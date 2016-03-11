@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>IndexServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.derp.servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CreatePollServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.derp.servlet.CreatePollServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PollServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.derp.servlet.PollServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ProfileServlet</servlet-name>
+  	<servlet-class>edu.ycp.cs320.derp.servlet.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UserHomeServlet</servlet-name>
+  	<servlet-class>edu.ycp.cs320.derp.servlet.UserHomeServlet</servlet-class>
+  </servlet>
+
+  <!-- AJAX servlets. -->
+  <servlet>
+    <servlet-name>AddNumbersAjaxServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.derp.servlet.ajax.AddNumbersAjaxServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>NextGuessAjaxServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.derp.servlet.ajax.NextGuessAjaxServlet</servlet-class>
+  </servlet>
+
+  <!-- Servlet mappings --><servlet-mapping>
+  	<servlet-name>UserHomeServlet</servlet-name>
+  	<url-pattern>/userHome</url-pattern>
+</servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ProfileServlet</servlet-name>
+  	<url-pattern>/profile</url-pattern>
+</servlet-mapping>
+	<servlet-mapping>
+    <servlet-name>IndexServlet</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CreatePollServlet</servlet-name>
+    <url-pattern>/createPoll</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PollServlet</servlet-name>
+    <url-pattern>/poll</url-pattern>
+  </servlet-mapping>
+  
+  <!--  AJAX servlet mappings. -->
+  <servlet-mapping>
+    <servlet-name>AddNumbersAjaxServlet</servlet-name>
+    <url-pattern>/ajax/addNumbers</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NextGuessAjaxServlet</servlet-name>
+    <url-pattern>/ajax/nextGuess</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
