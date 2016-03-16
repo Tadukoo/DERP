@@ -15,7 +15,7 @@
 			<c:if test="${! empty game}">
 				<c:if test="${game.done}">
 					<div>
-						The number you are thinking of is ${game.guess}
+						The number you are thinking of is not this retarded ${game.guess}
 					</div>
 					<div>
 						<input name="startGame" type="submit" value="Play again" />
