@@ -6,6 +6,6 @@
 	</head>
 
 	<body>
-		This is the index view jsp
+		NO!!! This is the true index view jsp
 	</body>
 </html>
