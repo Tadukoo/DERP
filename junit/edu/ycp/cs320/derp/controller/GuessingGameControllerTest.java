@@ -1,4 +1,4 @@
-package edu.ycp.cs320.lab03.controller;
+package edu.ycp.cs320.derp.controller;
 
 import static org.junit.Assert.assertTrue;
 

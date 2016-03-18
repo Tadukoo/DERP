@@ -1,4 +1,4 @@
-package edu.ycp.cs320.lab03.model;
+package edu.ycp.cs320.derp.model;
 
 import static org.junit.Assert.*;
 
