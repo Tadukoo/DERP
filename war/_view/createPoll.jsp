@@ -1,42 +1,188 @@
 <!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
-	<head>
-		<title>Add Numbers</title>
-		<style type="text/css">
-		.error {
-			color: red;
-		}
-		
-		td.label {
-			text-align: right;
-		}
-		</style>
-	</head>
-
-	<body>
-		<c:if test="${! empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
-	
-		<form action="${pageContext.servletContext.contextPath}/createPoll" method="post">
-			<table>
-				<tr>
-					<td class="label">First number:</td>
-					<td><input type="text" name="first" size="12" value="${first}" /></td>
-				</tr>
-				<tr>
-					<td class="label">Second number:</td>
-					<td><input type="text" name="second" size="12" value="${second}" /></td>
-				</tr>
-				<tr>
-					<td class="label">Result:</td>
-					<td>${result}</td>
-				</tr>
-			</table>
-			<input type="Submit" name="submit" value="Add Numbers!">
-		</form>
-	</body>
+    <head>
+        <title>D.E.R.P.</title>
+        <!--<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> this is a font i like please check out-->
+        <style type="text/css">
+            #main{
+                float:center;
+                height: 1000px;
+                border-left-style: solid;
+                border-right-style: solid;
+                border-right-color: #000000;
+                border-left-color: #000000;
+                margin-left:200px;
+                margin-right:200px;
+                position:relative;
+                z-index:1;
+            }
+            #buttonBar{
+                border-radius: 25px;
+                position:relative;
+                z-index:3;
+                text-align: center;
+                float:center;
+                border-style:solid;
+                height: 100px;
+                width:85%;
+                margin-top:-850px;
+                margin-left:100px;
+                font-size:300%;
+                background-color: #0099ff;
+            }
+            #name{
+                float: left;
+                font-size: 300%;
+            }
+            #fullName{
+                float:left;
+                margin-top:5%;
+                margin-left:-16.5%;
+                font-size: 150%;
+            }
+            #Yourpolls{
+                margin-left: 10%;
+                margin-top:1%;
+            }
+            #home{
+                float: center;
+                margin-left: 40%;
+                margin-top:-3%;
+            }
+            #other{
+                float: right;
+                margin-right:4%;
+                margin-top:-3%
+            }
+            .YourPolls {
+                display: block;
+                height: 40px;
+                width: 300px;
+            }
+            .Home {
+                display: block;
+                height: 40px;
+                width: 300px;
+            }
+            .Other {
+                display: block;
+                height: 40px;
+                width: 300px;
+            }
+            #CreateLabel{
+                text-align: center;
+                float: center;
+                font-size: 500%;
+                border-style: solid;
+                border-radius: 25px;
+                margin-left: 30%;
+                margin-top: 2%;
+                margin-right: 30%;
+            }
+            #PollTitle{
+                position:relative;
+                margin-top:5%;
+                margin-left:23%;
+                z-index:12;
+                font-size:200%;
+            }
+            #LinkTo{
+                position:relative;
+                float: right;
+                margin-top:-5%;
+                margin-right: 20%;
+                z-index:13;
+                font-size:200%;
+            }
+            #PollDesc{
+                position:relative;
+                margin-top:2%;
+                margin-left: 23%;
+                z-index:13;
+                font-size:200%;
+            }
+            #PostPoll{
+                float:center;
+                margin-top:10%;
+                margin-left: 30%;
+                position:relative;
+                z-index:13;
+            }
+            .postPoll {
+                border-radius:25px;
+                background-color: #0099ff;
+                border: none;
+                color: white;
+                padding: 65px 192px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 50px;
+            }
+            .postPoll:hover {
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+        </style>
+    </head>
+    <body>
+        <div id = "entirety">
+            <div id = "main">
+                <div id = "name">
+                    D.E.R.P.
+                </div>
+                <div id = "fullName">
+                    Dedicated Electronic Representative Polling
+                </div>
+            </div>
+            <div id = "buttonBar">
+                <div id = "Yourpolls">
+                    <a href="http://designshack.net/" class="YourPolls">Your Polls</a>
+                </div>
+                <div id = "home">
+                    <a href="http://designshack.net/" class="Home">Home</a>
+                </div>
+                <div id = "other">
+                    <a href="http://designshack.net/" class="Other">Other</a>
+                </div>
+            </div>
+            <div id = "CreateLabel">
+                Create Poll
+            </div>
+            <form id="form">
+            <div id = "PollTitle">
+                Poll Title <br>
+                <input type="text" name="pollTitle" size="30"/>
+            </div>
+            <div id = "LinkTo">
+                Personal Link To <br>
+                <input type="text" name="linkTo" size="60"/>
+            </div>
+            <div id = "PollDesc">
+                Poll Description <br>
+                <input type="text" name="pollDesc" size="133"/>
+            </div>
+            </form>
+            <div id = "PostPoll">
+                <button type="button" class="btn postPoll" id="post" value ="pollpage" onclick="storeInfo()">Post Poll</button>
+            </div>
+        </div>
+        
+        
+    <script>
+        function storeInfo(){
+            var title,desc,link,hyper;
+            title=document.getElementById("form");
+            desc=title.elements["pollDesc"].value;
+            link=title.elements["linkTo"].value;
+            title=title.elements["pollTitle"].value;
+            var agree="0";
+            var disagree="0";
+            window.location.href = "poll?" + title + "=" + link + "+" + desc + "-" + agree + "#" + disagree;
+        }
+    </script>
+    
+    
+    
+    </body>
 </html>

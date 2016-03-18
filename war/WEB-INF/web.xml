@@ -27,16 +27,6 @@
   	<servlet-class>edu.ycp.cs320.derp.servlet.UserHomeServlet</servlet-class>
   </servlet>
 
-  <!-- AJAX servlets. -->
-  <servlet>
-    <servlet-name>AddNumbersAjaxServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.derp.servlet.ajax.AddNumbersAjaxServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>NextGuessAjaxServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.derp.servlet.ajax.NextGuessAjaxServlet</servlet-class>
-  </servlet>
-
   <!-- Servlet mappings --><servlet-mapping>
   	<servlet-name>UserHomeServlet</servlet-name>
   	<url-pattern>/userHome</url-pattern>
@@ -56,16 +46,6 @@
   <servlet-mapping>
     <servlet-name>PollServlet</servlet-name>
     <url-pattern>/poll</url-pattern>
-  </servlet-mapping>
-  
-  <!--  AJAX servlet mappings. -->
-  <servlet-mapping>
-    <servlet-name>AddNumbersAjaxServlet</servlet-name>
-    <url-pattern>/ajax/addNumbers</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>NextGuessAjaxServlet</servlet-name>
-    <url-pattern>/ajax/nextGuess</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
