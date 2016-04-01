@@ -181,15 +181,15 @@
             </div>
         </div>
         <div id="title">
-            <p id="Title"></p>
+        ${title}
         </div>
         <div id="desc">
             Description of Poll:<br>
-            <p id="Desc"></p>
+            ${description}
         </div>
         <div id="link">
             Link to the Poll:<br>
-            <p id="Link"></p>
+            ${link}
         </div>
         <div id="agree">
             Agree<br>
