@@ -167,16 +167,16 @@
             </div>
             <div id = "buttonBar">
                 <div id = "yourPolls">
-                    <a href="http://designshack.net/" class="YourPolls">Your Polls</a>
+                    <a href="/profile" class="YourPolls">Your Polls</a>
                 </div>
                 <div id = "home">
-                <a href="http://designshack.net/" class="Home">Home</a>
+                <a href="/userHome" class="Home">Home</a>
                 </div>
                 <div id = "other">
-                <a href="http://designshack.net/" class="Other">Other</a>
+                <a href="/login" class="Other">Login</a>
                 </div>
                 <div id = "newPoll">
-                    <a href="http://designshack.net/" class="NewPoll">NewPoll</a>
+                    <a href="/createPoll" class="NewPoll">NewPoll</a>
                 </div>
             </div>
         </div>

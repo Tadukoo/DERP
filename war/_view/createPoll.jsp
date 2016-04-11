@@ -137,13 +137,10 @@
             </div>
             <div id = "buttonBar">
                 <div id = "Yourpolls">
-                    <a href="http://designshack.net/" class="YourPolls">Your Polls</a>
+                    <a href="/profile" class="YourPolls">Your Polls</a>
                 </div>
                 <div id = "home">
-                    <a href="http://designshack.net/" class="Home">Home</a>
-                </div>
-                <div id = "other">
-                    <a href="http://designshack.net/" class="Other">Other</a>
+                    <a href="/userHome" class="Home">Home</a>
                 </div>
                 <div id = "login">
                 	<a href="login" class = "Login">Login</a>
