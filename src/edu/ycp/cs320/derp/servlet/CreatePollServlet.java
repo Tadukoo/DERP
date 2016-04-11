@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.derp.controller.AddNumbersController;
-
 public class CreatePollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

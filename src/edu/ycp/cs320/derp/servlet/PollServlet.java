@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.derp.controller.GuessingGameController;
-import edu.ycp.cs320.derp.model.GuessingGame;
-
 public class PollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

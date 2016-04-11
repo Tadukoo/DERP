@@ -44,14 +44,14 @@ public class LoginServlet extends HttpServlet {
 
 		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");			
 
-		if (name == null || pw == null || name.equals("") || pw.equals("")) {
+		if(name == null || pw == null || name.equals("") || pw.equals("")){
 			errorMessage = "Please specify both user name and password";
-		} else {
+		}else{
 			model      = new TempLoginDatabase();
 			controller = new LoginController(model);
 			validLogin = controller.validateCredentials(name, pw);
 
-			if (!validLogin) {
+			if(!validLogin){
 				errorMessage = "Username and/or password invalid";
 			}
 		}
