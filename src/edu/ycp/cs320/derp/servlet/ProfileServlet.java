@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.derp.controller.AddNumbersController;
-
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,8 +30,6 @@ public class ProfileServlet extends HttpServlet {
 			if (first == null || second == null) {
 				errorMessage = "Please specify two numbers";
 			} else {
-				AddNumbersController controller = new AddNumbersController();
-				result = controller.add(first, second);
 			}
 		} catch (NumberFormatException e) {
 			errorMessage = "Invalid double";

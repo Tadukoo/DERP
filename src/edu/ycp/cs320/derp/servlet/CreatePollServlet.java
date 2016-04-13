@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.derp.controller.AddNumbersController;
-
 public class CreatePollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,22 +24,27 @@ public class CreatePollServlet extends HttpServlet {
 		String errorMessage = null;
 		Double result = null;
 		try {
-			Double first = getDoubleFromParameter(req.getParameter("first"));
-			Double second = getDoubleFromParameter(req.getParameter("second"));
+			String title = req.getParameter("title");
+			String link = req.getParameter("link");
+			String description = req.getParameter("description");
 
-			if (first == null || second == null) {
-				errorMessage = "Please specify two numbers";
-			} else {
-				AddNumbersController controller = new AddNumbersController();
-				result = controller.add(first, second);
+			if(title == null || link == null || description == null || title == "" ||
+					description == "" || link == ""){
+				errorMessage = "Please specify a title, link, and description";
+			}else{
+				// TODO: Add Controller for actually putting polls in database.
+				// Controller would check that title isn't in use and link isn't.
+				req.getSession().setAttribute("title", title);
+				req.getSession().setAttribute("link", link);
+				req.getSession().setAttribute("description", description);
+				
+				resp.sendRedirect(req.getContextPath() + "/poll");
+				
+				return;
 			}
 		} catch (NumberFormatException e) {
 			errorMessage = "Invalid double";
 		}
-		
-		// Add parameters as request attributes
-		req.setAttribute("first", req.getParameter("first"));
-		req.setAttribute("second", req.getParameter("second"));
 		
 		// Add result objects as request attributes
 		req.setAttribute("errorMessage", errorMessage);
@@ -49,13 +52,5 @@ public class CreatePollServlet extends HttpServlet {
 		
 		// Forward to view to render the result HTML document
 		req.getRequestDispatcher("/_view/createPoll.jsp").forward(req, resp);
-	}
-
-	private Double getDoubleFromParameter(String s) {
-		if (s == null || s.equals("")) {
-			return null;
-		} else {
-			return Double.parseDouble(s);
-		}
 	}
 }

@@ -137,34 +137,35 @@
             </div>
             <div id = "buttonBar">
                 <div id = "Yourpolls">
-                    <a href="http://designshack.net/" class="YourPolls">Your Polls</a>
+                    <a href="/profile" class="YourPolls">Your Polls</a>
                 </div>
                 <div id = "home">
-                    <a href="http://designshack.net/" class="Home">Home</a>
+                    <a href="/userHome" class="Home">Home</a>
                 </div>
-                <div id = "other">
-                    <a href="http://designshack.net/" class="Other">Other</a>
+                <div id = "login">
+                	<a href="login" class = "Login">Login</a>
                 </div>
             </div>
             <div id = "CreateLabel">
                 Create Poll
             </div>
-            <form id="form">
+            <form action="${pageContext.servletContext.contextPath}/createPoll" method="post">
             <div id = "PollTitle">
                 Poll Title <br>
-                <input type="text" name="pollTitle" size="30"/>
+                <input type="text" name="title" size="30" value="${title}" />
             </div>
             <div id = "LinkTo">
                 Personal Link To <br>
-                <input type="text" name="linkTo" size="60"/>
+                <input type="text" name="link" size="60" value="${link}" />
             </div>
             <div id = "PollDesc">
                 Poll Description <br>
-                <input type="text" name="pollDesc" size="133"/>
+                <input type="text" name="description" size="133" value="${description}" />
             </div>
-            </form>
             <div id = "PostPoll">
+            	<input type="Submit" name="submit" value="Create Poll">
                 <button type="button" class="btn postPoll" id="post" value ="pollpage" onclick="storeInfo()">Post Poll</button>
+            </form>
             </div>
         </div>
         
@@ -178,7 +179,6 @@
             title=title.elements["pollTitle"].value;
             var agree="0";
             var disagree="0";
-            window.location.href = "poll?" + title + "=" + link + "+" + desc + "-" + agree + "#" + disagree;
         }
     </script>
     
