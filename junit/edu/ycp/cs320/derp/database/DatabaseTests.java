@@ -11,13 +11,16 @@ import org.junit.BeforeClass;
 import edu.ycp.cs320.derp.model.Pair;
 import edu.ycp.cs320.derp.model.Poll;
 import edu.ycp.cs320.derp.model.User;
+import edu.ycp.cs320.derp.persist.DatabaseProvider;
+import edu.ycp.cs320.derp.persist.DerbyDatabase;
+import edu.ycp.cs320.derp.persist.IDatabase;
 
 public class DatabaseTests{
-	//private IDatabase db = null;
+	private IDatabase db = null;
 	
 	ArrayList<User> users = null;
 	ArrayList<Poll> polls = null;
-	List<Pair<Poll, User>> pollUserList = null;
+	List<Pair<User, Poll>> pollUserList = null;
 	List<Pair<User, Poll>> userPollList = null;	
 	
 	@BeforeClass
@@ -31,8 +34,8 @@ public class DatabaseTests{
 	@Before
 	public void setUp() throws Exception {
 		// creating DB instance here
-		//DatabaseProvider.setInstance(new DerbyDatabase());
-		//db = DatabaseProvider.getInstance();		
+		DatabaseProvider.setInstance(new DerbyDatabase());
+		db = DatabaseProvider.getInstance();		
 		
 	}
 

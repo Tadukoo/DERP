@@ -6,11 +6,8 @@ public class User{
 	private String email;
 	private String ip;
 	
-	public User(int userId, String name, String email, String ip){
-		this.userId = userId;
-		this.name = name;
-		this.email = email;
-		this.ip = ip;
+	public User(){
+		
 	}
 	
 	public int getUserId(){
