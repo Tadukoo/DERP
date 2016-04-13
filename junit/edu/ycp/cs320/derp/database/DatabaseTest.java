@@ -15,7 +15,7 @@ import edu.ycp.cs320.derp.persist.DatabaseProvider;
 import edu.ycp.cs320.derp.persist.DerbyDatabase;
 import edu.ycp.cs320.derp.persist.IDatabase;
 
-public class DatabaseTests{
+public class DatabaseTest{
 	private IDatabase db = null;
 	
 	ArrayList<User> users = null;
