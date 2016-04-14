@@ -63,9 +63,10 @@ public class MainContentController {
 		}
 		return (ArrayList<Pair<User, Poll>>) userPollsList;
 	}
+	
 	//TODO:Implement Stub
 	/**
-	 * Returns a specified Pair of User and Poll.
+	 * Returns a specified poll comprised of the Poll and the username.
 	 * Temporarily a stub.
 	 * @param title
 	 * @param author
@@ -78,6 +79,101 @@ public Pair<User, Poll> SearchByPollTitleAndAuthor(String title, String author){
 		Poll strong = new Poll(1,1,"PowerLevel",23, 5);
 		Pair<User, Poll> JackReacher = new Pair<User, Poll>(jack, strong);
 	return JackReacher;		
+	}
+
+//TODO: implement Stub
+/**
+ * Returns True if the username and password match a database entry
+ * Temporarily a stub
+ * @param userName
+ * @param password
+ * @return
+ */
+public Boolean UserNamePasswordCheck(String userName, String password){
+		return true;
+	}
+//TODO: implement Stub
+/**
+ * Method used to change the email of a User
+ * @param Username
+ * @param email
+ * @return true if email has been change, false if it hasn't.
+ */
+public Boolean ChangeEmail(String Username,String email){
+		return true;
+	}
+//TODO: Implement Stub
+/**
+ * Method to create an new user accoutn and add it to the database.
+ * @param Username
+ * @param Password
+ * @param email
+ * @param ipAdress
+ * @return true if it was sucessfully added to the database
+ */
+public Boolean CreateUserAccount(String Username, String Password, String email, String ipAdress){
+		return true;
+	}
+//TODO: implement stub
+/**
+ * Method to check that the ip adress is in the database for that user.
+ * @param Username
+ * @param IPAdress
+ * @return boolean for if it was in the database
+ */
+public Boolean IPAdressCheck(String Username, String IPAdress){
+		return true;
+	}
+
+//TODO: implement Stub
+/**
+ * method to add the users ip address to their address list
+ * @param Username
+ * @param IpAdress
+ * @return
+ */
+public Boolean IPaddressAdd(String Username, String IpAdress){
+		return true;
+	}
+//TODO: Implemnt Stub
+/**
+ * method to change a users password.
+ * @param Username
+ * @param Password
+ * @return true if the change was made in the database
+ */
+public Boolean ChangePassword(String Username, String Password){
+		return true;
+	}
+//TODO: Implement Stub
+/**
+ * Method to increment the positive poll counter for a specific poll
+ * @param Username
+ * @param PollTitle
+ * @return
+ */
+public Boolean IncrementPositivePollCounter(String Username,String PollTitle){
+		return true;
+	}
+//TODO: Implement Stub
+/**
+* Method to increment the total poll counter for a specific poll
+* @param Username
+* @param PollTitle
+* @return
+*/
+public Boolean IncrementTotalPollCounter(String Username,String PollTitle){
+		return true;
+	}
+//TODO: Implement Stub
+/**
+* Method to increment the pageview poll counter for a specific poll
+* @param Username
+* @param PollTitle
+* @return
+*/
+public Boolean IncrementPollPageViewCounter(String Username,String PollTitle){
+		return true;
 	}
 }
 
