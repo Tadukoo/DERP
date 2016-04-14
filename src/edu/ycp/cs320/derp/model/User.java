@@ -9,7 +9,12 @@ public class User{
 	public User(){
 		
 	}
-	
+	public User(int userId, String name, String email, String ip){
+		this.userId = userId;
+		this.name = name;
+		this.email= email;
+		this.ip = ip;
+	}
 	public int getUserId(){
 		return userId;
 	}

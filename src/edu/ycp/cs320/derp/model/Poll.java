@@ -10,6 +10,13 @@ public class Poll{
 	public Poll(){
 		
 	}
+	public Poll(int pollId, int userId, String title, int totalVotes, int yesVotes){
+		this.pollId = pollId;
+		this.userId = userId;
+		this.title = title;
+		this.totalVotes = totalVotes;
+		this.yesVotes = yesVotes;
+	}
 	
 	public int getPollId(){
 		return pollId;

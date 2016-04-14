@@ -49,7 +49,7 @@ public class DerbyDatabase implements IDatabase {
 							"  from  Users, Polls, PollUsers " +
 							"  where Polls.title = ? " +
 							"    and Users.User_id = PollUsers.User_id " +
-							"    and Polls.Poll_id     = PollUsers.Poll_id"
+							"    and Polls.Poll_id = PollUsers.Poll_id"
 					);
 					stmt.setString(1, title);
 					
