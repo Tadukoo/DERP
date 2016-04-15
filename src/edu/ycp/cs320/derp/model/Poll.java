@@ -6,16 +6,28 @@ public class Poll{
 	private String title;
 	private int totalVotes;
 	private int yesVotes;
-	
+	private int pageViews;
+	private String Description;
 	public Poll(){
 		
 	}
-	public Poll(int pollId, int userId, String title, int totalVotes, int yesVotes){
+	public Poll(int pollId, int userId, String title, int totalVotes, int yesVotes,int pageView, String Description){
 		this.pollId = pollId;
 		this.userId = userId;
 		this.title = title;
 		this.totalVotes = totalVotes;
 		this.yesVotes = yesVotes;
+		this.pageViews = pageView;
+		this.Description = Description;
+	}
+	public Poll(int pollId, int userId, String title, String Description){
+		this.pollId = pollId;
+		this.userId = userId;
+		this.title = title;
+		this.totalVotes = 0;
+		this.yesVotes = 0;
+		this.pageViews = 0;
+		this.Description = Description;
 	}
 	
 	public int getPollId(){
@@ -56,5 +68,17 @@ public class Poll{
 	
 	public void setYesVotes(int yesVotes){
 		this.yesVotes = yesVotes;
+	}
+	public int getPageViews() {
+		return pageViews;
+	}
+	public void setPageViews(int pageViews) {
+		this.pageViews = pageViews;
+	}
+	public String getDescription() {
+		return Description;
+	}
+	public void setDescription(String description) {
+		Description = description;
 	}
 }

@@ -75,8 +75,8 @@ public class MainContentController {
 public Pair<User, Poll> SearchByPollTitleAndAuthor(String title, String author){
 		
 		// get the list of (User, Poll) pairs from the db
-		User jack = new User(1,"Jack","jackreacker@gmail.com", "192.152.234.234");
-		Poll strong = new Poll(1,1,"PowerLevel",23, 5);
+		User jack = new User(1,"Jack","Reacher","jackreacker@gmail.com", "The Organization", "jaReacher", "bam");
+		Poll strong = new Poll(1,1,"PowerLevel",23, 5, 0, "The number of Votes is how Strong you are.");
 		Pair<User, Poll> JackReacher = new Pair<User, Poll>(jack, strong);
 	return JackReacher;		
 	}

@@ -32,7 +32,7 @@ public class PollTest{
 	}
 	
 	@Test
-	public void testSetAndGetName(){
+	public void testSetAndGetTitle(){
 		String title = "user";
 		
 		assertEquals(null, poll.getTitle());
@@ -56,5 +56,22 @@ public class PollTest{
 		assertEquals(0, poll.getYesVotes());
 		poll.setYesVotes(votes);
 		assertEquals(votes, poll.getYesVotes());
+	}
+	@Test
+	public void testSetAndGetPageViews(){
+		int views = 12;
+		
+		assertEquals(0, poll.getPageViews());
+		poll.setPageViews(views);
+		assertEquals(views, poll.getPageViews());
+	}
+	@Test
+	public void testSetAndGetDescription(){
+		String Description = "This is a description.";
+		
+		assertEquals(null, poll.getDescription());
+		poll.setDescription(Description);
+		assertEquals(Description, poll.getDescription());
+
 	}
 }
