@@ -167,16 +167,16 @@
             </div>
             <div id = "buttonBar">
                 <div id = "yourPolls">
-                    <a href="/profile" class="YourPolls">Your Polls</a>
+                    <a href="/derp/profile" class="YourPolls">Your Polls</a>
                 </div>
                 <div id = "home">
-                <a href="/userHome" class="Home">Home</a>
+                <a href="/derp/userHome" class="Home">Home</a>
                 </div>
                 <div id = "other">
-                <a href="/login" class="Other">Login</a>
+                <a href="/derp/login" class="Other">Login</a>
                 </div>
                 <div id = "newPoll">
-                    <a href="/createPoll" class="NewPoll">NewPoll</a>
+                    <a href="/derp/createPoll" class="NewPoll">NewPoll</a>
                 </div>
             </div>
         </div>
