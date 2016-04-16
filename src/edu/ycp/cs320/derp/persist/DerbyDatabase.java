@@ -15,7 +15,7 @@ import java.util.List;
 
 import edu.ycp.cs320.derp.model.User;
 import edu.ycp.cs320.derp.model.Poll;
-import edu.ycp.cs320.derp.model.PollUser;
+import edu.ycp.cs320.derp.model.IpAdress;
 import edu.ycp.cs320.derp.model.Pair;
 
 public class DerbyDatabase implements IDatabase {
@@ -26,14 +26,24 @@ public class DerbyDatabase implements IDatabase {
 			throw new IllegalStateException("Could not load Derby driver");
 		}
 	}
-	
+	// The main method creates the database tables and loads the initial data.
+	public static void main(String[] args) throws IOException {
+		System.out.println("Creating tables...");
+		DerbyDatabase db = new DerbyDatabase();
+		db.createTables();
+		
+		System.out.println("Loading initial data...");
+		db.loadInitialData();
+		
+		System.out.println("Derp DB successfully initialized!");
+	}
 	private interface Transaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
 	}
 
 	private static final int MAX_ATTEMPTS = 10;
 
-	
+/*
 	// transaction that retrieves a Poll, and its User by Title
 	@Override
 	public List<Pair<User, Poll>> findUserAndPollByTitle(final String title) {
@@ -515,7 +525,7 @@ public class DerbyDatabase implements IDatabase {
 							stmt6.setInt(1, Users.get(i).getUserId());
 							stmt6.executeUpdate();
 							
-							System.out.println("Deleted User <" + Users.get(i).getName() + ", " + 
+							System.out.println("Deleted User <" + Users.get(i).getFirstName() + ", " + 
 							Users.get(i).getEmail() + "> from DB");
 							
 							// we're done with this, so close it, since we might have more to do
@@ -542,7 +552,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	
+*/	
 	// wrapper SQL transaction function that calls actual transaction function (which has retries)
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
@@ -592,7 +602,7 @@ public class DerbyDatabase implements IDatabase {
 	// TODO: You will need to change this location to the same path as your workspace for this example
 	// TODO: Change it here and in SQLDemo under CS320_Lab06->edu.ycp.cs320.sqldemo	
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320/library.db;create=true");		
+		Connection conn = DriverManager.getConnection("jdbc:derby:C:/Users/Alex Keperling/Documents/CS320_TeamProject/Derp.db;create=true");		
 		
 		// Set autocommit to false to allow multiple the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -604,26 +614,32 @@ public class DerbyDatabase implements IDatabase {
 	// retrieves User information from query result set
 	private void loadUser(User User, ResultSet resultSet, int index) throws SQLException {
 		User.setUserId(resultSet.getInt(index++));
-		User.setName(resultSet.getString(index++));
+		User.setFirstName(resultSet.getString(index++));
+		User.setLastName(resultSet.getString(index++));
+		User.setUserName(resultSet.getString(index++));
+		User.setPassword(resultSet.getString(index++));
 		User.setEmail(resultSet.getString(index++));
-		User.setIP(resultSet.getString(index++));
+		User.setInstitution(resultSet.getString(index++)); 
 	}
 	
 	// retrieves Poll information from query result set
 	private void loadPoll(Poll Poll, ResultSet resultSet, int index) throws SQLException {
 		Poll.setPollId(resultSet.getInt(index++));
-//		Poll.setUserId(resultSet.getInt(index++));  // no longer used
+		Poll.setUserId(resultSet.getInt(index++));  
 		Poll.setTitle(resultSet.getString(index++));
 		Poll.setTotalVotes(resultSet.getInt(index++));
 		Poll.setYesVotes(resultSet.getInt(index++));
+		Poll.setPageViews(resultSet.getInt(index++));
+		Poll.setDescription(resultSet.getString(index++));
 	}
-	
-	// retrieves WrittenBy information from query result set
-	private void loadPollUsers(PollUser PollUser, ResultSet resultSet, int index) throws SQLException {
-		PollUser.setPollId(resultSet.getInt(index++));
-		PollUser.setUserId(resultSet.getInt(index++));
+	// Retrieves IPAddress information from query result set
+	private void loadIpAdresses(IpAdress ip, ResultSet resultSet, int index) throws SQLException{
+		ip.setIPId(resultSet.getInt(index++));
+		ip.setUserId(resultSet.getInt(index++));
+		ip.setIp(resultSet.getString(index++));
 	}
-	
+
+	// Updated as of 4/15/16
 	//  creates the Users and Polls tables
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
@@ -638,46 +654,57 @@ public class DerbyDatabase implements IDatabase {
 						"create table Users (" +
 						"	User_id integer primary key " +
 						"		generated always as identity (start with 1, increment by 1), " +									
-						"	User_lastname varchar(40)," +
-						"	User_firstname varchar(40)" +
+						"	user_firstname varchar(40)" +
+						"	user_lastname varchar(40)," +
+						"   username varchar(40)," +
+						"   password varchar(40)," +
+						" 	email varchar(60),   " +
+						" 	institution varchar(240)" +
 						")"
 					);	
 					stmt1.executeUpdate();
 					
 					System.out.println("Users table created");
-					
+					//TODO:continue editing
 					stmt2 = conn.prepareStatement(
 							"create table Polls (" +
 							"	Poll_id integer primary key " +
 							"		generated always as identity (start with 1, increment by 1), " +
-//							"	User_id integer constraint User_id references Users, " +
+							"	User_id integer constraint User_id references Users, " +
 							"	title varchar(50)," +
-							"	isbn varchar(20)" +
+							"	total_votes int," +
+							"	yes_votes int,"	+
+							"	page_views int," +
+							"	description varchar(240)"+
 							")"
 					);
 					stmt2.executeUpdate();
 					
-					System.out.println("Polls table created");					
+					System.out.println("Ip Adress table created");					
 					
+					// assuming only support for ipv4
 					stmt3 = conn.prepareStatement(
-							"create table PollUsers (" +
-							"	Poll_id   integer constraint Poll_id references Polls, " +
-							"	User_id integer constraint User_id references Users " +
+							"create table IpAdresses (" +
+							"	ip_id integer primary key " +
+							"		generated always as identity (start with 1, increment by1),"+		
+							"	User_id integer constraint User_id references Users, " +
+							" 	ip_adress varchar(15)" +
 							")"
 					);
 					stmt3.executeUpdate();
 					
-					System.out.println("PollUsers table created");					
+					System.out.println("IpAdress table created");					
 										
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
 				}
 			}
 		});
 	}
-	
+	//Updated as of 4/15/16
 	// loads data retrieved from CSV files into DB tables in batch mode
 	public void loadInitialData() {
 		executeTransaction(new Transaction<Boolean>() {
@@ -685,79 +712,117 @@ public class DerbyDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> UserList;
 				List<Poll> PollList;
-				List<PollUser> PollUserList;
+				List<IpAdress> IpList;
 				
 				try {
-					UserList     = InitialData.getUsers();
-					PollList       = InitialData.getPolls();
-					PollUserList = InitialData.getPollUsers();					
+					UserList = InitialData.getUsers();
+					PollList = InitialData.getPolls();
+					IpList   = InitialData.getIpAdresses();					
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
-				PreparedStatement insertUser     = null;
-				PreparedStatement insertPoll       = null;
-				PreparedStatement insertPollUser = null;
+				PreparedStatement insertUser = null;
+				PreparedStatement insertPoll = null;
+				PreparedStatement insertIp   = null;
 
 				try {
-					// must completely populate Users table before populating PollUsers table becasue of primary keys
-					insertUser = conn.prepareStatement("insert into Users (User_lastname, User_firstname) values (?, ?)");
+					// must completely populate Users primary keys
+					insertUser = conn.prepareStatement("insert into Users (user_firstname, user_lastname, username, password, email, institution) values (?, ?, ?, ?, ?, ?)");
 					for (User User : UserList) {
 //						insertUser.setInt(1, User.getUserId());	// auto-generated primary key, don't insert this
-						insertUser.setString(1, User.getName());
-						insertUser.setString(2, User.getEmail());
-						insertUser.setString(3, User.getIP());
+						insertUser.setString(1, User.getFirstName());
+						insertUser.setString(2, User.getLastName());
+						insertUser.setString(3, User.getUserName());
+						insertUser.setString(4, User.getPassword());
+						insertUser.setString(5, User.getEmail());
+						insertUser.setString(6, User.getInstitution());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();
 					
 					System.out.println("Users table populated");
 					
-					// must completely populate Polls table before populating PollUsers table becasue of primary keys
-					insertPoll = conn.prepareStatement("insert into Polls (title, isbn) values (?, ?)");
+					// must completely populate Polls table before populating PollUsers table because of primary keys
+					insertPoll = conn.prepareStatement("insert into Polls (User_id, title, total_votes, yes_votes, page_views, description) values (?, ?, ?, ?, ?, ?)");
 					for (Poll Poll : PollList) {
 //						insertPoll.setInt(1, Poll.getPollId());		// auto-generated primary key, don't insert this
-//						insertPoll.setInt(1, Poll.getUserId());	// this is now in the PollUsers table
-						insertPoll.setString(1, Poll.getTitle());
-						insertPoll.setInt(2, Poll.getTotalVotes());
-						insertPoll.setInt(3, Poll.getYesVotes());
+						insertPoll.setInt(1, Poll.getUserId());	// this is a key to the user table
+						insertPoll.setString(2, Poll.getTitle());
+						insertPoll.setInt(3, Poll.getTotalVotes());
+						insertPoll.setInt(4, Poll.getYesVotes());
+						insertPoll.setInt(5, Poll.getPageViews());
+						insertPoll.setString(6, Poll.getDescription());
 						insertPoll.addBatch();
 					}
 					insertPoll.executeBatch();
 					
 					System.out.println("Polls table populated");					
-					
+					//TODO:fix commented out section
 					// must wait until all Polls and all Users are inserted into tables before creating PollUser table
 					// since this table consists entirely of foreign keys, with constraints applied
-					insertPollUser = conn.prepareStatement("insert into PollUsers (Poll_id, User_id) values (?, ?)");
-					for (PollUser PollUser : PollUserList) {
-						insertPollUser.setInt(1, PollUser.getPollId());
-						insertPollUser.setInt(2, PollUser.getUserId());
-						insertPollUser.addBatch();
+				
+					insertIp = conn.prepareStatement("insert into IpAdresses (User_id, ip_address) values (?, ?)");
+					for (IpAdress IpAdress : IpList) {
+//						insertIp.setInt(1, Ip.getPollId());		// auto-generated primary key, don't insert this
+						insertIp.setInt(1, IpAdress.getUserId());
+						insertIp.setString(2, IpAdress.getIp());
+						insertIp.addBatch();
 					}
-					insertPollUser.executeBatch();	
+					insertIp.executeBatch();	
 					
-					System.out.println("PollUsers table populated");					
+					System.out.println("IPAdresses table populated");					
 					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertPoll);
 					DBUtil.closeQuietly(insertUser);
-					DBUtil.closeQuietly(insertPollUser);					
+					DBUtil.closeQuietly(insertIp);					
 				}
 			}
 		});
 	}
-	
-	// The main method creates the database tables and loads the initial data.
-	public static void main(String[] args) throws IOException {
-		System.out.println("Creating tables...");
-		DerbyDatabase db = new DerbyDatabase();
-		db.createTables();
-		
-		System.out.println("Loading initial data...");
-		db.loadInitialData();
-		
-		System.out.println("Library DB successfully initialized!");
+
+
+	@Override
+	public List<Pair<User, Poll>> findUserAndPollByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public List<Pair<User, Poll>> findUserAndPollByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer insertPollIntoPollsTable(String title, String isbn, String lastName, String firstName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pair<User, Poll>> findAllPollsWithUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> removePollByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<String> FindIpAdressByUser(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
