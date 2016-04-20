@@ -1,15 +1,15 @@
 package edu.ycp.cs320.derp.model;
 
-public class IpAdress {
+public class IpAddress {
 
 	private int IPId;
 	private int UserId;
 	private String ip;
 	
-	public IpAdress(){
+	public IpAddress(){
 		
 	}
-	public IpAdress(int IpId, int UserId, String ip){
+	public IpAddress(int IpId, int UserId, String ip){
 		this.IPId = IpId;
 		this.UserId = UserId;
 		this.ip = ip;

@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import edu.ycp.cs320.derp.model.User;
-import edu.ycp.cs320.derp.model.IpAdress;
+import edu.ycp.cs320.derp.model.IpAddress;
 import edu.ycp.cs320.derp.model.Poll;
 
 public class InitialData {
@@ -87,19 +87,19 @@ public class InitialData {
 		}
 	}
 	// reads initial IP Address data from CSV file and returns a List of PollUsers
-	public static List<IpAdress> getIpAdresses() throws IOException {
-		List<IpAdress> IPAdressList = new ArrayList<IpAdress>();
-		ReadCSV readIpAdresses = new ReadCSV("IpAdresses.csv");
+	public static List<IpAddress> getIpaddresses() throws IOException {
+		List<IpAddress> IPaddressList = new ArrayList<IpAddress>();
+		ReadCSV readIpaddresses = new ReadCSV("Ipaddresses.csv");
 		try {
 			// auto-generated primary key for table Polls
 						Integer IpId = 1;
 						while (true) {
-							List<String> tuple = readIpAdresses.next();
+							List<String> tuple = readIpaddresses.next();
 							if (tuple == null) {
 								break;
 							}
 				Iterator<String> i = tuple.iterator();
-				IpAdress ip = new IpAdress();
+				IpAddress ip = new IpAddress();
 				
 				// read Ip ID from CSV file, but don't use it
 				// it's there for reference purposes, just make sure that it is correct
@@ -109,12 +109,12 @@ public class InitialData {
 				ip.setIPId(IpId++);	
 				ip.setUserId(Integer.parseInt(i.next()));
 				ip.setIp(i.next());
-				IPAdressList.add(ip);
+				IPaddressList.add(ip);
 			}
 			System.out.println("IpList loaded from CSV file");			
-			return IPAdressList;
+			return IPaddressList;
 		} finally {
-			readIpAdresses.close();
+			readIpaddresses.close();
 		}
 	}
 }
