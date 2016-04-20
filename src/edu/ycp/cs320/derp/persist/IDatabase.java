@@ -15,6 +15,6 @@ public interface IDatabase {
 	public List<User> findAllUsers();
 	public List<User> removePollByTitle(String title);	
 	// bellow not implemented in DerbyDatabase
-	public List<String> FindIpAdressByUser(String userName);
+	public List<String> FindIpaddressByUser(String userName);
 	
 }

@@ -639,7 +639,9 @@ public class DerbyDatabase implements IDatabase {
 		Poll.setDescription(resultSet.getString(index++));
 	}
 	// Retrieves IPAddress information from query result set
-	private void loadIpAdresses(IpAddress ip, ResultSet resultSet, int index) throws SQLException{
+
+	private void loadIpaddresses(IpAddress ip, ResultSet resultSet, int index) throws SQLException{
+
 		ip.setIPId(resultSet.getInt(index++));
 		ip.setUserId(resultSet.getInt(index++));
 		ip.setIp(resultSet.getString(index++));
@@ -671,6 +673,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt1.executeUpdate();
 					
 					System.out.println("Users table created");
+					
 					stmt2 = conn.prepareStatement(
 							"create table Polls (" +
 							"	Poll_id integer primary key " +
@@ -685,12 +688,13 @@ public class DerbyDatabase implements IDatabase {
 					);
 					stmt2.executeUpdate();
 					
-					System.out.println("Polls table created");					
+					System.out.println("Ip address table created");					
 					
 					// assuming only support for ipv4
+
 					//TODO:continue editing  oddly by changing User_id to User_id1 it works >>> maybe constraing naming error
 					stmt3 = conn.prepareStatement(
-							"create table IpAdresses (" +
+							"create table Ipaddresses (" +
 							"	ip_id integer primary key " +
 							"		generated always as identity (start with 1, increment by 1),"+		
 							"	User_id integer constraint User_id1 references Users, " +
@@ -723,7 +727,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					UserList = InitialData.getUsers();
 					PollList = InitialData.getPolls();
-					IpList   = InitialData.getIpAdresses();					
+					IpList   = InitialData.getIpaddresses();					
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -768,7 +772,7 @@ public class DerbyDatabase implements IDatabase {
 					// must wait until all Polls and all Users are inserted into tables before creating PollUser table
 					// since this table consists entirely of foreign keys, with constraints applied
 				
-					insertIp = conn.prepareStatement("insert into IpAdresses (User_id, ip_address) values (?, ?)");
+					insertIp = conn.prepareStatement("insert into Ipaddresses (User_id, ip_address) values (?, ?)");
 					for (IpAddress IpAddress : IpList) {
 //						insertIp.setInt(1, Ip.getPollId());		// auto-generated primary key, don't insert this
 						insertIp.setInt(1, IpAddress.getUserId());
@@ -777,7 +781,7 @@ public class DerbyDatabase implements IDatabase {
 					}
 					insertIp.executeBatch();	
 					
-					System.out.println("IPAdresses table populated");					
+					System.out.println("IPaddresses table populated");					
 					
 					return true;
 				} finally {
@@ -826,7 +830,7 @@ public class DerbyDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	public List<String> FindIpAdressByUser(String userName) {
+	public List<String> FindIpaddressByUser(String userName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
