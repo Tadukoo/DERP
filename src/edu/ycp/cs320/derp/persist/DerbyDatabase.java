@@ -49,7 +49,7 @@ public class DerbyDatabase implements IDatabase {
 
 	private static final int MAX_ATTEMPTS = 10;
 
-/*
+
 	// transaction that retrieves a Poll, and its User by Title
 	@Override
 	public List<Pair<User, Poll>> findUserAndPollByTitle(final String title) {
@@ -558,7 +558,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-*/	
+	
 	// wrapper SQL transaction function that calls actual transaction function (which has retries)
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
@@ -604,6 +604,12 @@ public class DerbyDatabase implements IDatabase {
 		}
 	}
 
+	@Override
+	public List<String> FindIpaddressByUser(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// TODO: Here is where you specify the location of your Derby SQL database
 	// TODO: You will need to change this location to the same path as your workspace for this example
 	// TODO: Change it here and in SQLDemo under CS320_Lab06->edu.ycp.cs320.sqldemo	
@@ -692,7 +698,7 @@ public class DerbyDatabase implements IDatabase {
 					
 					// assuming only support for ipv4
 
-					//TODO:continue editing  oddly by changing User_id to User_id1 it works >>> maybe constraing naming error
+					// using user_id1 as constraint name be careful of changes
 					stmt3 = conn.prepareStatement(
 							"create table Ipaddresses (" +
 							"	ip_id integer primary key " +
@@ -795,44 +801,43 @@ public class DerbyDatabase implements IDatabase {
 
 
 	@Override
-	public List<Pair<User, Poll>> findUserAndPollByTitle(String title) {
+	public Integer generateNewUser(String Username, String password, String email, String IPaddress) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer CheckIP(String Ipadress) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer AddIPadress(String Username, String ipadress) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Boolean CheckPassword(String Username, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Pair<User, Poll>> findUserAndPollByUserName(String userName) {
+	public Boolean ChangePassword(String Username, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		return true;
 	}
 
-	@Override
-	public Integer insertPollIntoPollsTable(String title, String isbn, String lastName, String firstName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public List<Pair<User, Poll>> findAllPollsWithUsers() {
+	public Boolean IncrementPollCounter(String Username, String PollTitle, int PollType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<User> removePollByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<String> FindIpaddressByUser(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
+
