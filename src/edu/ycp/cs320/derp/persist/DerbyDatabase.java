@@ -15,7 +15,7 @@ import java.util.List;
 
 import edu.ycp.cs320.derp.model.User;
 import edu.ycp.cs320.derp.model.Poll;
-import edu.ycp.cs320.derp.model.IpAdress;
+import edu.ycp.cs320.derp.model.IpAddress;
 import edu.ycp.cs320.derp.model.Pair;
 
 public class DerbyDatabase implements IDatabase {
@@ -28,14 +28,20 @@ public class DerbyDatabase implements IDatabase {
 	}
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
-		System.out.println("Creating tables...");
+		
 		DerbyDatabase db = new DerbyDatabase();
-		db.createTables();
-		
-		System.out.println("Loading initial data...");
-		db.loadInitialData();
-		
-		System.out.println("Derp DB successfully initialized!");
+		try {
+			db.connect();
+		} catch (SQLException e) {
+			System.out.println("Creating tables...");
+			System.out.println("No database file found creating Database from scratch...");
+			db.createTables();
+			
+			System.out.println("Loading initial data...");
+			db.loadInitialData();
+			
+			System.out.println("Derp DB successfully initialized!");
+		}
 	}
 	private interface Transaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
@@ -633,7 +639,7 @@ public class DerbyDatabase implements IDatabase {
 		Poll.setDescription(resultSet.getString(index++));
 	}
 	// Retrieves IPAddress information from query result set
-	private void loadIpAdresses(IpAdress ip, ResultSet resultSet, int index) throws SQLException{
+	private void loadIpAdresses(IpAddress ip, ResultSet resultSet, int index) throws SQLException{
 		ip.setIPId(resultSet.getInt(index++));
 		ip.setUserId(resultSet.getInt(index++));
 		ip.setIp(resultSet.getString(index++));
@@ -654,7 +660,7 @@ public class DerbyDatabase implements IDatabase {
 						"create table Users (" +
 						"	User_id integer primary key " +
 						"		generated always as identity (start with 1, increment by 1), " +									
-						"	user_firstname varchar(40)" +
+						"	user_firstname varchar(40)," +
 						"	user_lastname varchar(40)," +
 						"   username varchar(40)," +
 						"   password varchar(40)," +
@@ -665,7 +671,6 @@ public class DerbyDatabase implements IDatabase {
 					stmt1.executeUpdate();
 					
 					System.out.println("Users table created");
-					//TODO:continue editing
 					stmt2 = conn.prepareStatement(
 							"create table Polls (" +
 							"	Poll_id integer primary key " +
@@ -680,20 +685,21 @@ public class DerbyDatabase implements IDatabase {
 					);
 					stmt2.executeUpdate();
 					
-					System.out.println("Ip Adress table created");					
+					System.out.println("Polls table created");					
 					
 					// assuming only support for ipv4
+					//TODO:continue editing  oddly by changing User_id to User_id1 it works >>> maybe constraing naming error
 					stmt3 = conn.prepareStatement(
 							"create table IpAdresses (" +
 							"	ip_id integer primary key " +
-							"		generated always as identity (start with 1, increment by1),"+		
-							"	User_id integer constraint User_id references Users, " +
-							" 	ip_adress varchar(15)" +
+							"		generated always as identity (start with 1, increment by 1),"+		
+							"	User_id integer constraint User_id1 references Users, " +
+							" 	ip_address varchar(15)" +
 							")"
 					);
 					stmt3.executeUpdate();
 					
-					System.out.println("IpAdress table created");					
+					System.out.println("IpAddress table created");					
 										
 					return true;
 				} finally {
@@ -712,7 +718,7 @@ public class DerbyDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> UserList;
 				List<Poll> PollList;
-				List<IpAdress> IpList;
+				List<IpAddress> IpList;
 				
 				try {
 					UserList = InitialData.getUsers();
@@ -763,10 +769,10 @@ public class DerbyDatabase implements IDatabase {
 					// since this table consists entirely of foreign keys, with constraints applied
 				
 					insertIp = conn.prepareStatement("insert into IpAdresses (User_id, ip_address) values (?, ?)");
-					for (IpAdress IpAdress : IpList) {
+					for (IpAddress IpAddress : IpList) {
 //						insertIp.setInt(1, Ip.getPollId());		// auto-generated primary key, don't insert this
-						insertIp.setInt(1, IpAdress.getUserId());
-						insertIp.setString(2, IpAdress.getIp());
+						insertIp.setInt(1, IpAddress.getUserId());
+						insertIp.setString(2, IpAddress.getIp());
 						insertIp.addBatch();
 					}
 					insertIp.executeBatch();	

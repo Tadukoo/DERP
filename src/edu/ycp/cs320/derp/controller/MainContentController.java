@@ -129,7 +129,7 @@ public Boolean IPAdressCheck(String Username, String IPAdress){
 /**
  * method to add the users ip address to their address list
  * @param Username
- * @param IpAdress
+ * @param IpAddress
  * @return
  */
 public Boolean IPaddressAdd(String Username, String IpAdress){

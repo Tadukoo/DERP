@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import edu.ycp.cs320.derp.model.User;
-import edu.ycp.cs320.derp.model.IpAdress;
+import edu.ycp.cs320.derp.model.IpAddress;
 import edu.ycp.cs320.derp.model.Poll;
 
 public class InitialData {
@@ -87,8 +87,8 @@ public class InitialData {
 		}
 	}
 	// reads initial IP Address data from CSV file and returns a List of PollUsers
-	public static List<IpAdress> getIpAdresses() throws IOException {
-		List<IpAdress> IPAdressList = new ArrayList<IpAdress>();
+	public static List<IpAddress> getIpAdresses() throws IOException {
+		List<IpAddress> IPAdressList = new ArrayList<IpAddress>();
 		ReadCSV readIpAdresses = new ReadCSV("IpAdresses.csv");
 		try {
 			// auto-generated primary key for table Polls
@@ -99,7 +99,7 @@ public class InitialData {
 								break;
 							}
 				Iterator<String> i = tuple.iterator();
-				IpAdress ip = new IpAdress();
+				IpAddress ip = new IpAddress();
 				
 				// read Ip ID from CSV file, but don't use it
 				// it's there for reference purposes, just make sure that it is correct

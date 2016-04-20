@@ -5,7 +5,7 @@ import java.util.List;
 import edu.ycp.cs320.derp.model.Pair;
 import edu.ycp.cs320.derp.model.Poll;
 import edu.ycp.cs320.derp.model.User;
-import edu.ycp.cs320.derp.model.IpAdress;
+import edu.ycp.cs320.derp.model.IpAddress;
 
 public interface IDatabase {
 	public List<Pair<User, Poll>> findUserAndPollByTitle(String title);
