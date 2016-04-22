@@ -104,7 +104,7 @@ public class DerbyDatabase implements IDatabase {
 	
 	// transaction that retrieves a list of Polls with their Users, given User's name
 	@Override
-	public List<Pair<User, Poll>> findUserAndPollByUserName(final String userName) {
+	public List<Pair<User, Poll>> findPollByUserName(final String userName) {
 		return executeTransaction(new Transaction<List<Pair<User,Poll>>>() {
 			@Override
 			public List<Pair<User, Poll>> execute(Connection conn) throws SQLException {
@@ -147,8 +147,8 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	
-	// transaction that retrieves all Polls in Library, with their respective Users
-	@Override
+	//TODO: check override transaction that retrieves all Polls in Library, with their respective Users
+//	@Override
 	public List<Pair<User, Poll>> findAllPollsWithUsers() {
 		return executeTransaction(new Transaction<List<Pair<User,Poll>>>() {
 			@Override
@@ -243,28 +243,26 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	//TODO: write junit test case
 	
 	// transaction that inserts new Poll into the Polls table
 	// also first inserts new User into Users table, if necessary
 	// and then inserts entry into PollUsers junction table
+	/**
+	 * insertPollIntoPollsTable 
+	 * method to insert a poll into the database. If user does not exist for poll it will not post.
+	 */
 	@Override
-	public Integer insertPollIntoPollsTable(final String title, final String isbn, final String lastName, final String firstName) {
+	public Integer insertPollIntoPollsTable(final String title, final String description, final String userName) {
 		return executeTransaction(new Transaction<Integer>() {
 			@Override
 			public Integer execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
-				PreparedStatement stmt3 = null;
-				PreparedStatement stmt4 = null;
-				PreparedStatement stmt5 = null;
-				PreparedStatement stmt6 = null;				
+				PreparedStatement stmt3 = null;		
 				
 				ResultSet resultSet1 = null;
-//	(unused)	ResultSet resultSet2 = null;
 				ResultSet resultSet3 = null;
-//	(unused)	ResultSet resultSet4 = null;
-				ResultSet resultSet5 = null;				
-//	(unused)	ResultSet resultSet6 = null;
 				
 				// for saving User ID and Poll ID
 				Integer User_id = -1;
@@ -274,140 +272,78 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt1 = conn.prepareStatement(
 							"select User_id from Users " +
-							"  where User_lastname = ? and User_firstname = ? "
+							"  where username = ? "
 					);
-					stmt1.setString(1, lastName);
-					stmt1.setString(2, firstName);
+					stmt1.setString(1, userName);
 					
 					// execute the query, get the result
 					resultSet1 = stmt1.executeQuery();
 
 					
 					// if User was found then save User_id					
-					if (resultSet1.next())
-					{
-						User_id = resultSet1.getInt(1);
-						System.out.println("User <" + lastName + ", " + firstName + "> found with ID: " + User_id);						
-					}
-					else
-					{
-						System.out.println("User <" + lastName + ", " + firstName + "> not found");
-				
-						// if the User is new, insert new User into Users table
-						if (User_id <= 0) {
-							// prepare SQL insert statement to add User to Users table
-							stmt2 = conn.prepareStatement(
-									"insert into Users (User_lastname, User_firstname) " +
-									"  values(?, ?) "
-							);
-							stmt2.setString(1, lastName);
-							stmt2.setString(2, firstName);
-							
-							// execute the update
-							stmt2.executeUpdate();
-							
-							System.out.println("New User <" + lastName + ", " + firstName + "> inserted in Users table");						
+					try{ 
+						resultSet1.next();
 						
-							// try to retrieve User_id for new User - DB auto-generates User_id
-							stmt3 = conn.prepareStatement(
-									"select User_id from Users " +
-									"  where User_lastname = ? and User_firstname = ? "
-							);
-							stmt3.setString(1, lastName);
-							stmt3.setString(2, firstName);
-							
-							// execute the query							
-							resultSet3 = stmt3.executeQuery();
-							
-							// get the result - there had better be one							
-							if (resultSet3.next())
-							{
-								User_id = resultSet3.getInt(1);
-								System.out.println("New User <" + lastName + ", " + firstName + "> ID: " + User_id);						
-							}
-							else	// really should throw an exception here - the new User should have been inserted, but we didn't find them
-							{
-								System.out.println("New User <" + lastName + ", " + firstName + "> not found in Users table (ID: " + User_id);
-							}
+						User_id = resultSet1.getInt(1);
+						System.out.println("User <" + userName+ "> found with ID: " + User_id);						
+					
+						// now insert new Poll into Polls table
+						// prepare SQL insert statement to add new Poll to Polls table
+						stmt2 = conn.prepareStatement(
+								"insert into Polls (title, description) " +
+								"  values(?, ?) "
+						);
+						stmt2.setString(1, title);
+						stmt2.setString(2, description);
+						
+						// execute the update
+						stmt2.executeUpdate();
+						
+						System.out.println("New Poll <" + title + "> inserted into Polls table");					
+	
+						// now retrieve Poll_id for new Poll, so that we can set up PollUser entry
+						// and return the Poll_id, which the DB auto-generates
+						// prepare SQL statement to retrieve Poll_id for new Poll
+						stmt3 = conn.prepareStatement(
+								"select Poll_id from Polls " +
+								"  where title = ? and description = ? "
+						);
+						stmt3.setString(1, title);
+						stmt3.setString(2, description);
+	
+						// execute the query
+						resultSet3 = stmt3.executeQuery();
+						
+						// get the result - there had better be one
+						if (resultSet3.next())
+						{
+							Poll_id = resultSet3.getInt(1);
+							System.out.println("New Poll <" + title + "> ID: " + Poll_id);						
 						}
+						else	// really should throw an exception here - the new Poll should have been inserted, but we didn't find it
+						{
+							System.out.println("New Poll <" + title + "> not found in Polls table (ID: " + Poll_id);
+						}
+						
+						System.out.println("New Poll <" + title + "> inserted into Polls table");					
+						
+						return Poll_id;
+					} catch (SQLException e) {
+						throw new SQLException("no user specified", e);
 					}
-					
-					// now insert new Poll into Polls table
-					// prepare SQL insert statement to add new Poll to Polls table
-					stmt4 = conn.prepareStatement(
-							"insert into Polls (title, isbn) " +
-							"  values(?, ?) "
-					);
-					stmt4.setString(1, title);
-					stmt4.setString(2, isbn);
-					
-					// execute the update
-					stmt4.executeUpdate();
-					
-					System.out.println("New Poll <" + title + "> inserted into Polls table");					
-
-					// now retrieve Poll_id for new Poll, so that we can set up PollUser entry
-					// and return the Poll_id, which the DB auto-generates
-					// prepare SQL statement to retrieve Poll_id for new Poll
-					stmt5 = conn.prepareStatement(
-							"select Poll_id from Polls " +
-							"  where title = ? and isbn = ? "
-					);
-					stmt5.setString(1, title);
-					stmt5.setString(2, isbn);
-
-					// execute the query
-					resultSet5 = stmt5.executeQuery();
-					
-					// get the result - there had better be one
-					if (resultSet5.next())
-					{
-						Poll_id = resultSet5.getInt(1);
-						System.out.println("New Poll <" + title + "> ID: " + Poll_id);						
-					}
-					else	// really should throw an exception here - the new Poll should have been inserted, but we didn't find it
-					{
-						System.out.println("New Poll <" + title + "> not found in Polls table (ID: " + Poll_id);
-					}
-					
-					// now that we have all the information, insert entry into PollUsers table
-					// which is the junction table for Polls and Users
-					// prepare SQL insert statement to add new Poll to Polls table
-					stmt6 = conn.prepareStatement(
-							"insert into PollUsers (Poll_id, User_id) " +
-							"  values(?, ?) "
-					);
-					stmt6.setInt(1, Poll_id);
-					stmt6.setInt(2, User_id);
-					
-					// execute the update
-					stmt6.executeUpdate();
-					
-					System.out.println("New enry for Poll ID <" + Poll_id + "> and User ID <" + User_id + "> inserted into PollUsers junction table");						
-					
-					System.out.println("New Poll <" + title + "> inserted into Polls table");					
-					
-					return Poll_id;
 				} finally {
 					DBUtil.closeQuietly(resultSet1);
 					DBUtil.closeQuietly(stmt1);
-//	(unused)		DBUtil.closeQuietly(resultSet2);
 					DBUtil.closeQuietly(stmt2);					
 					DBUtil.closeQuietly(resultSet3);
 					DBUtil.closeQuietly(stmt3);					
-// (unused)			DBUtil.closeQuietly(resultSet4);
-					DBUtil.closeQuietly(stmt4);
-					DBUtil.closeQuietly(resultSet5);
-					DBUtil.closeQuietly(stmt5);
-// (unused)			DBUtil.closeQuietly(resultSet6);
-					DBUtil.closeQuietly(stmt6);
 				}
 			}
 		});
 	}
 	
 	
-	// transaction that deletes Poll (and possibly its User) from Library
+	// transaction that deletes Poll
 	@Override
 	public List<User> removePollByTitle(final String title) {
 		return executeTransaction(new Transaction<List<User>>() {
@@ -839,5 +775,6 @@ public class DerbyDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
 

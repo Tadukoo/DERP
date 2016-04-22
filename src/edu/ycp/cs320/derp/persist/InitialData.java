@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import edu.ycp.cs320.derp.model.User;
-import edu.ycp.cs320.derp.model.IpAddress;
 import edu.ycp.cs320.derp.model.Poll;
+import edu.ycp.cs320.derp.model.IpAddress;
 
 public class InitialData {
 

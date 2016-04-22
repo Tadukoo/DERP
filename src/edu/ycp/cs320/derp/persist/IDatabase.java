@@ -10,8 +10,8 @@ import edu.ycp.cs320.derp.model.IpAddress;
 public interface IDatabase {
 	public List<Pair<User, Poll>> findUserAndPollByTitle(String title);
 	public List<Pair<User, Poll>> findPollByUserName(String userName);
-	public Integer insertPollIntoPollsTable(String title, String isbn, String lastName, String firstName);
-	public List<Pair<User, Poll>> findAllPollsWithUsers();
+	// First two done by Logan.
+	public Integer insertPollIntoPollsTable(String title, String Description, String userName);
 	public List<User> findAllUsers();
 	public List<User> removePollByTitle(String title);	
 	// below not implemented in DerbyDatabase

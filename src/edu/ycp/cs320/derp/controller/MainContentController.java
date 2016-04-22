@@ -31,7 +31,7 @@ public class MainContentController {
 	 */
 	public boolean InsertPollController(String title, String isbn, String lastName, String firstName){
 		// insert new poll into the table
-		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName, firstName);
+		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName);
 		
 		// check to see if insertion succeeded
 		if(Poll_id > 0)
