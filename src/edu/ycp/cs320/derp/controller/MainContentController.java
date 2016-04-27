@@ -112,7 +112,8 @@ public Boolean ChangeEmail(String Username,String email){
  * @param Password
  * @param email
  * @param ipAdress
- * @return true if it was sucessfully added to the database
+ * @return true if it was successfully added to the database
+ * the integer it returns tells what error happened
  */
 public Boolean CreateUserAccount(String Username, String Password, String email, String ipAdress){
 		
