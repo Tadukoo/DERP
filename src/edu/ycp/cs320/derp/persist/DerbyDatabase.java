@@ -28,10 +28,11 @@ public class DerbyDatabase implements IDatabase {
 	}
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
-		
 		DerbyDatabase db = new DerbyDatabase();
+		
 		try {
 			db.connect();
+			System.out.println("Successfully connected...");
 		} catch (SQLException e) {
 			System.out.println("Creating tables...");
 			System.out.println("No database file found creating Database from scratch...");
@@ -53,7 +54,7 @@ public class DerbyDatabase implements IDatabase {
 	// transaction that retrieves a Poll, and its User by Title
 	@Override
 	public List<Pair<User, Poll>> findUserAndPollByTitle(final String title) {
-		return executeTransaction(new Transaction<List<Pair<User,Poll>>>() {
+		return executeTransaction(new Transaction<List<Pair<User,Poll>>>(){
 			@Override
 			public List<Pair<User, Poll>> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
@@ -62,10 +63,9 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"select Users.*, Polls.* " +
-							"  from  Users, Polls, PollUsers " +
+							"  from  Users, Polls" +
 							"  where Polls.title = ? " +
-							"    and Users.User_id = PollUsers.User_id " +
-							"    and Polls.Poll_id = PollUsers.Poll_id"
+							"    and Users.user_id = Polls.user_id"
 					);
 					stmt.setString(1, title);
 					
@@ -82,7 +82,7 @@ public class DerbyDatabase implements IDatabase {
 						User User = new User();
 						loadUser(User, resultSet, 1);
 						Poll Poll = new Poll();
-						loadPoll(Poll, resultSet, 4);
+						loadPoll(Poll, resultSet, 8);
 						
 						result.add(new Pair<User, Poll>(User, Poll));
 					}
@@ -104,7 +104,7 @@ public class DerbyDatabase implements IDatabase {
 	
 	// transaction that retrieves a list of Polls with their Users, given User's name
 	@Override
-	public List<Pair<User, Poll>> findUserAndPollByUserName(final String userName) {
+	public List<Pair<User, Poll>> findPollByUserName(final String userName) {
 		return executeTransaction(new Transaction<List<Pair<User,Poll>>>() {
 			@Override
 			public List<Pair<User, Poll>> execute(Connection conn) throws SQLException {
@@ -614,7 +614,7 @@ public class DerbyDatabase implements IDatabase {
 	// TODO: You will need to change this location to the same path as your workspace for this example
 	// TODO: Change it here and in SQLDemo under CS320_Lab06->edu.ycp.cs320.sqldemo	
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:C:/Users/Alex Keperling/Documents/CS320_TeamProject/Derp.db;create=true");		
+		Connection conn = DriverManager.getConnection("jdbc:derby:C:/Users/Tadukoo/Desktop/Tadukoo Verse/Programming/CS320 Soft Eng and Des/Derp.db;create=true");		
 		
 		// Set autocommit to false to allow multiple the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -787,7 +787,7 @@ public class DerbyDatabase implements IDatabase {
 					}
 					insertIp.executeBatch();	
 					
-					System.out.println("IPaddresses table populated");					
+					System.out.println("IPaddresses table populated");
 					
 					return true;
 				} finally {

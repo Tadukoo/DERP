@@ -2,7 +2,6 @@ package edu.ycp.cs320.derp.model;
 
 public class User{
 	private int userId;
-	//private String name;
 	private String email;
 	private String firstName;
 	private String lastName;
