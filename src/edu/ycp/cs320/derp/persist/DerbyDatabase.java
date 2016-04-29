@@ -115,11 +115,10 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"select Users.*, Polls.* " +
-							"  from  Users, Polls, PollUsers " +
-							"  where Users.User_lastname = ? " +
-							"    and Users.User_id = PollUsers.User_id " +
-							"    and Polls.Poll_id     = PollUsers.Poll_id "   +
-							"  order by Polls.title asc, Polls.isbn asc"
+							"  from  Users, Polls " +
+							"  where Users.userName = ? " +
+							"    and Users.User_id = Polls.User_id "   +
+							"  order by Polls.title asc, Polls.description asc"
 					);
 					stmt.setString(1, userName);
 					
@@ -132,7 +131,7 @@ public class DerbyDatabase implements IDatabase {
 						User User = new User();
 						loadUser(User, resultSet, 1);
 						Poll Poll = new Poll();
-						loadPoll(Poll, resultSet, 4);
+						loadPoll(Poll, resultSet, 8);
 						
 						result.add(new Pair<User, Poll>(User, Poll));
 					}
