@@ -31,7 +31,7 @@ public class MainContentController {
 	 */
 	public boolean InsertPollController(String title, String isbn, String lastName, String firstName){
 		// insert new poll into the table
-		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName, firstName);
+		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName);
 		
 		// check to see if insertion succeeded
 		if(Poll_id > 0)
@@ -112,7 +112,8 @@ public Boolean ChangeEmail(String Username,String email){
  * @param Password
  * @param email
  * @param ipAdress
- * @return true if it was sucessfully added to the database
+ * @return true if it was successfully added to the database
+ * the integer it returns tells what error happened
  */
 public Boolean CreateUserAccount(String Username, String Password, String email, String ipAdress){
 		
