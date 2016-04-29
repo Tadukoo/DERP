@@ -15,11 +15,11 @@ import edu.ycp.cs320.derp.controller.MainContentController;
 public class PollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	@Override
+/*	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
-	}
+	}*/
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -29,16 +29,29 @@ public class PollServlet extends HttpServlet {
 		
 		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
 	}
-/*  private MainContentController controller = null;
+  //private MainContentController controller = null;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
 		String user = (String) req.getSession().getAttribute("user");
-		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
+		if (user == null) {
+			System.out.println("   User: <" + user + "> not logged in or session timed out");
+			
+			// user is not logged in, or the session expired
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+			
+			
+			// now we have the user's User object,
+			// proceed to handle request...
+			
+			req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);	
 	}
 	
-	@Override
+/*	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{
 		

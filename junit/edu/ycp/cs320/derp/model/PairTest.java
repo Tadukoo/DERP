@@ -19,14 +19,19 @@ public class PairTest{
 		
 		definedUser = new User();
 		definedUser.setUserId(25);
-		definedUser.setName("Tadukoo");
+		definedUser.setFirstName("Tadukoo");
+		definedUser.setLastName("Smith");
 		definedUser.setEmail("realtadukoo@gmail.com");
-		definedUser.setIP("192.168.1.1");
+		definedUser.setInstitution("Real World");
+		definedUser.setUserName("Tadukoo12");
+		definedUser.setPassword("wordsmith12");
 		
 		definedPoll = new Poll();
 		definedPoll.setPollId(50);
 		definedPoll.setUserId(25);
 		definedPoll.setTitle("Is Rey Luke's Daughter?");
+		definedPoll.setDescription("A poll to get to known a girl.");
+		definedPoll.setPageViews(200);
 		definedPoll.setTotalVotes(25);
 		definedPoll.setYesVotes(23);
 	}
@@ -48,34 +53,40 @@ public class PairTest{
 	@Test
 	public void testGetUserInfoFromPair(){
 		assertEquals(0, pair.getLeft().getUserId());
-		assertEquals(null, pair.getLeft().getName());
+		assertEquals(null, pair.getLeft().getFirstName());
 		assertEquals(null, pair.getLeft().getEmail());
-		assertEquals(null, pair.getLeft().getIP());
+		assertEquals(null, pair.getLeft().getLastName());
+		assertEquals(null, pair.getLeft().getInstitution());
+		assertEquals(null,pair.getLeft().getPassword());
+		assertEquals(null,pair.getLeft().getUserName());
 		
 		pair.setLeft(definedUser);
 		
 		assertEquals(25, pair.getLeft().getUserId());
-		assertEquals("Tadukoo", pair.getLeft().getName());
+		assertEquals("Tadukoo", pair.getLeft().getFirstName());
 		assertEquals("realtadukoo@gmail.com", pair.getLeft().getEmail());
-		assertEquals("192.168.1.1", pair.getLeft().getIP());
+		assertEquals("Smith", pair.getLeft().getLastName());
+		assertEquals("Real World", pair.getLeft().getInstitution());
+		assertEquals("wordsmith12", pair.getLeft().getPassword());
+		assertEquals("Tadukoo12", pair.getLeft().getUserName());
+		
 	}
+
 	
 	@Test
 	public void testSetUserInfoFromPair(){
 		assertEquals(0, pair.getLeft().getUserId());
-		assertEquals(null, pair.getLeft().getName());
+		assertEquals(null, pair.getLeft().getFirstName());
 		assertEquals(null, pair.getLeft().getEmail());
-		assertEquals(null, pair.getLeft().getIP());
 		
 		pair.getLeft().setUserId(5);
-		pair.getLeft().setName("Derp");
+		pair.getLeft().setFirstName("Derp");
 		pair.getLeft().setEmail("hubakunychanikad@gmail.com");
-		pair.getLeft().setIP("255.255.255.255");
+		
 		
 		assertEquals(5, pair.getLeft().getUserId());
-		assertEquals("Derp", pair.getLeft().getName());
+		assertEquals("Derp", pair.getLeft().getFirstName());
 		assertEquals("hubakunychanikad@gmail.com", pair.getLeft().getEmail());
-		assertEquals("255.255.255.255", pair.getLeft().getIP());
 	}
 	
 	@Test

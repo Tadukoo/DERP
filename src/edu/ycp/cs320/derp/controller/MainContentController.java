@@ -30,10 +30,10 @@ public class MainContentController {
 	 * @return boolean ifInsert
 	 */
 	public boolean InsertPollController(String title, String isbn, String lastName, String firstName){
-		// insert new poll intro the table
-		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName, firstName);
+		// insert new poll into the table
+		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName);
 		
-		// check to see if insertion suceeded
+		// check to see if insertion succeeded
 		if(Poll_id > 0)
 		{
 			System.out.println("New Poll (ID: " + Poll_id + ") sucessfully added to Poll Table: <" +title + ">");
@@ -45,6 +45,7 @@ public class MainContentController {
 			return false;
 		}
 	}
+
 	/**
 	 * Method to return a ArrayList of User Poll pairs.
 	 * Main use is to create a search result to click a hyperlink.
@@ -72,11 +73,13 @@ public class MainContentController {
 	 * @param author
 	 * @return
 	 */
+
 public Pair<User, Poll> SearchByPollTitleAndAuthor(String title, String author){
 		
+	
 		// get the list of (User, Poll) pairs from the db
-		User jack = new User(1,"Jack","jackreacker@gmail.com", "192.152.234.234");
-		Poll strong = new Poll(1,1,"PowerLevel",23, 5);
+		User jack = new User(1,"Jack","Reacher","jackreacker@gmail.com", "The Organization", "jaReacher", "bam");
+		Poll strong = new Poll(1,1,"PowerLevel",23, 5, 0, "The number of Votes is how Strong you are.");
 		Pair<User, Poll> JackReacher = new Pair<User, Poll>(jack, strong);
 	return JackReacher;		
 	}
@@ -109,9 +112,12 @@ public Boolean ChangeEmail(String Username,String email){
  * @param Password
  * @param email
  * @param ipAdress
- * @return true if it was sucessfully added to the database
+ * @return true if it was successfully added to the database
+ * the integer it returns tells what error happened
  */
 public Boolean CreateUserAccount(String Username, String Password, String email, String ipAdress){
+		
+	
 		return true;
 	}
 //TODO: implement stub
@@ -129,7 +135,7 @@ public Boolean IPAdressCheck(String Username, String IPAdress){
 /**
  * method to add the users ip address to their address list
  * @param Username
- * @param IpAdress
+ * @param IpAddress
  * @return
  */
 public Boolean IPaddressAdd(String Username, String IpAdress){

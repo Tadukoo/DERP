@@ -137,19 +137,19 @@
             </div>
             <div id = "buttonBar">
                 <div id = "Yourpolls">
-                    <a href="/profile" class="YourPolls">Your Polls</a>
+                    <a href="profile" class="YourPolls">Your Polls</a>
                 </div>
                 <div id = "home">
-                    <a href="/userHome" class="Home">Home</a>
+                    <a href="userHome" class="Home">Home</a>
                 </div>
-                <div id = "login">
-                	<a href="login" class = "Login">Login</a>
+                <div id = "other">
+                    <a href="login" class="Other">Login</a>
                 </div>
             </div>
             <div id = "CreateLabel">
-                Create Poll
+                Create Polls
             </div>
-            <form action="${pageContext.servletContext.contextPath}/createPoll" method="post">
+            <form id="info" action="${pageContext.servletContext.contextPath}/createPoll" method="post">
             <div id = "PollTitle">
                 Poll Title <br>
                 <input type="text" name="title" size="30" value="${title}" />
@@ -163,8 +163,8 @@
                 <input type="text" name="description" size="133" value="${description}" />
             </div>
             <div id = "PostPoll">
-            	<input type="Submit" name="submit" value="Create Poll">
-                <button type="button" class="btn postPoll" id="post" value ="pollpage" onclick="storeInfo()">Post Poll</button>
+            	<input type="Submit" name="submit" onclick="WriteToFile(info.form) storeInfo()" value="Create Poll">
+                <button type="submit" class="submit" id="post" value ="pollpage" onclick="WriteToFile(info.form) storeInfo()" >Post Poll</button>
             </form>
             </div>
         </div>
@@ -177,10 +177,19 @@
             desc=title.elements["pollDesc"].value;
             link=title.elements["linkTo"].value;
             title=title.elements["pollTitle"].value;
-            var agree="0";
-            var disagree="0";
+            var agree=0;
+            var disagree=0;
         }
     </script>
+    <script type = "text/javascript">
+		function WriteToFile(passForm)
+		{
+			var fso = new ActiveXObject("Scripting.FileSystemObject");
+			var s = fso.CreateTextFile("C:\\users.csv", true);
+			s.WriteLine(document.passForm.pollTitle.value + "," + document.passForm.pollDesc.value+",0,0");
+			s.Close();
+		}
+	</script>
     
     
     

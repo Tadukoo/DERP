@@ -23,14 +23,29 @@ public class UserTest{
 	}
 	
 	@Test
-	public void testSetAndGetName(){
+	public void testSetAndGetFirstName(){
 		String name = "user";
 		
-		assertEquals(null, user.getName());
-		user.setName(name);
-		assertEquals(name, user.getName());
+		assertEquals(null, user.getFirstName());
+		user.setFirstName(name);
+		assertEquals(name, user.getFirstName());
 	}
-	
+	@Test
+	public void testSetAndGetLastName(){
+		String name = "Alpha";
+		
+		assertEquals(null, user.getLastName());
+		user.setLastName(name);
+		assertEquals(name, user.getLastName());
+	}
+	@Test
+	public void testSetAndGetUserName(){
+		String name = "user132";
+		
+		assertEquals(null, user.getUserName());
+		user.setUserName(name);
+		assertEquals(name, user.getUserName());
+	}
 	@Test
 	public void testSetAndGetEmail(){
 		String email = "lferree@ycp.edu";
@@ -39,13 +54,20 @@ public class UserTest{
 		user.setEmail(email);
 		assertEquals(email, user.getEmail());
 	}
-	
 	@Test
-	public void testSetAndGetIp(){
-		String ip = "178.52.34.5";
+	public void testSetAndGetPassword(){
+		String password = "password";
+		assertEquals(null,user.getPassword());
+		user.setPassword(password);
+		assertEquals(password, user.getPassword());
 		
-		assertEquals(null, user.getIP());
-		user.setIP(ip);
-		assertEquals(ip, user.getIP());
 	}
+	@Test
+	public void testSetAndGetInstitution(){
+		String institution = "York College Of Pensylvania";
+		assertEquals(null, user.getInstitution());
+		user.setInstitution(institution);
+		assertEquals(institution, user.getInstitution());
+	}
+	
 }
