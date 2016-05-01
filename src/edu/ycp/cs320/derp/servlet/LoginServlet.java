@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.derp.controller.LoginController;
-import edu.ycp.cs320.derp.model.TempLoginDatabase;
+//import edu.ycp.cs320.derp.model.TempLoginDatabase;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TempLoginDatabase model;
-	private LoginController controller;
+//	private TempLoginDatabase model;
+//	private LoginController controller;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -47,13 +46,14 @@ public class LoginServlet extends HttpServlet {
 		if(name == null || pw == null || name.equals("") || pw.equals("")){
 			errorMessage = "Please specify both user name and password";
 		}else{
-			model      = new TempLoginDatabase();
-			controller = new LoginController(model);
-			validLogin = controller.validateCredentials(name, pw);
+		//	model      = new TempLoginDatabase();
+	//		controller = new LoginController(model);
+//			validLogin = controller.validateCredentials(name, pw);
 
-			if(!validLogin){
+//			if(!validLogin){
 				errorMessage = "Username and/or password invalid";
-			}
+//			}
+
 		}
 
 		// Add parameters as request attributes
