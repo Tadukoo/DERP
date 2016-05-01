@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.derp.controller.CreateAccountController;
-import edu.ycp.cs320.derp.model.TempLoginDatabase;
+//import edu.ycp.cs320.derp.controller.CreateAccountController;
+//import edu.ycp.cs320.derp.model.TempLoginDatabase;
 
 public class CreateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TempLoginDatabase model;
-	private CreateAccountController controller;
+//	private TempLoginDatabase model;
+//	private CreateAccountController controller;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -47,13 +47,13 @@ public class CreateAccountServlet extends HttpServlet {
 		if (name == null || pw == null || name.equals("") || pw.equals("")) {
 			errorMessage = "Please specify both user name and password";
 		} else {
-			model      = new TempLoginDatabase();
-			controller = new CreateAccountController(model);
-			validAccount = controller.createAccount(name, pw);
+//			model      = new TempLoginDatabase();
+//			controller = new CreateAccountController(model);
+//			validAccount = controller.createAccount(name, pw);
 
-			if (!validAccount) {
-				errorMessage = "Username is already taken.";
-			}
+//			if (!validAccount) {
+//				errorMessage = "Username is already taken.";
+//			}
 		}
 
 		// Add parameters as request attributes
