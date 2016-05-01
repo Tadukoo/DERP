@@ -144,6 +144,107 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	//TODO: implement junit test 
+	@Override
+	public User findUserInformation(final String userName) {
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+
+				// try to retrieve Users and Polls based on User's last name, passed into query
+				try {
+					stmt = conn.prepareStatement(
+							"select * " +
+							"  from  Users " +
+							"  where Users.userName = ? " 
+					);
+					stmt.setString(1, userName);
+					
+					resultSet = stmt.executeQuery();
+					User result = null;
+					loadUser(result, resultSet, 0);
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	//TODO: implement junit test.
+	@Override
+	public Poll findPollByTitle(final String title,final String userName) {
+		return executeTransaction(new Transaction<Poll>() {
+		@Override
+		public Poll execute(Connection conn) throws SQLException {
+			Poll found = null;
+			PreparedStatement stmt1 = null;
+			PreparedStatement stmt2 = null;
+			PreparedStatement stmt3 = null;
+			PreparedStatement stmt4 = null;						
+			
+			ResultSet resultSet1    = null;			
+			ResultSet resultSet2    = null;
+//			ResultSet resultSet3    = null;
+			ResultSet resultSet4    = null;			
+			
+			try {
+				// first get the user
+				stmt1 = conn.prepareStatement(
+						"select Users.* " +
+						"  from  Users, Polls" +
+						"  where Polls.title = ? " +
+						"    and Users.User_id = Polls.User_id "
+				);
+				
+				// get the Poll's User(s)
+				stmt1.setString(1, title);
+				resultSet1 = stmt1.executeQuery();
+				
+				// User from query
+				User User = new User();					
+				loadUser(User, resultSet1, 0);
+				
+				// check if any Users were found
+				// this shouldn't be necessary, there should not be a Poll in the DB without an User
+				if (User.getUserName() == null) {
+					System.out.println("No User was found for title <" + title + "> in the database");
+				}
+				// check if we have the correct user
+				if ( User.getUserName() == userName){
+					try{
+						// get the poll
+						stmt2 = conn.prepareStatement(
+						"select Polls.*" +
+						" from Polls" +
+						"where Polls.user_id = ?"+
+						" and Polls.title = ?"
+						);
+						stmt2.setInt(1, User.getUserId());
+						stmt2.setString(2, title);
+						resultSet2 = stmt1.executeQuery();
+						
+						loadPoll(found, resultSet2, 0);
+						
+					}finally{
+						DBUtil.closeQuietly(resultSet2);
+						DBUtil.closeQuietly(resultSet4);
+						DBUtil.closeQuietly(stmt4);
+						DBUtil.closeQuietly(stmt3);
+						DBUtil.closeQuietly(stmt2);
+					}
+				}
+				return found;
+			} finally {
+				DBUtil.closeQuietly(resultSet1);
+				DBUtil.closeQuietly(stmt1);	
+			}
+		}
+	});
+
+	}
 	
 	// Written by Alex Keperling 4/22/16
 	// TODO: junit test
@@ -674,7 +775,6 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	//TODO:finish implement
 	@Override
 	public Integer generateNewUser(final String firstname, final String lastname,final String Username,final String password,final String email,final String Institution,final String IPAdress){
 		return executeTransaction(new Transaction<Integer>() {
@@ -799,7 +899,7 @@ public class DerbyDatabase implements IDatabase {
 				
 				
 				
-				
+//TODO: implement				
 				} else if(CounterType == 2){
 					stmt = conn.prepareStatement(
 							"select Polls.total_votes, Poll.poll_id from Users, Polls"+
@@ -937,6 +1037,7 @@ public class DerbyDatabase implements IDatabase {
 		}
 	});
 }
+
 
 }
 

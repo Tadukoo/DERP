@@ -16,9 +16,10 @@ public interface IDatabase {
 	public Boolean removePollByTitle(String title, String userName);
 	public List<Poll> findAllPolls();// sorted by totalCount
 	public Integer generateNewUser(String firstname, String lastname, String Username, String password, String email, String Institution, String IPAdress);
-	// below not implemented in DerbyDatabase
 	public Boolean CheckPassword(String Username, String password);
 	public Boolean IncrementCounter(String Username,String PollTitle, int CounterType);
+	public User findUserInformation(String userName);
+	public Poll findPollByTitle(String title, String userName);
 	
 	// Not necessarily needed
 	public List<String> FindIpaddressByUser(String userName);

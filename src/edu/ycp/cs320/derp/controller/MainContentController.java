@@ -152,7 +152,15 @@ public Boolean IncrementTotalPollCounter(String Username,String PollTitle){
 public Boolean IncrementPollPageViewCounter(String Username,String PollTitle){
 		return db.IncrementCounter(Username, PollTitle, 3);
 	}
+public User GetUserByUsername(String username){
+	User temp = db.findUserInformation(username);
+	temp.setPassword(null);
+	return temp;
+}
 
+public Poll GetPollByTitle(String title, String username ){
+	return db.findPollByTitle(title, username);
+}
 ///////////////////////////////////////////Not needed for produce///////////////////////////////
 //TODO: implement stub
 /**
