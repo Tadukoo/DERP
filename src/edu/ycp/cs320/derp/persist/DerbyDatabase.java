@@ -717,6 +717,9 @@ public class DerbyDatabase implements IDatabase {
 						int user_id;
 						stmt3.setString(1, Username);
 						resultSet3 = stmt3.executeQuery();
+						if(resultSet3.next() == false){
+							result = 2;
+						}
 						user_id = resultSet3.getInt(1);
 						
 						stmt4 = conn.prepareStatement("insert into IpAdressess (User_id, Ip) values(?, ?)");
@@ -731,6 +734,8 @@ public class DerbyDatabase implements IDatabase {
 						DBUtil.closeQuietly(stmt2);
 					}
 					// returns 1 for username is already used
+					// returns 2 for user not properly added
+					
 					return result;
 				} finally {
 					DBUtil.closeQuietly(resultSet1);
@@ -805,6 +810,8 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(1, Username);
 					stmt.setString(2, PollTitle);
 					resultSet = stmt.executeQuery();
+				
+					
 					
 				}else if(CounterType == 3){
 					stmt = conn.prepareStatement(
@@ -816,6 +823,9 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(1, Username);
 					stmt.setString(2, PollTitle);
 					resultSet = stmt.executeQuery();
+					
+					
+					
 					
 				}else{
 					System.out.println("What type of counter are you looking for?");
