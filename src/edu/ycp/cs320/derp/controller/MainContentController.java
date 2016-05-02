@@ -24,14 +24,13 @@ public class MainContentController {
 	 * Method to insert Polls into the database.
 	 * 
 	 * @param title
-	 * @param isbn
-	 * @param lastName
-	 * @param firstName
+	 * @param description
+	 * @param username
 	 * @return boolean ifInsert
 	 */
-	public boolean InsertPoll(String title, String isbn, String lastName, String firstName){
+	public boolean InsertPoll(String title, String description, String username){
 		// insert new poll into the table
-		Integer Poll_id = db.insertPollIntoPollsTable(title, isbn, lastName);
+		Integer Poll_id = db.insertPollIntoPollsTable(title, description, username);
 		
 		// check to see if insertion succeeded
 		if(Poll_id > 0)

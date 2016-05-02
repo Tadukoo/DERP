@@ -30,8 +30,8 @@ public class DerbyDatabase implements IDatabase {
 	public static void main(String[] args) throws IOException {
 		DerbyDatabase db = new DerbyDatabase();
 	// TODO: fix try catch statements as it is not working.
-	//	db.createTables();
-	//	db.loadInitialData();
+//		db.createTables();
+//		db.loadInitialData();/*
 		try {
 			db.connect();
 			System.out.println("Successfully connected...");
@@ -145,7 +145,7 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	//TODO: implement junit test 
+	// Alex Keperling 5/2/2016
 	@Override
 	public User findUserInformation(final String userName) {
 		return executeTransaction(new Transaction<User>() {
@@ -175,7 +175,7 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	//TODO: implement junit test.
+	//TODO: implement junit test. 
 	@Override
 	public Poll findPollByTitle(final String title,final String userName) {
 		return executeTransaction(new Transaction<Poll>() {
@@ -197,27 +197,29 @@ public class DerbyDatabase implements IDatabase {
 				stmt1 = conn.prepareStatement(
 						"select Users.* " +
 						"  from  Users, Polls" +
-						"  where Polls.title = ? " +
-						"    and Users.User_id = Polls.User_id "
+						"  where Users.username = ?" +
+						"  and Polls.title = ? " +
+						"  and Users.User_id = Polls.User_id "
 				);
 				
 				// get the Poll's User(s)
-				stmt1.setString(1, title);
+				stmt1.setString(2, title);
+				stmt1.setString(1, userName);
 				resultSet1 = stmt1.executeQuery();
 				
 				// User from query
 				resultSet1.next();
 				User User = new User();					
 				loadUser(User, resultSet1, 1);
-				
 				// check if any Users were found
 				// this shouldn't be necessary, there should not be a Poll in the DB without an User
 				if (User.getUserName() == null) {
 					System.out.println("No User was found for title <" + title + "> in the database");
 				}
 				// check if we have the correct user
-				if ( User.getUserName() == userName){
+				if ( User.getUserName().equals(userName)){
 					try{
+						System.out.println("Its here");
 						// get the poll
 						stmt2 = conn.prepareStatement(
 						"select Polls.*" +
@@ -229,7 +231,8 @@ public class DerbyDatabase implements IDatabase {
 						stmt2.setString(2, title);
 						resultSet2 = stmt1.executeQuery();
 						resultSet2.next();
-						loadPoll(found, resultSet2, 0);
+						loadPoll(found, resultSet2, 1);
+						System.out.println(found.getPollId());
 					}finally{
 						DBUtil.closeQuietly(resultSet2);
 						DBUtil.closeQuietly(resultSet4);
@@ -847,7 +850,7 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	// TODO: implement unit test
+	// TODO: implement unit test fix error
 	// written by Alex Keperling 4/26/2016
 	@Override
 	public Boolean CheckPassword(final String Username,final String password) {
@@ -865,9 +868,10 @@ public class DerbyDatabase implements IDatabase {
 				);
 				stmt.setString(1, Username);
 				resultSet = stmt.executeQuery();
-				resultSet.next();
-				if(password == resultSet.getString(1)){
-					check = true;
+				if(resultSet.next()){
+					if(password == resultSet.getString(1)){
+						check = true;
+					}
 				}
 				
 			return check;	
@@ -896,7 +900,7 @@ public class DerbyDatabase implements IDatabase {
 						"where poll_id = ?"
 				);
 				stmt.setInt(1, poll_id);
-				resultSet = stmt.executeQuery();
+				stmt.execute();
 								
 				} else if(CounterType == 2){
 					stmt = conn.prepareStatement(
@@ -904,7 +908,7 @@ public class DerbyDatabase implements IDatabase {
 							"where poll_id = ?"
 					);
 					stmt.setInt(1, poll_id);
-					resultSet = stmt.executeQuery();					
+					stmt.execute();					
 					
 				}else if(CounterType == 3){
 					stmt = conn.prepareStatement(
@@ -912,7 +916,7 @@ public class DerbyDatabase implements IDatabase {
 							"where poll_id = ?"
 					);
 					stmt.setInt(1, poll_id);
-					resultSet = stmt.executeQuery();
+					stmt.execute();
 					
 					
 				}else{

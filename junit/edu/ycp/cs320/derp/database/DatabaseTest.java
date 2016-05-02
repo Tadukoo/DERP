@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.After;
@@ -180,32 +181,48 @@ public class DatabaseTest{
 			}
 		}
 	}
-/*	
+	
 	@Test
-	public void TestinsertPollIntoPollsTable(String title, String Description, String userName){
+	public void TestinsertPollIntoPollsTable(){
+		String title = "Is Little Mac OP?";
+		String Description = "Everyone's favorite boxer is too OP let them know.";
+		String userName = "JonesJames";
 		
+		db.insertPollIntoPollsTable(title, Description, userName);
+		Poll temp = db.findPollByTitle(title, userName);
+		
+		assertEquals(temp.getDescription(), Description);
+		db.removePollByTitle(title, userName);
 	}
 	
 	@Test
 	public void TestfindAllUsers(){
-		
+		List<User> users = db.findAllUsers();
+		Iterator<User> i = users.iterator();
+		assertEquals(i.next().getUserId(), 1);
+		assertEquals(i.next().getUserId(), 4);
+		assertEquals(i.next().getUserId(), 5);
+		assertEquals(i.next().getUserId(), 3);
+		assertEquals(i.next().getUserId(), 2);
 	}
-	*/
+	
 	@Test
 	public void TestremovePollByTitle(){
 		String title = "Do you know Him?";
 		String userName = "Harry13";
 		Poll test = db.findPollByTitle(title, userName);
+		String Description = test.getDescription();
 		assertEquals(title,test.getTitle() );
 		db.removePollByTitle(title, userName);
 		test = db.findPollByTitle(title, userName);
 		assertNotEquals(test.getTitle(), title);
+		db.insertPollIntoPollsTable(title, Description, userName);
 	}
 	
 	@Test
 	public void TestfindAllPolls(){// sorted by totalCount
 		List<Poll> polls = db.findAllPolls();
-		assertEquals(polls.get(0).getPollId(), 1);
+		assertEquals(polls.get(0).getPollId(), 15);
 		assertEquals(polls.get(13).getPollId(), 14);
 	}
 	
@@ -264,7 +281,7 @@ public class DatabaseTest{
 		assertEquals(test.getLastName(), "Wayne");
 	}
 	
-	/*@Test
+	@Test
 	public void TestfindPollByTitle(){
 		String test = "I am the one";
 		String userName = "Gringo";
@@ -274,5 +291,5 @@ public class DatabaseTest{
 		assertEquals(tessted.getDescription(), "This is a desciption");
 		assertEquals(tessted.getTitle(), test);
 		assertEquals(tessted.getYesVotes(),33 );
-	}*/
+	}
 }

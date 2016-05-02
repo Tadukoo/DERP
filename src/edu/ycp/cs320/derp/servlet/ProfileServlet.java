@@ -7,13 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.derp.controller.MainContentController;
+
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private MainContentController controller;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.getRequestDispatcher("/_view/profile.jsp").forward(req, resp);
+		String name = (String)req.getSession().getAttribute("username");
+		controller = new MainContentController();
+		req.setAttribute("fullname", controller.GetUserByUsername(name));
+		
 	}
 /*	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -38,7 +45,7 @@ public class ProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		// Decode form parameters and dispatch to controller
+		/*// Decode form parameters and dispatch to controller
 		String errorMessage = null;
 		Double result = null;
 		try {
@@ -70,6 +77,6 @@ public class ProfileServlet extends HttpServlet {
 			return null;
 		} else {
 			return Double.parseDouble(s);
-		}
+		}*/
 	}
 }
