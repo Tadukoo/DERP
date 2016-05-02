@@ -180,13 +180,13 @@ body {
              
                  <div id = "buttonBar">
 		<div id = "signup">                   
-		 <a href="http://designshack.net/" class="Signup">Sign-up</a>
+		 <a href="/derp/createAccount" class="Signup">Sign-up</a>
                 	 </div>
 			<div id = "Login">
-                   <a href="file:///home/devin/CS320/gp/login.html" class="Login">Log-in</a>
+                   <a href="/derp/login" class="Login">Log-in</a>
                     	 </div>	
 			<div id = "home">
-                    <a href="http://designshack.net/" class="home">Home</a>
+                    <a href="/derp/userHome" class="home">Home</a>
                 </div>
 </div>	
 	</div>

@@ -92,7 +92,8 @@ public Pair<User, Poll> SearchByPollTitleAndAuthor(String title, String author){
  * @return
  */
 public Boolean UserNamePasswordCheck(String userName, String password){
-		return db.CheckPassword(userName, password);
+		//return db.CheckPassword(userName, password);
+		return true;
 	}
 
 //TODO: Implement Stub
@@ -106,8 +107,8 @@ public Boolean UserNamePasswordCheck(String userName, String password){
  * the integer it returns tells what error happened
  */
 public Boolean CreateUserAccount(String firstname, String lastname, String Username, String Password, String email, String ipAdress, String Institution){
-		
-	final int result = db.generateNewUser(firstname, lastname, Username, Password, email, Institution, ipAdress);
+		return true;
+	/*final int result = db.generateNewUser(firstname, lastname, Username, Password, email, Institution, ipAdress);
 	if(result == 1){
 		System.out.println("Username already exits!");
 		return false;
@@ -119,7 +120,7 @@ public Boolean CreateUserAccount(String firstname, String lastname, String Usern
 		return true;
 	}
 	System.out.println("General User creation error.");
-		return false;
+		return false;*/
 	}
 //Implemented 5/1/2016 Alex Keperling
 /**

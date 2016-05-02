@@ -31,7 +31,7 @@ public class DerbyDatabase implements IDatabase {
 		DerbyDatabase db = new DerbyDatabase();
 	// TODO: fix try catch statements as it is not working.
 //		db.createTables();
-//		db.loadInitialData();/*
+	//	db.loadInitialData();/*
 		try {
 			db.connect();
 			System.out.println("Successfully connected...");

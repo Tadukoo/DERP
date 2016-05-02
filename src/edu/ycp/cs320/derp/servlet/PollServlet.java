@@ -24,6 +24,9 @@ public class PollServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("\nLoginServlet: doGet");
+		req.setAttribute("username", "Gringo");
+		req.setAttribute("password", "western");
+		req.setAttribute("pollname","Are Ghosts real??" );
 		if((String)req.getSession().getAttribute("username")==null || (String)req.getSession().getAttribute("username")==""){
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);}
 		String name= (String)req.getSession().getAttribute("username");
