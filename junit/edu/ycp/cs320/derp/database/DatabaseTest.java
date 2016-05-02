@@ -2,7 +2,7 @@ package edu.ycp.cs320.derp.database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,4 +180,99 @@ public class DatabaseTest{
 			}
 		}
 	}
+/*	
+	@Test
+	public void TestinsertPollIntoPollsTable(String title, String Description, String userName){
+		
+	}
+	
+	@Test
+	public void TestfindAllUsers(){
+		
+	}
+	*/
+	@Test
+	public void TestremovePollByTitle(){
+		String title = "Do you know Him?";
+		String userName = "Harry13";
+		Poll test = db.findPollByTitle(title, userName);
+		assertEquals(title,test.getTitle() );
+		db.removePollByTitle(title, userName);
+		test = db.findPollByTitle(title, userName);
+		assertNotEquals(test.getTitle(), title);
+	}
+	
+	@Test
+	public void TestfindAllPolls(){// sorted by totalCount
+		List<Poll> polls = db.findAllPolls();
+		assertEquals(polls.get(0).getPollId(), 1);
+		assertEquals(polls.get(13).getPollId(), 14);
+	}
+	
+	@Test
+	public void TestgenerateNewUser(){
+		String firstname = "Charles";
+		String lastname  = "Manson";
+		String Username = "CHMAN";
+		String password = "cman12";
+		String email = "cman@gmail.com";
+		String Institution = "York College";
+		String IPAdress = "192.125.123.043";
+		
+		System.out.println("*** Testing generate New User **");
+		db.generateNewUser(firstname, lastname, Username, password, email, Institution, IPAdress);
+		
+		User test = db.findUserInformation(Username);
+		assertEquals(test.getFirstName(), firstname);
+		assertEquals(test.getLastName(), lastname);
+		assertEquals(test.getPassword(), password);
+	}
+
+	@Test
+	public void TestCheckPassword(){
+		String Username = "Gringo";
+		String password = "western";
+		System.out.println("*** Testing password Checker***");
+		boolean pass = db.CheckPassword(Username, password);
+		assertTrue(pass);
+		
+	}
+	
+	@Test
+	public void TestIncrementCounter(){
+		String userName = "Gringo";
+		int poll_id = 2;
+		System.out.println("*** Testing Increment Counter ***");
+		Poll compare = db.findPollByTitle("Do you want a dog", userName);
+		System.out.println(compare.getPageViews()+" " + compare.getYesVotes()+ " " + compare.getTotalVotes());
+		db.IncrementCounter(poll_id, 1);
+		db.IncrementCounter(poll_id, 2);
+		db.IncrementCounter(poll_id, 3);
+		Poll compare1 = db.findPollByTitle("Do you want a dog", userName);
+		System.out.println(compare1.getPageViews()+" " + compare1.getYesVotes()+ " " + compare1.getTotalVotes());
+		assertEquals(compare.getTotalVotes()+1, compare1.getTotalVotes());
+		assertEquals(compare.getYesVotes()+1, compare1.getYesVotes());
+		assertEquals(compare.getPageViews()+1, compare1.getPageViews());
+	}
+	
+	@Test
+	public void TestfindUserInformation(){
+		String userName = "Gringo";
+		System.out.println("*** Testing findUserInformation***");
+		User test = db.findUserInformation(userName);
+		assertEquals(test.getFirstName(), "John");
+		assertEquals(test.getLastName(), "Wayne");
+	}
+	
+	/*@Test
+	public void TestfindPollByTitle(){
+		String test = "I am the one";
+		String userName = "Gringo";
+		System.out.println("*** Testing findPollByTitle ***");
+		Poll tessted = db.findPollByTitle(test, userName);
+		System.out.println(tessted.getPageViews() + tessted.getTitle());
+		assertEquals(tessted.getDescription(), "This is a desciption");
+		assertEquals(tessted.getTitle(), test);
+		assertEquals(tessted.getYesVotes(),33 );
+	}*/
 }

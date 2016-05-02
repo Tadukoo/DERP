@@ -10,12 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.derp.controller.MainContentController;
+
 //import edu.ycp.cs320.derp.model.TempLoginDatabase;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 //	private TempLoginDatabase model;
-//	private LoginController controller;
+	private MainContentController controller;
+	String errorMessage = null;
+	String name         = null;
+	String pw           = null;
+	boolean validLogin  = false;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -24,6 +30,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("\nLoginServlet: doGet");
 
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+		
 	}
 
 	@Override
@@ -32,33 +39,32 @@ public class LoginServlet extends HttpServlet {
 
 		System.out.println("\nLoginServlet: doPost");
 
-		String errorMessage = null;
-		String name         = null;
-		String pw           = null;
-		boolean validLogin  = false;
+		
 
 		// Decode form parameters and dispatch to controller
-		name = req.getParameter("username");
-		pw   = req.getParameter("password");
-
-		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");			
+		name = req.getParameter("user");
+		pw   = req.getParameter("pass");
+		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");
 
 		if(name == null || pw == null || name.equals("") || pw.equals("")){
 			errorMessage = "Please specify both user name and password";
 		}else{
-		//	model      = new TempLoginDatabase();
-	//		controller = new LoginController(model);
-//			validLogin = controller.validateCredentials(name, pw);
+			System.out.print("else");
+			controller = new MainContentController();
+			System.out.println("valid login strst");
+			validLogin = controller.UserNamePasswordCheck(name, pw);
+			System.out.println("valid login end");
 
-//			if(!validLogin){
+			if(!validLogin){
+				System.out.println("invalid login");
 				errorMessage = "Username and/or password invalid";
-//			}
+			}
 
 		}
-
+		System.out.print("setting attributes");
 		// Add parameters as request attributes
-		req.setAttribute("username", req.getParameter("username"));
-		req.setAttribute("password", req.getParameter("password"));
+		req.setAttribute("username", req.getParameter("user"));
+		req.setAttribute("password", req.getParameter("pass"));
 
 		// Add result objects as request attributes
 		req.setAttribute("errorMessage", errorMessage);
@@ -72,6 +78,7 @@ public class LoginServlet extends HttpServlet {
 			req.getSession().setAttribute("user", name);
 
 			// redirect to /index page
+			System.out.println(req.getContextPath());
 			resp.sendRedirect(req.getContextPath() + "/userHome");
 
 			return;

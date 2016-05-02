@@ -17,7 +17,7 @@ public interface IDatabase {
 	public List<Poll> findAllPolls();// sorted by totalCount
 	public Integer generateNewUser(String firstname, String lastname, String Username, String password, String email, String Institution, String IPAdress);
 	public Boolean CheckPassword(String Username, String password);
-	public Boolean IncrementCounter(String Username,String PollTitle, int CounterType);
+	public Boolean IncrementCounter(int poll_id, int CounterType);
 	public User findUserInformation(String userName);
 	public Poll findPollByTitle(String title, String userName);
 	

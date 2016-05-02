@@ -50,19 +50,19 @@ public class MainContentController {
 	 * Method to return a ArrayList of User Poll pairs.
 	 * Main use is to create a search result to click a hyperlink.
 	 ***/
-	public ArrayList<Pair<User, Poll>> SearchByPollTitle(String title){
+	public Poll SearchByPollTitle(String title, String username){
 		
 		// get the list of (User, Poll) pairs from the db
-		List<Pair<User, Poll>> userPollsList= db.findUserAndPollByTitle(title);
+		Poll userPolls= db.findPollByTitle(title, username);
 		
-		if(userPollsList.isEmpty()){
+		if(userPolls.getPollId() != 0){
 			System.out.println("No Polls found for Title: " + title);
 			return null;
 		}
 		else{
 			System.out.println("Polls and User Pairs found and returned");
 		}
-		return (ArrayList<Pair<User, Poll>>) userPollsList;
+		return userPolls;
 	}
 	
 	//TODO:Implement Stub
@@ -129,8 +129,8 @@ public Boolean CreateUserAccount(String firstname, String lastname, String Usern
  * @param PollTitle
  * @return
  */
-public Boolean IncrementYesPollCounter(String Username,String PollTitle){
-		return db.IncrementCounter(Username, PollTitle, 1);
+public Boolean IncrementYesPollCounter(int user_id){
+		return db.IncrementCounter(user_id, 1);
 	}
 //Implemented 5/1/2016 Alex Keperling
 /**
@@ -139,8 +139,8 @@ public Boolean IncrementYesPollCounter(String Username,String PollTitle){
 * @param PollTitle
 * @return
 */
-public Boolean IncrementTotalPollCounter(String Username,String PollTitle){
-		return db.IncrementCounter(Username, PollTitle, 2);
+public Boolean IncrementTotalPollCounter(int user_id){
+		return db.IncrementCounter(user_id, 2);
 	}
 //Implemented 5/1/2016 Alex Keperling
 /**
@@ -149,8 +149,8 @@ public Boolean IncrementTotalPollCounter(String Username,String PollTitle){
 * @param PollTitle
 * @return
 */
-public Boolean IncrementPollPageViewCounter(String Username,String PollTitle){
-		return db.IncrementCounter(Username, PollTitle, 3);
+public Boolean IncrementPollPageViewCounter(int Poll_id){
+		return db.IncrementCounter(Poll_id, 3);
 	}
 public User GetUserByUsername(String username){
 	User temp = db.findUserInformation(username);
@@ -160,6 +160,9 @@ public User GetUserByUsername(String username){
 
 public Poll GetPollByTitle(String title, String username ){
 	return db.findPollByTitle(title, username);
+}
+public List<Poll> FindAllPolls(){
+	return db.findAllPolls();
 }
 ///////////////////////////////////////////Not needed for produce///////////////////////////////
 //TODO: implement stub
