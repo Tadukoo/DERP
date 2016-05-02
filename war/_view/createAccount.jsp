@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -24,14 +25,14 @@
             #fullName{
                 float:left;
                 margin-top:2%;
-                margin-left:-13.5%;
+                margin-left:-12%;
                 font-size: 150%;
                 color: #0099ff;
 		}
 
 		
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+;
 
 body {
   background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 

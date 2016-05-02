@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.derp.controller.MainContentController;
+import edu.ycp.cs320.derp.model.Poll;
+
 /*import edu.ycp.cs320.derp.model.Pair;
 import edu.ycp.cs320.derp.model.Poll;
 import edu.ycp.cs320.derp.model.User;
@@ -14,42 +17,45 @@ import edu.ycp.cs320.derp.controller.MainContentController;
 */
 public class PollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private MainContentController controller;
 	
-/*	@Override
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
-	}*/
+
+		System.out.println("\nLoginServlet: doGet");
+		if((String)req.getSession().getAttribute("username")==null || (String)req.getSession().getAttribute("username")==""){
+		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);}
+		String name= (String)req.getSession().getAttribute("username");
+		String pollname= (String)req.getSession().getAttribute("pollname");
+		controller = new MainContentController();
+		Poll poll =new Poll();
+		poll = controller.SearchByPollTitle(pollname,name);
+		req.setAttribute("poll", poll);
+		req.setAttribute("polltitle", pollname);
+		req.setAttribute("pollsummary", poll.getDescription());
+		req.setAttribute("agrees", poll.getYesVotes());
+		req.setAttribute("disagrees", poll.getTotalVotes() - poll.getYesVotes());
+		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+		
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{
-		String title = (String) req.getSession().getAttribute("title");
-		req.setAttribute("title", title);
+		String name= (String)req.getSession().getAttribute("username");
+		String pollname= (String)req.getSession().getAttribute("pollname");;
+		Poll poll = (Poll) req.getSession().getAttribute("poll");
+		controller = new MainContentController();
+		controller.IncrementTotalPollCounter(poll.getPollId());
+		if (req.getParameter("Agree") == null) {
+			controller.IncrementYesPollCounter(poll.getPollId());
+			}
 		
 		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
 	}
   //private MainContentController controller = null;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		String user = (String) req.getSession().getAttribute("user");
-		if (user == null) {
-			System.out.println("   User: <" + user + "> not logged in or session timed out");
-			
-			// user is not logged in, or the session expired
-			resp.sendRedirect(req.getContextPath() + "/login");
-			return;
-		}
-			
-			
-			// now we have the user's User object,
-			// proceed to handle request...
-			
-			req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);	
-	}
 	
 /*	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

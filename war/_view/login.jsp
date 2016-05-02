@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -153,7 +154,7 @@ height: 44px;
            
     <div class="login-box">
     <h1>Log-in</h1><br>
-  <form method="post">
+   <form method="post">
     <input type="text" name="user" placeholder="Username">
     <input type="password" name="pass" placeholder="Password">
     <input type="submit" name="login" class="login login-submit" value="login">

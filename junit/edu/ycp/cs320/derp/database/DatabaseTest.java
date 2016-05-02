@@ -184,6 +184,7 @@ public class DatabaseTest{
 	
 	@Test
 	public void TestinsertPollIntoPollsTable(){
+		System.out.println("*** Testing insert Poll into Polls Table ***");
 		String title = "Is Little Mac OP?";
 		String Description = "Everyone's favorite boxer is too OP let them know.";
 		String userName = "JonesJames";
@@ -192,11 +193,12 @@ public class DatabaseTest{
 		Poll temp = db.findPollByTitle(title, userName);
 		
 		assertEquals(temp.getDescription(), Description);
-		db.removePollByTitle(title, userName);
+	//	db.removePollByTitle(title, userName);
 	}
 	
 	@Test
 	public void TestfindAllUsers(){
+		System.out.println("*** Find all Users ***");
 		List<User> users = db.findAllUsers();
 		Iterator<User> i = users.iterator();
 		assertEquals(i.next().getUserId(), 1);
@@ -208,6 +210,7 @@ public class DatabaseTest{
 	
 	@Test
 	public void TestremovePollByTitle(){
+		System.out.println("*** Testing Remove Poll By Title ***");
 		String title = "Do you know Him?";
 		String userName = "Harry13";
 		Poll test = db.findPollByTitle(title, userName);
@@ -221,9 +224,10 @@ public class DatabaseTest{
 	
 	@Test
 	public void TestfindAllPolls(){// sorted by totalCount
+		System.out.println("*** Testing find All Polls ***");
 		List<Poll> polls = db.findAllPolls();
-		assertEquals(polls.get(0).getPollId(), 15);
-		assertEquals(polls.get(13).getPollId(), 14);
+		assertEquals(polls.get(0).getPollId(), 9);
+		assertEquals(polls.get(13).getPollId(), 1);
 	}
 	
 	@Test
@@ -261,12 +265,10 @@ public class DatabaseTest{
 		int poll_id = 2;
 		System.out.println("*** Testing Increment Counter ***");
 		Poll compare = db.findPollByTitle("Do you want a dog", userName);
-		System.out.println(compare.getPageViews()+" " + compare.getYesVotes()+ " " + compare.getTotalVotes());
 		db.IncrementCounter(poll_id, 1);
 		db.IncrementCounter(poll_id, 2);
 		db.IncrementCounter(poll_id, 3);
 		Poll compare1 = db.findPollByTitle("Do you want a dog", userName);
-		System.out.println(compare1.getPageViews()+" " + compare1.getYesVotes()+ " " + compare1.getTotalVotes());
 		assertEquals(compare.getTotalVotes()+1, compare1.getTotalVotes());
 		assertEquals(compare.getYesVotes()+1, compare1.getYesVotes());
 		assertEquals(compare.getPageViews()+1, compare1.getPageViews());

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -5,224 +6,214 @@
         <title>D.E.R.P.</title>
         <!--<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> this is a font i like please check out-->
         <style type="text/css">
-            #main{
+ 		#main{
                 float:center;
-                height: 1000px;
-                border-left-style: solid;
+                height: 500px;
+                border-left-style: double;
                 border-right-style: solid;
-                border-right-color: #000000;
-                border-left-color: #000000;
-                margin-left:200px;
-                margin-right:200px;
+                 margin-left:10%;
+                margin-right:10%;
                 position:relative;
-                z-index:1;
+                z-index:0;
             }
-            #buttonBar{
-                border-radius: 25px;
+	body {
+  background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+}
+		#name {
+                float: left;
+                font-size: 300%;
+           	color: #0099ff;
+		 }
+            #fullName{
+                float:left;
+                margin-top:4%;
+                margin-left:-12%;
+                font-size: 150%;
+                color: #0099ff;
+		}
+		#PollTitleBox{
+		border-radius: 25px;
                 position:relative;
                 z-index:3;
                 text-align: center;
                 float:center;
                 border-style:solid;
                 height: 100px;
-                width:85%;
-                margin-top:-850px;
-                margin-left:100px;
+                width:30%;
+                margin-top:-18%;
+                left: 30%;
                 font-size:300%;
-                background-color: #0099ff
+                background-color: #0099ff;
             }
-            #name{
-                float: left;
-                font-size: 300%;
-            }
-            #fullName{
-                float:left;
-                margin-top:5%;
-                margin-left:-16.5%;
-                font-size: 150%;
-            }
-            #yourPolls{
-                margin-left: 27%;
+		#descriptionbox{
+                border-radius: 25px;
+		position:relative;
+                z-index:3;
+                text-align: center;
+                float:center;
+                border-style:solid;
+                height:500px;
+                width: 30%;
                 margin-top:2%;
+                left: 52%;
+                font-size:300%;
+                background-color: #0099ff;
             }
-            #home{
-                float: center;
-                margin-left: 5%;
-                margin-top:-3.5%;
-            }
-            #newPoll{
-                float: right;
-                margin-right:-3%;
-                margin-top:-3%
-            }
-            #other{
-                float: right;
-                margin-right:4%;
-                margin-top:-3%
-            }
-            .YourPolls {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-            .Home {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-            .Other {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-            .NewPoll {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-            #title{
-                font-size: 350%;
-                text-align:center;
-            }
-            #desc{
+		#totalanswerbox{
+		border-radius: 25px;               
+		 position:relative;
+                z-index:3;
+                text-align: center;
+                float:center;
                 border-style:solid;
-                font-size: 200%;
-                margin-top:10%;
-                margin-left:15%;
-                text-align:center-left;
-                margin-right:50%;
+                height: 200px;
+                width: 35%;
+                margin-top:-26.5%;
+                left: 10%;
+                font-size:150%;
+                background-color: #0099ff;
             }
-            #link{
+		#answerbox{
+		border-radius: 25px;               
+		 position:absolute;
+                z-index:3;
+                text-align: center;
+                float:center;
                 border-style:solid;
-                font-size: 200%;
-                margin-top:-10%;
-                margin-left:55%;
-                text-align:center-right;
-                margin-right:18%;
+                height: 200px;
+                width: 25%;
+                top: 0;
+                right: -.5%;
+                font-size:300%;
+                background-color: #999966;
             }
-        #Agreebtn{
-            float:center;
-            margin-top:8%;
-            margin-left: 18%;
-            position:relative;
-            z-index:13;
-        }
-        .Agreebtn {
-            border-radius:25px;
-            background-color: #0099ff;
-            border: none;
-            color: white;
-            padding: 65px 172px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 50px;
-        }
-        .Agreebtn:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-        #Disagreebtn{
-            float:center;
-            margin-top:-1%;
-            margin-left: 40%;
-            position:relative;
-            z-index:13;
-        }
-        .Disagreebtn {
-            border-radius:25px;
-            background-color: #0099ff;
-            border: none;
-            color: white;
-            padding: 65px 172px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 50px;
-        }
-        .Disagreebtn:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-
-        #agree{
-            margin-left:33%;
-            margin-top:3%;
-    
-        }
-        #disagree{
-            margin-left:63%;
-            margin-top:-4%;
-            
-        }
+.totalyescount{
+	position: absolute;
+	top: 10%;
+	left: 5%;
+}
+.totalnocount{
+	position: absolute;
+	bottom: 10%;
+	left: 5%;
+}
+.yesbutton {
+     position:absolute;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    left: 5%;
+}
+.nobutton {
+    position:absolute;
+    background-color: #f44336;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    bottom: 5%;
+    left: 5%;
+}
+		
+		#profileinfo{
+		position:relative;
+                z-index:3;
+                text-align: center;
+                float:center;
+                border-style:solid;
+                height: 120px;
+                width: 30%;
+                margin-top:4%;
+                left: 15%;
+                font-size:100%;
+                background-color: #0099ff;
+            }	
+		#picture{
+		position:absolute;
+		left: 0;
+		top:0%;
+		}	
+		#author{
+		font-size:150%;
+		top:0;
+		
+		}
+		#username{
+		font-size:100%;
+		float:center;
+		bottom: 0;
+		}
+ 
 </style>
+	
     </head>
-    <body>
-        <div id = "entirety">
+	<body>
+        
+
+<div id = "entirety">
             <div id = "main">
                 <div id = "name">
                     D.E.R.P.
                 </div>
                 <div id = "fullName">
-                    Dedicated Electronic Representative Polling
+                   <p> Dedicated Electronic Representative Pollings<p>
                 </div>
             </div>
-            <div id = "buttonBar">
-                <div id = "yourPolls">
-                    <a href="/derp/profile" class="YourPolls">Your Polls</a>
-                </div>
-                <div id = "home">
-                <a href="/derp/userHome" class="Home">Home</a>
-                </div>
-                <div id = "other">
-                <a href="/derp/login" class="Other">Login</a>
-                </div>
-                <div id = "newPoll">
-                    <a href="/derp/createPoll" class="NewPoll">NewPoll</a>
-                </div>
-            </div>
-        </div>
-        <div id="title">
-        ${title}
-        </div>
-        <div id="desc">
-            Description of Poll:<br>
-            ${description}
-        </div>
-        <div id="link">
-            Link to the Poll:<br>
-            ${link}
-        </div>
-        <div id="agree">
-            Agree<br>
-            <p id="Agree"></p>
-        </div>
-        <div id="disagree">
-            Disagree<br>
-            <p id="Disagree"></p>
-        </div>
-        <script language="JavaScript">
-            function getParameter() {
-                var val = window.location.href;
-                var title = val.slice(val.indexOf("?")+1,val.indexOf("="));
-                var link = val.slice(val.indexOf("=")+1,val.indexOf("+"));
-                var desc = val.slice(val.indexOf("+")+1,val.indexOf("-"));
-                var agree = val.slice(val.indexOf("-")+1,val.indexOf("#"));
-                var disagree = val.slice(val.indexOf("#")+1);
-                title = title.replace("%20"," ");
-                desc = desc.replace("%20"," ");
-                link = link.replace("%20"," ");
-                document.getElementById("Title").innerHTML = title;
-                document.getElementById("Desc").innerHTML = desc;
-                document.getElementById("Link").innerHTML = link;
-                document.getElementById("Agree").innerHTML = agree;
-                document.getElementById("Disagree").innerHTML = disagree;
-            }
-            getParameter();
-        </script>
-        <div id = "Agreebtn">
-            <button type="button" class="btn postPoll" id="Agreebtn" value ="pollpage">Agree</button>
-        </div>
-        <div id = "Disagreebtn">
-            <button type="button" class="btn postPoll" id="Disagreebtn" value ="pollpage">Disagree</button>
-        </div>
-    </body>
+	<div id= "PollTitleBox">
+	<title="polltitle"> Poll Title</title>
+	</div>
+  <div id="descriptionbox">
+<summary="pollsummary"> Summary of poll</summary>
+</div>
+ <div id="totalanswerbox">
+	<div class="totalyescount">
+		Total Votes for agree:
+</div>
+<div class="totalnocount">
+	        Total Votes for disagree:
+</div>
+<div id="answerbox">
+<name="agrees"></name>
+<name="disagrees"></name>	
+<form method="post">
+<input type="button" class="yesbutton" value="Agree">
+</form>
+<form method="post">
+<input type="button" class="nobutton" value="Disagree">
+</form>
+</div>
+</div>
+<div id="profileinfo">
+	<div id="picture">
+		<img src="http://www.ycp.edu/media/t4_1714435898215170617-270x270.jpg" alt="None"
+		 width="120" height="120"  >
+		</div>
+		<div id="author">	
+		Author Info
+		</div>
+		<div id="username">
+		<profilename="profilename">Author username:Professor Hake </name>
+</div>
+
+</body>
 </html>
+

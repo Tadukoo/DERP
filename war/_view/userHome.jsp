@@ -1,228 +1,219 @@
+
+<!DOCTYPE html>
+
 <html>
     <head>
         <title>D.E.R.P.</title>
-        <!--<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> this is a font i like please check out-->
+        <title>DDedicated Electronic Representative Pollings</title>
+ <!--<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> this is a font i like please check out-->
         <style type="text/css">
-            #main{
+            
+
+body {
+  background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+}
+
+	 #name {
+                float: left;
+                font-size: 600%;
+            	color: #0099ff;
+		}
+            #fullName{
+                float:left;
+                position: relative;
+		margin-top: 5%;
+                margin-left:-18.5%;
+                font-size: 150%;
+            	color: #0099ff;
+		}
+
+		 #main{
                 float:center;
                 height: 1000px;
                 border-left-style: solid;
                 border-right-style: solid;
                 border-right-color: #000000;
                 border-left-color: #000000;
-                margin-left:200px;
-                margin-right:200px;
+                margin-left:5%;
+                margin-right:5%;
                 position:relative;
                 z-index:1;
             }
-            #buttonBar{
+		#buttonBar{
                 border-radius: 25px;
                 position:relative;
                 z-index:3;
                 text-align: center;
                 float:center;
                 border-style:solid;
-                height: 50px;
-                width:85%;
-                margin-top:-900px;
-                margin-left:100px;
+                height: 80px;
+                width:40%;
+                margin-top:-50%;
+                left: 52%;
                 font-size:200%;
                 background-color: #0099ff;
             }
-       #Searchbar{
-	float:center;
+		#Infobox{
+				
+		border-radius: 25px;
+	         border:3px solid #00;		
+                position: relative;
+                text-align: left;
+                float:right;
+                border-style:solid;
+                height: 350px;
+                width:50%;
+                margin-top: 10%;
+                left: -7.5%;
+                font-size:200%;
+                background-color: #0099ff;
+            }
+		
+           
+            .Signup{
+                   text-decoration: underline;
+		 z-index: 4;
+		position: absolute;
+		left: 10%;
+                bottom: 10%;
+            	color: #000000;
+            }
+            .Login{
+                 text-decoration: underline;
+		 z-index: 4;
+		position: absolute;
+		left: 40%;
+                bottom: 10%;
+            	color: #000000;
+              }
+		.home{
+                z-index: 4;
+		position: absolute;
+		left: 70%;
+                bottom: 10%;
+            	color: #000000;
 	}
-            #newpollsbox{
- 	            border-radius: 25px;
-	            border:3px solid #00;		
-	            position:relative;
-	            float:right;
-	            text-align:center;
-		        border-style:solid;
-                height: 200px;
-                width: 400px;
-                margin-top: 100px;
-                margin-right: 300px;
+	 
+	h3{
+	font-size: 150%;	
+	} 
+		 #hotpollsbox{
+                border-radius: 25px;
+	         border:3px solid #00;		
+                position: relative;
+                text-align: center;
+                float:left;
+                border-style:solid;
+                height: 275%;
+                width:65%;
+                margin-top: -20%;
+                left: -70%;
                 font-size:100%;
                 background-color: #0099ff;
             }
-		  #hotpollsbox{
-                border-radius: 25px;
-	            border:3px solid #00;		
-                position:relative;
+		 #pollboxThree{
+                
+	        border:3px solid #00;		
+                position:absolute ;
                 text-align: center;
-                float:right;
                 border-style:solid;
-                height: 150px;
-                width:800px;
-                margin-top:50px;
-                margin-right:400px;
-                font-size:200%;
-                background-color: #0099ff;
+		left: 5%;
+		bottom: 0;                
+		height: 25%;
+                width: 90%;
+                font-size:100%;
+                background-color: #e6e6e6;
             }
-			#Examplepicture{
-		position:absolute;
-		float:left;
-		margin-left:300px;
-		margin-top:10px;
-		}
-	 #PollBoxOne{
-                border-radius: 25px;
-	            border:3px solid #00;		
-                position:relative;
+		 #pollboxTwo{
+                
+	        border:3px solid #00;		
+                position:absolute ;
                 text-align: center;
-                float:right;
                 border-style:solid;
-                height: 100px;
-                width:800px;
-                margin-top:50px;
-                margin-right:600px;
-                font-size:300%;
-                background-color: #0099ff;
+		left: 5%;
+		bottom: 30%;                
+		height: 25%;
+                width: 90%;
+                font-size:100%;
+                background-color: #e6e6e6;
             }
-		 
-		 #PollBoxTwo{
-                border-radius: 25px;
-	            border:3px solid #00;		
-                position:relative;
+		#pollboxOne{
+                
+	        border:3px solid #00;		
+                position:absolute ;
                 text-align: center;
-                float:right;
                 border-style:solid;
-                height: 100px;
-                width:800px;
-                margin-top:60px;
-                margin-right:600px;
-                font-size:300%;
-                background-color: #0099ff;
+		left: 5%;
+		bottom: 60%;                
+		height: 25%;
+                width: 90%;
+                font-size:100%;
+                background-color: #e6e6e6;
             }
-		 #PollBoxThree{
-                border-radius: 25px;
-	            border:3px solid #00;		
-                position:relative;
-                text-align: center;
-                float:right;
-                border-style:solid;
-                height: 100px;
-                width:800px;
-                margin-top:70px;
-                margin-right:600px;
-                font-size:300%;
-                background-color: #0099ff;
-            }
-		#name {
-                float: left;
-                font-size: 300%;
-            }
-            #fullName{
-                float:left;
-                margin-top:5%;
-                margin-left:-12.5%;
-                font-size: 150%;
-            }
-           #Yourpolls{
-                margin-left: 10%;
-                margin-top:1%;
-            }
-            #home{
-                float: center;
-                margin-top:-3%;
-            }
-            #other{
-                float: right;
-                margin-right:10%;
-                margin-top:-3%
-            }
-		#recentpolls{
-		float: center;
-		font-size: 250%;
-	 }
-            
-		#hotpolls{
-		float: center;
-		font-size: 200%;
-	   }
-		.YourPolls {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-            .Home {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-            .Other {
-                display: block;
-                height: 40px;
-                width: 300px;
-            }
-	.recentpolls {
-		display: block;
-		height: 30px;
-		width: 200px;
-	}
-	.Searchbar{
-	float:right;
-}	
-        </style>
+		
+  </style>
     </head>
 
     <body>
         <div id = "entirety">
-            <div id = "main">
-                <div id = "name">
+     
+<div class="search"> 
+<form action="site/search.php" method="get"> 
+<input type="text" name="query" id="query" size="40" value=""> 
+<input type="submit" value="Search"> 
+<input type="hidden" name="search" value="1"> 
+</form> 
+</div> 
+		 <div id="main">
+            	     <div id = "name">
                     D.E.R.P.
                 </div>
                 <div id = "fullName">
-                    Dedicated Electronic Representative Pollings
+                   <p> Dedicated Electronic Representative Pollings<p>
                 </div>
             </div>
-            <div id = "buttonBar">
-                <div id = "Yourpolls">
-                    <a href="http://designshack.net/" class="YourPolls">Your Polls</a>
-                </div>
-                <div id = "home">
+             
+                 <div id = "buttonBar">
+		<div id = "signup">                   
+		 <a href="http://designshack.net/" class="Signup">Sign-up</a>
+                	 </div>
+			<div id = "Login">
+                   <a href="file:///home/devin/CS320/gp/login.html" class="Login">Log-in</a>
+                    	 </div>	
+			<div id = "home">
                     <a href="http://designshack.net/" class="home">Home</a>
                 </div>
-                <div id = "other">
-                    <a href="http://designshack.net/" class="Other">Other</a>
-                </div>
-            </div>
-        </div>
-	    <div id = "newpollsbox">
-		 	<div id = "recentpolls">
-				<a href="http://designshack.net/" class="recentPolls">Recent polls</a>
-            </div>
-		</div>
-		<div id = "hotpollsbox">
-		    <div id= "hotpolls">
-		        <a href="http://designshack.net/" class="hotpolls">Hot polls</a>
-		    </div>
-		</div>
-		<div id="PollBoxOne">
-		    <div id="PollOne">
-			<a href="http://designshack.net/" class="PollOne">Poll One</a>
-		    </div>
-	        </div>
-		<div id="PollBoxTwo">
-		    <div id="PollTwo">
-			<a href="http://designshack.net/" class="PollTwo">Poll Two</a>
-		    </div>
-	        </div>
-		<div id="PollBoxThree">
-		    <div id="PollThree">
-			<a href="http://designshack.net/" class="PollThree">Poll Three</a>
-		    </div>
-	        </div>
-
-	<div>
-  	<div id="Searchbar">
-	<input type="search" placeholder="Search">
+</div>	
 	</div>
-<div>
-		<div id="Examplepicture">
-		<img src="http://www.codeproject.com/KB/applications/381659/poll.jpg" alt="None"
-		 width="400" height="300"  >
+ </div>		
+ <div id = "Infobox"> 
+ Derp is an online survey site. However unlike most survey sites ours will be more secure and reliable due to verification of the ip address of registered users taking polls.
+<div id = "hotpollsbox">   
+<h3> Hot Polls</h3>
+<div id = "pollboxOne">
+		    <div id= "pollOne">
+		        <a href="http://designshack.net/" class="pollOne">Example Pole one</a>
 		</div>
-</body>		
+</div>
+<div id = "pollboxTwo">
+		    <div id= "pollTwo">
+		        <a href="http://designshack.net/" class="pollTwo">Example Pole Two</
+		</div>
+</div>
+</div>
+<div id = "pollboxThree">
+		    <div id= "pollThree">
+		        <a href="http://designshack.net/" class="pollThree">Example Pole Three</a>
+</div>
+
+</div>
+</div>
+
+
+</body>
 </html>

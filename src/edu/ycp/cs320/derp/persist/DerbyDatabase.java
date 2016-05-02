@@ -45,6 +45,7 @@ public class DerbyDatabase implements IDatabase {
 			
 			System.out.println("Derp DB successfully initialized!");
 		}
+//		*/
 	}
 	private interface Transaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
@@ -175,7 +176,7 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	//TODO: implement junit test. 
+	//Alex Keperling 5/2/2016 
 	@Override
 	public Poll findPollByTitle(final String title,final String userName) {
 		return executeTransaction(new Transaction<Poll>() {
@@ -183,19 +184,13 @@ public class DerbyDatabase implements IDatabase {
 		public Poll execute(Connection conn) throws SQLException {
 			Poll found = new Poll();
 			PreparedStatement stmt1 = null;
-			PreparedStatement stmt2 = null;
-			PreparedStatement stmt3 = null;
-			PreparedStatement stmt4 = null;						
 			
-			ResultSet resultSet1    = null;			
-			ResultSet resultSet2    = null;
-//			ResultSet resultSet3    = null;
-			ResultSet resultSet4    = null;			
+			ResultSet resultSet1    = null;						
 			
 			try {
 				// first get the user
 				stmt1 = conn.prepareStatement(
-						"select Users.* " +
+						"select Polls.* " +
 						"  from  Users, Polls" +
 						"  where Users.username = ?" +
 						"  and Polls.title = ? " +
@@ -207,40 +202,10 @@ public class DerbyDatabase implements IDatabase {
 				stmt1.setString(1, userName);
 				resultSet1 = stmt1.executeQuery();
 				
-				// User from query
+				// poll from query
 				resultSet1.next();
-				User User = new User();					
-				loadUser(User, resultSet1, 1);
-				// check if any Users were found
-				// this shouldn't be necessary, there should not be a Poll in the DB without an User
-				if (User.getUserName() == null) {
-					System.out.println("No User was found for title <" + title + "> in the database");
-				}
-				// check if we have the correct user
-				if ( User.getUserName().equals(userName)){
-					try{
-						System.out.println("Its here");
-						// get the poll
-						stmt2 = conn.prepareStatement(
-						"select Polls.*" +
-						" from Polls" +
-						"where Polls.user_id = ?"+
-						" and Polls.title = ?"
-						);
-						stmt2.setInt(1, User.getUserId());
-						stmt2.setString(2, title);
-						resultSet2 = stmt1.executeQuery();
-						resultSet2.next();
-						loadPoll(found, resultSet2, 1);
-						System.out.println(found.getPollId());
-					}finally{
-						DBUtil.closeQuietly(resultSet2);
-						DBUtil.closeQuietly(resultSet4);
-						DBUtil.closeQuietly(stmt4);
-						DBUtil.closeQuietly(stmt3);
-						DBUtil.closeQuietly(stmt2);
-					}
-				}
+				loadPoll(found, resultSet1, 1);
+				
 				return found;
 			} finally {
 				DBUtil.closeQuietly(resultSet1);
@@ -252,7 +217,6 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	// Written by Alex Keperling 4/22/16
-	// TODO: junit test
 	// transaction that retrieves all Users in Library
 	@Override
 	public List<User> findAllUsers() {
@@ -298,7 +262,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	//TODO: write junit test case
 	/**
 	 * insertPollIntoPollsTable 
 	 * method to insert a poll into the database. If user does not exist for poll it will not post.
@@ -401,91 +364,70 @@ public class DerbyDatabase implements IDatabase {
 	// written by Alex Keperling 4/25/16
 	// transaction that deletes Poll
 	@Override
-	public Boolean removePollByTitle(final String title, final String userName) {
+	public Boolean removePollByTitle(final String title, final String userName)  {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				Boolean removed = false;
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
-				PreparedStatement stmt3 = null;
-				PreparedStatement stmt4 = null;						
+				PreparedStatement stmt3 = null;						
 				
 				ResultSet resultSet1    = null;			
 				ResultSet resultSet2    = null;
-//				ResultSet resultSet3    = null;
-				ResultSet resultSet4    = null;			
+				ResultSet resultSet3    = null;			
 				
 				try {
 					// first get the user
 					stmt1 = conn.prepareStatement(
-							"select Users.* " +
+							"select Polls.* " +
 							"  from  Users, Polls" +
-							"  where Polls.title = ? " +
-							"    and Users.User_id = Polls.User_id "
+							"  where Users.username = ?" +
+							" and Polls.title = ? " +
+							" and Users.User_id = Polls.User_id "
 					);
 					
 					// get the Poll's User(s)
-					stmt1.setString(1, title);
+					stmt1.setString(2, title);
+					stmt1.setString(1, userName);
 					resultSet1 = stmt1.executeQuery();
 					
 					// assemble list of Users from query
-					User User = new User();					
+					Poll Poll = new Poll();					
 				
-					while (resultSet1.next()) {
-						loadUser(User, resultSet1, 1);
+					if(resultSet1.next()) {
+						loadPoll(Poll, resultSet1, 1);
 					}
-					
-					// check if any Users were found
-					// this shouldn't be necessary, there should not be a Poll in the DB without an User
-					if (User.getUserName() == null) {
-						System.out.println("No User was found for title <" + title + "> in the database");
-					}
-					// check if we have the correct user
-					if ( User.getUserName() == userName){
+					System.out.println(Poll.getDescription());
+				// got the poll that we need to remove
+					if(Poll.getTitle().equals(title)){
 						try{
-							// get the poll
-							stmt2 = conn.prepareStatement(
-							"select Polls.*" +
-							" from Polls" +
-							"where Polls.user_id = ?"+
-							" and Polls.title = ?"
-							);
-							stmt2.setInt(1, User.getUserId());
-							stmt2.setString(2, title);
-							resultSet2 = stmt1.executeQuery();
-							
-							Poll removable = new Poll();
-							loadPoll(removable, resultSet2, 1);
-							
-							if(removable.getPollId() != -1){
+							if(Poll.getPollId() > 0){
 								//delete the poll
-								stmt3 = conn.prepareStatement(
+								stmt2 = conn.prepareStatement(
 								"delete from Polls"+
 								"where poll_id = ?");
-								stmt3.setInt(1, removable.getPollId());
-								stmt3.executeUpdate();
+								stmt2.setInt(1, Poll.getPollId());
+								stmt2.executeUpdate();
+								System.out.println(Poll.getDescription());
 								System.out.println("Deleted Poll with title <" + title + "> from DB");									
 							}		
 							
 							// check that the result was removed
-							stmt4 = conn.prepareStatement(
+							stmt3 = conn.prepareStatement(
 							"select Polls.*"+
 							"from Polls" +
-							"where Polls.user_id = ?" +
-							"Polls.title = ?");
-							stmt4.setInt(1, User.getUserId());
-							stmt4.setString(2, title);
-							resultSet4 = stmt4.executeQuery();
+							"where Polls.poll_id = ?");
+							stmt3.setInt(1, Poll.getPollId());
+							resultSet3 = stmt3.executeQuery();
 							
-							if(resultSet4 == null){
+							if(resultSet3 == null){
 								System.out.println("Deletion of Poll sucessful");
 								removed = true;
 							}
 						}finally{
 							DBUtil.closeQuietly(resultSet2);
-							DBUtil.closeQuietly(resultSet4);
-							DBUtil.closeQuietly(stmt4);
+							DBUtil.closeQuietly(resultSet3);
 							DBUtil.closeQuietly(stmt3);
 							DBUtil.closeQuietly(stmt2);
 						}
@@ -709,7 +651,6 @@ public class DerbyDatabase implements IDatabase {
 					insertPoll.executeBatch();
 					
 					System.out.println("Polls table populated");					
-					//TODO:fix commented out section
 					// must wait until all Polls and all Users are inserted into tables before creating PollUser table
 					// since this table consists entirely of foreign keys, with constraints applied
 				
@@ -755,10 +696,10 @@ public class DerbyDatabase implements IDatabase {
 					resultSet = stmt.executeQuery();
 					
 					// for testing that a result was returned
-					Boolean found = false;
+					Boolean found = true;
 					
 					if(resultSet.next() != true){
-						found = true;
+						found = false;
 					}
 					while (resultSet.next()) {
 						
@@ -792,13 +733,14 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt4 = null; 
 				ResultSet resultSet1 = null;
 				ResultSet resultSet3 = null;
-				ResultSet resultSet4 = null;
 				Integer result = 0;
 				try {
+					System.out.println("IN");
 					stmt1 = conn.prepareStatement(
 							"select user_id from Users"+
 							"where username = ?"
 					);
+					System.out.println("IN");
 					stmt1.setString(1, Username);
 					resultSet1 = stmt1.executeQuery();
 					
@@ -815,6 +757,7 @@ public class DerbyDatabase implements IDatabase {
 						stmt2.setString(5, email);
 						stmt2.setString(4, Institution);
 						stmt2.executeUpdate();
+						System.out.println("IN");
 						
 						stmt3 = conn.prepareStatement(
 								"select user_id from Users"+
@@ -826,6 +769,7 @@ public class DerbyDatabase implements IDatabase {
 						if(resultSet3.next() == false){
 							result = 2;
 						}
+						System.out.println("IN");
 						user_id = resultSet3.getInt(1);
 						
 						stmt4 = conn.prepareStatement("insert into IpAdressess (User_id, Ip) values(?, ?)");
@@ -855,29 +799,30 @@ public class DerbyDatabase implements IDatabase {
 	@Override
 	public Boolean CheckPassword(final String Username,final String password) {
 		return executeTransaction(new Transaction<Boolean>() {
-		@Override
-		public Boolean execute(Connection conn) throws SQLException {
-			PreparedStatement stmt = null;
-			ResultSet resultSet = null;
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+			PreparedStatement stmt1 = null;
+			ResultSet resultSet1 = null;
 			boolean check = false;
-			
-			try {
-				stmt = conn.prepareStatement(
-						"select password from Users"+
-						"where username = ?"
+			System.out.println("Help");
+			User User = new User();
+			try{
+				stmt1 = conn.prepareStatement(
+						"select * from Users "+
+						"where username = Gringo"
 				);
-				stmt.setString(1, Username);
-				resultSet = stmt.executeQuery();
-				if(resultSet.next()){
-					if(password == resultSet.getString(1)){
-						check = true;
-					}
-				}
-				
+				System.out.println("Help");
+				stmt1.setString(1, Username);
+				System.out.println("Help");
+				resultSet1 = stmt1.executeQuery();
+				System.out.println("Help");
+				if(resultSet1.next()){
+					loadUser(User, resultSet1, 1);;
+				}	
 			return check;	
 			} finally {
-				DBUtil.closeQuietly(resultSet);
-				DBUtil.closeQuietly(stmt);
+				DBUtil.closeQuietly(resultSet1);
+				DBUtil.closeQuietly(stmt1);
 			}
 		}
 	});
@@ -885,7 +830,6 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Boolean IncrementCounter(final int poll_id, final int CounterType) {
-		// TODO Auto-generated method stub
 		return executeTransaction(new Transaction<Boolean>() {
 		@Override
 		public Boolean execute(Connection conn) throws SQLException {
