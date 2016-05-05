@@ -13,7 +13,7 @@ import edu.ycp.cs320.derp.persist.DerbyDatabase;
 
 public class MainContentController {
 
-	private IDatabase db    = null;
+	private IDatabase db  = null;
 	
 	public MainContentController(){
 		// creating DB instance here
@@ -73,14 +73,15 @@ public class MainContentController {
 	 * @return
 	 */
 
-public Pair<User, Poll> SearchByPollTitleAndAuthor(String title, String author){
+public Poll SearchByPollTitleAndAuthor(String title, String username){
 		
 	
 		// get the list of (User, Poll) pairs from the db
-		User jack = new User(1,"Jack","Reacher","jackreacker@gmail.com", "The Organization", "jaReacher", "bam");
-		Poll strong = new Poll(1,1,"PowerLevel",23, 5, 0, "The number of Votes is how Strong you are.");
-		Pair<User, Poll> JackReacher = new Pair<User, Poll>(jack, strong);
-	return JackReacher;		
+//		User jack = new User(1,"Jack","Reacher","jackreacker@gmail.com", "The Organization", "jaReacher", "bam");
+//		Poll strong = new Poll(1,1,"PowerLevel",23, 5, 0, "The number of Votes is how Strong you are.");
+//		Pair<User, Poll> JackReacher = new Pair<User, Poll>(jack, strong);
+	Poll  returned= db.findPollByTitle(title, username);
+	return returned;		
 	}
 
 //TODO: implement Stub
@@ -107,8 +108,7 @@ public Boolean UserNamePasswordCheck(String userName, String password){
  * the integer it returns tells what error happened
  */
 public Boolean CreateUserAccount(String firstname, String lastname, String Username, String Password, String email, String ipAdress, String Institution){
-		return true;
-	/*final int result = db.generateNewUser(firstname, lastname, Username, Password, email, Institution, ipAdress);
+	final int result = db.generateNewUser(firstname, lastname, Username, Password, email, Institution, ipAdress);
 	if(result == 1){
 		System.out.println("Username already exits!");
 		return false;
@@ -120,7 +120,7 @@ public Boolean CreateUserAccount(String firstname, String lastname, String Usern
 		return true;
 	}
 	System.out.println("General User creation error.");
-		return false;*/
+		return false;
 	}
 //Implemented 5/1/2016 Alex Keperling
 /**
@@ -163,6 +163,10 @@ public Poll GetPollByTitle(String title, String username ){
 }
 public List<Poll> FindAllPolls(){
 	return db.findAllPolls();
+}
+
+public Boolean removePoll(String title, String username){
+	return db.removePollByTitle(title, username);
 }
 ///////////////////////////////////////////Not needed for produce///////////////////////////////
 //TODO: implement stub

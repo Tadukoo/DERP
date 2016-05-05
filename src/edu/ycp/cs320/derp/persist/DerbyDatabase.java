@@ -29,9 +29,9 @@ public class DerbyDatabase implements IDatabase {
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		DerbyDatabase db = new DerbyDatabase();
-	// TODO: fix try catch statements as it is not working.
-//		db.createTables();
-	//	db.loadInitialData();/*
+
+//	db.createTables();
+//		db.loadInitialData();/*
 		try {
 			db.connect();
 			System.out.println("Successfully connected...");
@@ -203,8 +203,10 @@ public class DerbyDatabase implements IDatabase {
 				resultSet1 = stmt1.executeQuery();
 				
 				// poll from query
-				resultSet1.next();
-				loadPoll(found, resultSet1, 1);
+				if(resultSet1.next()){
+					loadPoll(found, resultSet1, 1);
+				}
+
 				
 				return found;
 			} finally {
@@ -360,7 +362,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	//TODO: write junit test case
 	// written by Alex Keperling 4/25/16
 	// transaction that deletes Poll
 	@Override
@@ -398,30 +399,27 @@ public class DerbyDatabase implements IDatabase {
 					if(resultSet1.next()) {
 						loadPoll(Poll, resultSet1, 1);
 					}
-					System.out.println(Poll.getDescription());
 				// got the poll that we need to remove
 					if(Poll.getTitle().equals(title)){
 						try{
 							if(Poll.getPollId() > 0){
 								//delete the poll
 								stmt2 = conn.prepareStatement(
-								"delete from Polls"+
+								"delete from Polls "+
 								"where poll_id = ?");
 								stmt2.setInt(1, Poll.getPollId());
 								stmt2.executeUpdate();
-								System.out.println(Poll.getDescription());
 								System.out.println("Deleted Poll with title <" + title + "> from DB");									
 							}		
 							
 							// check that the result was removed
 							stmt3 = conn.prepareStatement(
-							"select Polls.*"+
-							"from Polls" +
+							"select Polls.* "+
+							"from Polls " +
 							"where Polls.poll_id = ?");
 							stmt3.setInt(1, Poll.getPollId());
 							resultSet3 = stmt3.executeQuery();
-							
-							if(resultSet3 == null){
+							if(!resultSet3.next()){
 								System.out.println("Deletion of Poll sucessful");
 								removed = true;
 							}
@@ -675,7 +673,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 
-	//TODO: implement junit test
 	// written by Alex Keperling 4/26/16
 	@Override
 	public List<Poll> findAllPolls() {
@@ -735,12 +732,10 @@ public class DerbyDatabase implements IDatabase {
 				ResultSet resultSet3 = null;
 				Integer result = 0;
 				try {
-					System.out.println("IN");
 					stmt1 = conn.prepareStatement(
-							"select user_id from Users"+
+							"select user_id from Users "+
 							"where username = ?"
 					);
-					System.out.println("IN");
 					stmt1.setString(1, Username);
 					resultSet1 = stmt1.executeQuery();
 					
@@ -748,19 +743,18 @@ public class DerbyDatabase implements IDatabase {
 						result = 1;
 					}else{
 						stmt2 = conn.prepareStatement(
-								"insert into Users (user_firstname, user_lastname, username, password, email, instituition)" +
+								"insert into Users (user_firstname, user_lastname, username, password, email, institution) " +
 								"values(?, ?, ?, ?, ?, ?)");
 						stmt2.setString(1, firstname);
 						stmt2.setString(2, lastname);
 						stmt2.setString(3, Username);
 						stmt2.setString(4, password);
 						stmt2.setString(5, email);
-						stmt2.setString(4, Institution);
+						stmt2.setString(6, Institution);
 						stmt2.executeUpdate();
-						System.out.println("IN");
 						
 						stmt3 = conn.prepareStatement(
-								"select user_id from Users"+
+								"select user_id from Users "+
 								"where username = ?"
 						);
 						int user_id;
@@ -769,10 +763,9 @@ public class DerbyDatabase implements IDatabase {
 						if(resultSet3.next() == false){
 							result = 2;
 						}
-						System.out.println("IN");
 						user_id = resultSet3.getInt(1);
 						
-						stmt4 = conn.prepareStatement("insert into IpAdressess (User_id, Ip) values(?, ?)");
+						stmt4 = conn.prepareStatement("insert into Ipaddresses (User_id, ip_address) values(?, ?)");
 						stmt4.setString(2, IPAdress);
 						stmt4.setInt(1, user_id);
 						stmt4.executeUpdate();
@@ -794,7 +787,6 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	// TODO: implement unit test fix error
 	// written by Alex Keperling 4/26/2016
 	@Override
 	public Boolean CheckPassword(final String Username,final String password) {
@@ -804,21 +796,20 @@ public class DerbyDatabase implements IDatabase {
 			PreparedStatement stmt1 = null;
 			ResultSet resultSet1 = null;
 			boolean check = false;
-			System.out.println("Help");
 			User User = new User();
 			try{
 				stmt1 = conn.prepareStatement(
 						"select * from Users "+
-						"where username = Gringo"
+						"where username = ?"
 				);
-				System.out.println("Help");
 				stmt1.setString(1, Username);
-				System.out.println("Help");
 				resultSet1 = stmt1.executeQuery();
-				System.out.println("Help");
 				if(resultSet1.next()){
 					loadUser(User, resultSet1, 1);;
 				}	
+				if(User.getPassword().equals(password)){
+					check = true;
+				}
 			return check;	
 			} finally {
 				DBUtil.closeQuietly(resultSet1);

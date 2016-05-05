@@ -203,17 +203,20 @@ public class DatabaseTest{
 		Iterator<User> i = users.iterator();
 		assertEquals(i.next().getUserId(), 1);
 		assertEquals(i.next().getUserId(), 4);
+		assertEquals(i.next().getUserId(), 6);
 		assertEquals(i.next().getUserId(), 5);
 		assertEquals(i.next().getUserId(), 3);
 		assertEquals(i.next().getUserId(), 2);
+
 	}
 	
 	@Test
 	public void TestremovePollByTitle(){
 		System.out.println("*** Testing Remove Poll By Title ***");
-		String title = "Do you know Him?";
-		String userName = "Harry13";
+		String title = "This is probably worth it?";
+		String userName = "MovieLover12";
 		Poll test = db.findPollByTitle(title, userName);
+		System.out.println("HEman");
 		String Description = test.getDescription();
 		assertEquals(title,test.getTitle() );
 		db.removePollByTitle(title, userName);
@@ -226,8 +229,7 @@ public class DatabaseTest{
 	public void TestfindAllPolls(){// sorted by totalCount
 		System.out.println("*** Testing find All Polls ***");
 		List<Poll> polls = db.findAllPolls();
-		assertEquals(polls.get(0).getPollId(), 9);
-		assertEquals(polls.get(13).getPollId(), 1);
+		assertEquals(polls.get(0).getPageViews(), 0);
 	}
 	
 	@Test
@@ -242,7 +244,7 @@ public class DatabaseTest{
 		
 		System.out.println("*** Testing generate New User **");
 		db.generateNewUser(firstname, lastname, Username, password, email, Institution, IPAdress);
-		
+	
 		User test = db.findUserInformation(Username);
 		assertEquals(test.getFirstName(), firstname);
 		assertEquals(test.getLastName(), lastname);
@@ -289,7 +291,6 @@ public class DatabaseTest{
 		String userName = "Gringo";
 		System.out.println("*** Testing findPollByTitle ***");
 		Poll tessted = db.findPollByTitle(test, userName);
-		System.out.println(tessted.getPageViews() + tessted.getTitle());
 		assertEquals(tessted.getDescription(), "This is a desciption");
 		assertEquals(tessted.getTitle(), test);
 		assertEquals(tessted.getYesVotes(),33 );
