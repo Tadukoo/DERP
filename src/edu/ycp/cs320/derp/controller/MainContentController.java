@@ -93,8 +93,7 @@ public Poll SearchByPollTitleAndAuthor(String title, String username){
  * @return
  */
 public Boolean UserNamePasswordCheck(String userName, String password){
-		//return db.CheckPassword(userName, password);
-		return true;
+		return db.CheckPassword(userName, password);
 	}
 
 //TODO: Implement Stub
