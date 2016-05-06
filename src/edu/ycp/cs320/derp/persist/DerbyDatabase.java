@@ -806,9 +806,13 @@ public class DerbyDatabase implements IDatabase {
 				resultSet1 = stmt1.executeQuery();
 				if(resultSet1.next()){
 					loadUser(User, resultSet1, 1);;
-				}	
-				if(User.getPassword().equals(password)){
-					check = true;
+				}
+				// fixed null pointer exception 5/6/2016
+				System.out.println(User.getPassword());
+				if(User != null && User.getPassword() != null && password != null){
+					if(User.getPassword().equals(password)){
+						check = true;
+					}
 				}
 			return check;	
 			} finally {
