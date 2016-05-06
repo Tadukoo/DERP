@@ -400,34 +400,37 @@ public class DerbyDatabase implements IDatabase {
 						loadPoll(Poll, resultSet1, 1);
 					}
 				// got the poll that we need to remove
-					if(Poll.getTitle().equals(title)){
-						try{
-							if(Poll.getPollId() > 0){
-								//delete the poll
-								stmt2 = conn.prepareStatement(
-								"delete from Polls "+
-								"where poll_id = ?");
-								stmt2.setInt(1, Poll.getPollId());
-								stmt2.executeUpdate();
-								System.out.println("Deleted Poll with title <" + title + "> from DB");									
-							}		
+					if(Poll != null && Poll.getTitle() != null && title != null){
+						if(Poll.getTitle().equals(title)){
+							try{
+								if(Poll.getPollId() > 0){
+									//delete the poll
+									stmt2 = conn.prepareStatement(
+									"delete from Polls "+
+									"where poll_id = ?");
+									stmt2.setInt(1, Poll.getPollId());
+									stmt2.executeUpdate();
+									System.out.println("Deleted Poll with title <" + title + "> from DB");									
+								}		
+								
+								// check that the result was removed
+								stmt3 = conn.prepareStatement(
+								"select Polls.* "+
+								"from Polls " +
+								"where Polls.poll_id = ?");
+								stmt3.setInt(1, Poll.getPollId());
+								resultSet3 = stmt3.executeQuery();
+								if(!resultSet3.next()){
+									System.out.println("Deletion of Poll sucessful");
+									removed = true;
+								}
 							
-							// check that the result was removed
-							stmt3 = conn.prepareStatement(
-							"select Polls.* "+
-							"from Polls " +
-							"where Polls.poll_id = ?");
-							stmt3.setInt(1, Poll.getPollId());
-							resultSet3 = stmt3.executeQuery();
-							if(!resultSet3.next()){
-								System.out.println("Deletion of Poll sucessful");
-								removed = true;
+							}finally{
+								DBUtil.closeQuietly(resultSet2);
+								DBUtil.closeQuietly(resultSet3);
+								DBUtil.closeQuietly(stmt3);
+								DBUtil.closeQuietly(stmt2);
 							}
-						}finally{
-							DBUtil.closeQuietly(resultSet2);
-							DBUtil.closeQuietly(resultSet3);
-							DBUtil.closeQuietly(stmt3);
-							DBUtil.closeQuietly(stmt2);
 						}
 					}
 					return removed;

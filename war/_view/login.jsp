@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -11,8 +10,6 @@
                 height: 500px;
                 border-left-style: double;
                 border-right-style: solid;
-                 margin-left:200px;
-                margin-right:200px;
                 position:relative;
                 z-index:0;
             }
@@ -24,7 +21,7 @@
             #fullName{
                 float:left;
                 margin-top:4%;
-                margin-left:-12%;
+                margin-left:-9%;
                 font-size: 150%;
                 color: #0099ff;
 		}
@@ -45,10 +42,10 @@ body {
 .login-box {
   position:fixed;
   float: center;
-  top: 200px;
-  left:450px;
+  top: 20%;
+  left:25%;
   padding: 40px;
-  width: 600px;
+  width: 40%;
   background-color: #999966;
   margin: 0 auto 10px;
   border-radius: 2px;

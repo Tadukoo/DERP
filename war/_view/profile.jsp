@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -23,8 +22,6 @@ font-family: 'Roboto', sans-serif;
                 border-right-style: solid;
                 border-right-color: #000000;
                 border-left-color: #000000;
-                margin-left:10%;
-                margin-right:10%;
                 position:relative;
                 z-index:1;
             }
@@ -57,9 +54,9 @@ font-family: 'Roboto', sans-serif;
 	        text-align:center;
 	        border-style:solid;
                 height: 250px;
-                width: 30%;
-                margin-top: 80px;
-                left: -20%;
+                width: 50%;
+                margin-top: -13%;
+                left: -18%;
                 font-size:200%;
                 background-color: #0099ff;
             }
@@ -72,8 +69,8 @@ font-family: 'Roboto', sans-serif;
                 border-style:solid;
                 height: 400px;
                 width:65%;
-                margin-top: 400px;
-                left: 15%;
+                margin-top: 2%;
+                left: -17%;
                 font-size:200%;
                 background-color: #0099ff;
             }
@@ -149,13 +146,11 @@ font-family: 'Roboto', sans-serif;
            	color: #000000;
 	 }
 		
-		
-	
-		
-	  .Profilepicture{
-                display: block;
-                
-            }
+#picture{
+margin-top: 5%;
+position:relative;
+margin-left: 15%;
+}
  </style>
     </head>
 
@@ -166,24 +161,23 @@ font-family: 'Roboto', sans-serif;
 		
             </div>
        </div>
-<div id="Profilepicture">
-		<img src="http://www.ycp.edu/media/t4_1714435898215170617-270x270.jpg" alt="None"
-		 width="300" height="250"  >
-		</div>
 
 <div id = "buttonBar">
                 <div id = "Yourpolls">
-                    <a href="http://designshack.net/" class="YourPolls">Your Polls</a>
+                    <a href="/derp/profile" class="YourPolls">Profile</a>
                 </div>
                 <div id = "home">
-                    <a href="http://designshack.net/" class="home">Home</a>
+                    <a href="/derp/userHome" class="home">Home</a>
                 </div>
                 <div id = "Newpoll">
-                    <a href="http://designshack.net/" class="Newpoll">New Poll</a>
+                    <a href"/derp/createpoll" class="Newpoll">New Poll</a>
                 </div>
             </div>
         </div>
-	    <div id = "Personalinfo">
+<div id="picture">
+    <a href="/url/"><img src="http://greenlea.ru/Articles-Directory/Online-Dating-the-First-Step-Is-Your-Profile/i0099rp.jpg" alt="/" /></a>
+</div>	    
+<div id = "Personalinfo">
 				<a class="Personalinfo">Personal Information</a>
             			<name="fullname"> </name>
 				<age="userage"> </age>
@@ -196,11 +190,17 @@ font-family: 'Roboto', sans-serif;
 		 <div id = "pollboxOne">
 		    <div id= "pollOne">
 		        <a href="http://designshack.net/" class="pollOne">Example Pole one</a>
+				<name="fullname"> </name>
+				<generalinfo="geninfo"> </generalinfo>
 		<div id = "pollboxTwo">
 		    <div id= "pollTwo">
 		        <a href="http://designshack.net/" class="pollTwo">Example Pole Two</a>
-			<div id = "pollboxThree">
+				<name="fullname2"> </name>
+				<generalinfo2="geninfo2"> </generalinfo>
+	<div id = "pollboxThree">
 		    <div id= "pollThree">
 		        <a href="http://designshack.net/" class="pollThree">Example Pole Three</a>
+				<name="fullname3"> </name>
+				<generalinfo2="geninfo3"> </generalinfo>
 </body>		
 </html>

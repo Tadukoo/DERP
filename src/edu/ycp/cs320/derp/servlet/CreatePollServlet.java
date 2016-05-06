@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.derp.controller.MainContentController;
+import edu.ycp.cs320.derp.model.User;
+import edu.ycp.cs320.derp.model.Poll;
 
 public class CreatePollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,15 +20,13 @@ public class CreatePollServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		String user = (String) req.getSession().getAttribute("user");
-		if (user == null) {
+		User user = (User)req.getSession().getAttribute("user");
+		if (!(boolean)req.getSession().getAttribute("login")) {
 			System.out.println("   User: <" + user + "> not logged in or session timed out");
-			
 			// user is not logged in, or the session expired
-			resp.sendRedirect(req.getContextPath() + "/login");
+			resp.sendRedirect("/_view/login.jsp");
 			return;
 		}
-			
 			// now we have the user's User object,
 			// proceed to handle request...
 			
@@ -40,20 +40,19 @@ public class CreatePollServlet extends HttpServlet {
 		
 		// Decode form parameters and dispatch to controller
 		String errorMessage = null;
-		String title = null;
-		String desc = null;
-		String name = (String)req.getSession().getAttribute("username");
+		String title = req.getParameter("polltitle");
+		String desc = req.getParameter("polldescription");
+		User user = (User) req.getSession().getAttribute("user");
+		String name =user.getUserName();
 		
 
 		// Decode form parameters and dispatch to controller
-		title = req.getParameter("polltitle");
-		desc = req.getParameter("polldescription");
-		
-		if (name == null || title == null || name.equals("") || title.equals("") || desc == null || desc.equals("")) {
+		if (desc == null || title == null || desc.equals("") || title.equals("")) {
 			errorMessage = "Please specify poll title and or desciption";
 		} else {
 			controller = new MainContentController();
 			controller.InsertPoll(title, desc, name);
+			req.getSession().setAttribute("poll", title);
 			resp.sendRedirect(req.getContextPath() + "/poll");
 			return;
 				

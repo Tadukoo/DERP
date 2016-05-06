@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.derp.controller.MainContentController;
+import edu.ycp.cs320.derp.model.User;
 
 //import edu.ycp.cs320.derp.model.TempLoginDatabase;
 
@@ -48,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 
 		if(name == null || pw == null || name.equals("") || pw.equals("")){
 			errorMessage = "Please specify both user name and password";
+			System.out.println(errorMessage);
 		}else{
 			System.out.print("else");
 			controller = new MainContentController();
@@ -58,29 +60,20 @@ public class LoginServlet extends HttpServlet {
 			if(!validLogin){
 				System.out.println("invalid login");
 				errorMessage = "Username and/or password invalid";
+				System.out.println(errorMessage);
+			}
+			else{
+				req.getSession().setAttribute("user", controller.GetUserByUsername(name));
+				User thisUser = (User) req.getSession().getAttribute("user");
+				System.out.print(thisUser.getUserName());
 			}
 
 		}
-		System.out.print("setting attributes");
-		// Add parameters as request attributes
-		req.setAttribute("username", req.getParameter("user"));
-		req.setAttribute("password", req.getParameter("pass"));
-
-		// Add result objects as request attributes
-		req.setAttribute("errorMessage", errorMessage);
-		req.setAttribute("login",        validLogin);
-
+		req.getSession().setAttribute("login",validLogin);
 		// if login is valid, start a session
 		if (validLogin) {
 			System.out.println("   Valid login - starting session, redirecting to /userHome");
-
-			// store user object in session
-			req.getSession().setAttribute("user", name);
-
-			// redirect to /index page
-			System.out.println(req.getContextPath());
 			resp.sendRedirect(req.getContextPath() + "/userHome");
-
 			return;
 		}
 

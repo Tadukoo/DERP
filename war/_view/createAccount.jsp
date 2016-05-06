@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -11,8 +10,7 @@
                 height: 500px;
                 border-left-style: double;
                 border-right-style: solid;
-                 margin-left:10%;
-                margin-right:10%;
+                 
                 position:relative;
                 z-index:0;
             }
@@ -25,7 +23,7 @@
             #fullName{
                 float:left;
                 margin-top:2%;
-                margin-left:-12%;
+                margin-left:-9%;
                 font-size: 150%;
                 color: #0099ff;
 		}
@@ -43,10 +41,11 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+
 .login-box {
   position:fixed;
   float: center;
-  top: 90px;
+  top: 20%;
   left: 20%;
   padding: 40px;
   width: 50%;
@@ -70,7 +69,7 @@ body {
   position: relative;
 }
 
-.login-box input[type=text], input[type=email], input[type=password], input[type=reppass] {
+.login-box input[type=text],input[type=text],input[type=text], input[type=email], input[type=password], input[type=reppass] {
 top: 20px;  
 height: 44px;
   font-size: 16px;
@@ -86,7 +85,7 @@ height: 44px;
   -moz-box-sizing: border-box;
 }
 
-.login-box input[type=text]:hover, input[type=email], input[type=password], input[type=reppass]:hover {
+.login-box input[type=text]:hover,[type=text]:hover,[type=text]:hover, input[type=email], input[type=password], input[type=reppass]:hover {
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
@@ -158,6 +157,9 @@ height: 44px;
     <div class="login-box">
     <h1>Sign-Up</h1><br>
   <form method="post">
+    <input type="text" name="firstname" placeholder="First Name">
+    <input type="text" name="lastname" placeholder="Last Name">
+    <input type="text" name="institution" placeholder="Institution">
     <input type="text" name="user" placeholder="Username">
     <input type="email" name="email" placeholder="Email">
     <input type="password" name="pass" placeholder="Password">

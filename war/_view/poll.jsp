@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -11,8 +10,6 @@
                 height: 500px;
                 border-left-style: double;
                 border-right-style: solid;
-                 margin-left:10%;
-                margin-right:10%;
                 position:relative;
                 z-index:0;
             }
@@ -32,10 +29,13 @@
             #fullName{
                 float:left;
                 margin-top:4%;
-                margin-left:-12%;
+                margin-left:-8%;
                 font-size: 150%;
                 color: #0099ff;
 		}
+		#pollbox{
+		
+}
 		#PollTitleBox{
 		border-radius: 25px;
                 position:relative;
@@ -44,9 +44,9 @@
                 float:center;
                 border-style:solid;
                 height: 100px;
-                width:30%;
-                margin-top:-18%;
-                left: 30%;
+                width:69%;
+                margin-top:-13%;
+                left: 17%;
                 font-size:300%;
                 background-color: #0099ff;
             }
@@ -58,9 +58,9 @@
                 float:center;
                 border-style:solid;
                 height:500px;
-                width: 30%;
-                margin-top:2%;
-                left: 52%;
+                width: 35%;
+                margin-top: .5%;
+                left: 51.5%;
                 font-size:300%;
                 background-color: #0099ff;
             }
@@ -72,9 +72,9 @@
                 float:center;
                 border-style:solid;
                 height: 200px;
-                width: 35%;
+                width: 33%;
                 margin-top:-26.5%;
-                left: 10%;
+                left: 17%;
                 font-size:150%;
                 background-color: #0099ff;
             }
@@ -140,10 +140,10 @@
                 text-align: center;
                 float:center;
                 border-style:solid;
-                height: 120px;
-                width: 30%;
-                margin-top:4%;
-                left: 15%;
+                height: 265px;
+                width: 33%;
+                margin-top:.5%;
+                left: 17%;
                 font-size:100%;
                 background-color: #0099ff;
             }	
@@ -163,6 +163,242 @@
 		bottom: 0;
 		}
  
+  @import url(http://fonts.googleapis.com/css?family=Cabin:400);
+#searchbox{
+		
+	position: relative;	
+	top: -30%;	
+	width: 40%;	
+	right: -71%;
+	height: 2%;
+	
+}
+.webdesigntuts-workshop {	
+	position:relative;
+	height: 100%;
+	text-align: center;
+	width: 100%;
+}
+
+.webdesigntuts-workshop:before,
+.webdesigntuts-workshop:after {
+	content: '';
+	
+	
+	left: 50%;
+	margin: 0 0 0 -400px;
+	position:relative;
+	width: 800px;
+}
+
+.webdesigntuts-workshop:before {
+	background: #444;
+	background: -webkit-linear-gradient(left, #151515, #444, #151515);
+	background: -moz-linear-gradient(left, #151515, #444, #151515);
+	background: -o-linear-gradient(left, #151515, #444, #151515);
+	background: -ms-linear-gradient(left, #151515, #444, #151515);
+	background: linear-gradient(left, #151515, #444, #151515);
+	top: 192px;
+}
+
+.webdesigntuts-workshop:after {
+	background: #000;
+	background: -webkit-linear-gradient(left, #151515, #000, #151515);	
+	background: -moz-linear-gradient(left, #151515, #000, #151515);	
+	background: -o-linear-gradient(left, #151515, #000, #151515);	
+	background: -ms-linear-gradient(left, #151515, #000, #151515);	
+	background: linear-gradient(left, #151515, #000, #151515);	
+	top: 191px;
+}
+
+.webdesigntuts-workshop form {
+	background: #111;
+	background: -webkit-linear-gradient(#1b1b1b, #111);
+	background: -moz-linear-gradient(#1b1b1b, #111);
+	background: -o-linear-gradient(#1b1b1b, #111);
+	background: -ms-linear-gradient(#1b1b1b, #111);
+	background: linear-gradient(#1b1b1b, #111);
+	border: 1px solid #000;
+	border-radius: 5px;
+	box-shadow: inset 0 0 0 1px #272727;
+	display: inline-block;
+	font-size: 0px;
+	margin: 150px auto 0;
+	padding: 20px;
+	position: relative;
+	z-index: 1;
+}
+
+.webdesigntuts-workshop input {
+	background: #222;
+	background: -webkit-linear-gradient(#333, #222);	
+	background: -moz-linear-gradient(#333, #222);	
+	background: -o-linear-gradient(#333, #222);	
+	background: -ms-linear-gradient(#333, #222);	
+	background: linear-gradient(#333, #222);	
+	border: 1px solid #444;
+	border-radius: 5px 0 0 5px;
+	box-shadow: 0 2px 0 #000;
+	color: #888;
+	display: block;
+	float: left;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	height: 40px;
+	margin: 0;
+	padding: 0 10px;
+	text-shadow: 0 -1px 0 #000;
+	width: 200px;
+}
+
+.ie .webdesigntuts-workshop input {
+	line-height: 40px;
+}
+
+.webdesigntuts-workshop input::-webkit-input-placeholder {
+   color: #888;
+}
+
+.webdesigntuts-workshop input:-moz-placeholder {
+   color: #888;
+}
+
+.webdesigntuts-workshop input:focus {
+	-webkit-animation: glow 800ms ease-out infinite alternate;
+	-moz-animation: glow 800ms ease-out infinite alternate;
+	-o-animation: glow 800ms ease-out infinite alternate;
+	-ms-animation: glow 800ms ease-out infinite alternate;
+	animation: glow 800ms ease-out infinite alternate;
+	background: #222922;
+	background: -webkit-linear-gradient(#333933, #222922);
+	background: -moz-linear-gradient(#333933, #222922);
+	background: -o-linear-gradient(#333933, #222922);
+	background: -ms-linear-gradient(#333933, #222922);
+	background: linear-gradient(#333933, #222922);
+	border-color: #393;
+	box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+	color: #efe;
+	outline: none;
+}
+
+.webdesigntuts-workshop input:focus::-webkit-input-placeholder { 
+	color: #efe;
+}
+
+.webdesigntuts-workshop input:focus:-moz-placeholder {
+	color: #efe;
+}
+
+.webdesigntuts-workshop button {
+	background: #222;
+	background: -webkit-linear-gradient(#333, #222);
+	background: -moz-linear-gradient(#333, #222);
+	background: -o-linear-gradient(#333, #222);
+	background: -ms-linear-gradient(#333, #222);
+	background: linear-gradient(#333, #222);
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-o-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	box-sizing: content-box;
+	border: 1px solid #444;
+	border-left-color: #000;
+	border-radius: 0 5px 5px 0;
+	box-shadow: 0 2px 0 #000;
+	color: #0099ff;
+	display: block;
+	float: left;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	height: 40px;
+	line-height: 40px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	text-shadow: 0 -1px 0 #000;
+	width: 80px;
+}	
+
+.webdesigntuts-workshop button:hover,
+.webdesigntuts-workshop button:focus {
+	background: #292929;
+	background: -webkit-linear-gradient(#393939, #292929);	
+	background: -moz-linear-gradient(#393939, #292929);	
+	background: -o-linear-gradient(#393939, #292929);	
+	background: -ms-linear-gradient(#393939, #292929);	
+	background: linear-gradient(#393939, #292929);
+	color: #0099ff;
+	outline: none;
+}
+
+.webdesigntuts-workshop button:active {
+	background: #292929;
+	background: -webkit-linear-gradient(#393939, #292929);
+	background: -moz-linear-gradient(#393939, #292929);
+	background: -o-linear-gradient(#393939, #292929);
+	background: -ms-linear-gradient(#393939, #292929);
+	background: linear-gradient(#393939, #292929);
+	box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
+	top: 1px;
+}
+	top: 1px;
+}
+
+@-webkit-keyframes glow {
+    0% {
+		border-color: #0099ff;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #0099ff;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@-moz-keyframes glow {
+    0% {
+		border-color: #0099ff;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #0099ff;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@-o-keyframes glow {
+    0% {
+		border-color: #0099ff;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #0099ff;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@-ms-keyframes glow {
+    0% {
+		border-color: #0099ff;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #0099ff;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+     @keyframes glow {
+    0% {
+		border-color: #0099ff;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #0099ff;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+}
 </style>
 	
     </head>
@@ -171,7 +407,16 @@
 
 <div id = "entirety">
             <div id = "main">
-                <div id = "name">
+           <div id ="searchbox">
+      	
+<section class="webdesigntuts-workshop">
+	<form action="" method="">		    
+		<input type="search" placeholder="Search Polls...">		    	
+		<button>Search</button>
+	</form>
+</section>
+</div>
+		     <div id = "name">
                     D.E.R.P.
                 </div>
                 <div id = "fullName">
@@ -203,17 +448,17 @@
 </div>
 </div>
 <div id="profileinfo">
-	<div id="picture">
-		<img src="http://www.ycp.edu/media/t4_1714435898215170617-270x270.jpg" alt="None"
-		 width="120" height="120"  >
-		</div>
+		<div id="picture">
+    <a href="/url/"><img src="http://greenlea.ru/Articles-Directory/Online-Dating-the-First-Step-Is-Your-Profile/i0099rp.jpg" alt="/" width=100px /></a>
+</div>	
 		<div id="author">	
 		Author Info
-		</div>
-		<div id="username">
-		<profilename="profilename">Author username:Professor Hake </name>
-</div>
+		<profilename="profilename"> </name>
+		<institution="institution"> </name>
+		<generalinfo="geninfo"> </generalinfo>
 
+</div>
+</div>	
 </body>
 </html>
 

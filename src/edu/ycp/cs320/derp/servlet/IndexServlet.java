@@ -19,3 +19,4 @@ public class IndexServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 	}
 }
+

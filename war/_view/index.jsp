@@ -22,7 +22,7 @@
 		<div id="great">NO!!! This is the true index view</div>
 	<script>
 		function storeInfo(){
-        	setTimeout(function(){window.location.href = "createPoll";},10);
+        	setTimeout(function(){window.location.href = "createAccount";},10);
             
         }
 		storeInfo();

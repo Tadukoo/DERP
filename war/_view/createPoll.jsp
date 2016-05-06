@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -11,8 +10,6 @@
                 height: 500px;
                 border-left-style: double;
                 border-right-style: solid;
-                 margin-left:200px;
-                margin-right:200px;
                 position:relative;
                 z-index:0;
             }
@@ -24,7 +21,7 @@
             #fullName{
                 float:left;
                 margin-top:4%;
-                margin-left:-12%;
+                margin-left:-9%;
                 font-size: 150%;
                 color: #0099ff;
 		}
@@ -138,7 +135,21 @@ color: #00000;
 text-align: center;
 }
 
-		
+Submit {
+     position:absolute;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    left: 5%;
+}		
 
 
  </style>
@@ -163,7 +174,10 @@ text-align: center;
    <form method="post">
     <input type="text" name="polltitle" placeholder="poll title">
     <input type="text" name="polldescription" placeholder="poll description">
-    <input type="submit" name="Submit" class="submit submit-submit" value="Submit">
+<form method="post">
+<input type="button" class="Submit" value="Submit">
+</form>
+
     
 </form>
       

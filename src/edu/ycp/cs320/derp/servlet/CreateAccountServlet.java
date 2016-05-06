@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import edu.ycp.cs320.derp.controller.MainContentController;
+import edu.ycp.cs320.derp.model.User;
 
 //import edu.ycp.cs320.derp.controller.CreateAccountController;
 //import edu.ycp.cs320.derp.model.TempLoginDatabase;
@@ -26,7 +28,6 @@ public class CreateAccountServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("\nCreateAccountServlet: doGet");
-
 		req.getRequestDispatcher("/_view/createAccount.jsp").forward(req, resp);
 	}
 
@@ -36,34 +37,29 @@ public class CreateAccountServlet extends HttpServlet {
 
 		System.out.println("\nCreateAccountServlet: doPost");
 
-		String errorMessage = null;
-		String name = null;
-		String email = null;
-		String pw = null;
-		String repw = null;
+		//User thisUser = (User)req.getParameter("user");
 		boolean validAccount = true;
 
 		// Decode form parameters and dispatch to controller
-		name = req.getParameter("user");
-		email = req.getParameter("email");
-		pw   = req.getParameter("pass");
-		repw   = req.getParameter("repass");
+		String fstnme =req.getParameter("user");
+		String lstnme = req.getParameter("user");
+		String usrname = req.getParameter("user");
+		String email = req.getParameter("email");
+		String pw   = req.getParameter("pass");
+		String repw   = req.getParameter("repass");
+		String inst = req.getParameter("institution");
 
-		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");	
+		System.out.println("   Name: <" + usrname + "> PW: <" + pw + ">");	
 		
-		req.setAttribute("username", req.getParameter("username"));
-		req.setAttribute("password", req.getParameter("password"));
-
-		// Add result objects as request attributes
-		req.setAttribute("errorMessage", errorMessage);
-		req.setAttribute("creatingAccount",   validAccount);
-
-		if (name == null || pw == null || name.equals("") || pw.equals("")) {
+		controller = new MainContentController();
+		String errorMessage;
+		
+		validAccount =controller.UserNamePasswordCheck(usrname, pw);
+		
+		if (usrname == null || pw == null || usrname.equals("") || pw.equals("")||fstnme == null || lstnme == null || fstnme.equals("") || lstnme.equals("")) {
 			errorMessage = "Please specify both user name and password";
-		} /*else {
+		} else {
 			controller = new MainContentController();
-			System.out.println("valid login strst");
-			System.out.println("valid login end");
 
 			if (validAccount) {
 				System.out.println("unam taken");
@@ -76,17 +72,21 @@ public class CreateAccountServlet extends HttpServlet {
 			}
 			else{
 				System.out.println("else");
-				controller.CreateUserAccount(name, pw, email, req.getRemoteAddr(), null, null, null);
-				req.getSession().setAttribute("user", name);
+				controller.CreateUserAccount(fstnme, lstnme, usrname, pw, email, req.getRemoteAddr(), inst);
+				req.getSession().setAttribute("login", true);
+				User thisUser = controller.GetUserByUsername(usrname);
+				req.getSession().setAttribute("user", thisUser);
 				req.getRequestDispatcher("/_view/userHome.jsp").forward(req, resp);
 				
 			}
 			
-		}*/
+		}
 		System.out.println("   Invalid login - returning to /Login");
-
-		// Forward to view to render the result HTML document
-		req.getSession().setAttribute("user", name);
 		req.getRequestDispatcher("/_view/userHome.jsp").forward(req, resp);
+		req.getSession().setAttribute("login", false);
+
+
+		// Add result objects as request attributes
+		
 	}
 }
