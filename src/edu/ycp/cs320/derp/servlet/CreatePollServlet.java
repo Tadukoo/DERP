@@ -30,14 +30,14 @@ public class CreatePollServlet extends HttpServlet {
 			// now we have the user's User object,
 			// proceed to handle request...
 			
-			req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);	
+			req.getRequestDispatcher("/_view/createPoll.jsp").forward(req, resp);	
 	}
 	
 	// new
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+		System.out.println("he");
 		// Decode form parameters and dispatch to controller
 		String errorMessage = null;
 		String title = req.getParameter("polltitle");
@@ -52,7 +52,7 @@ public class CreatePollServlet extends HttpServlet {
 		} else {
 			controller = new MainContentController();
 			controller.InsertPoll(title, desc, name);
-			req.getSession().setAttribute("poll", title);
+			req.getSession().setAttribute("poll", controller.GetPollByTitle(title, name));
 			resp.sendRedirect(req.getContextPath() + "/poll");
 			return;
 				

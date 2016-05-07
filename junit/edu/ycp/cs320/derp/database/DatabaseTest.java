@@ -229,7 +229,7 @@ public class DatabaseTest{
 	public void TestfindAllPolls(){// sorted by totalCount
 		System.out.println("*** Testing find All Polls ***");
 		List<Poll> polls = db.findAllPolls();
-		assertEquals(polls.get(0).getPageViews(), 0);
+		assertEquals(polls.get(0).getPageViews(), 1000);
 	}
 	
 	@Test

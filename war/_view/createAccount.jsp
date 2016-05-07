@@ -41,11 +41,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-
 .login-box {
   position:fixed;
   float: center;
-  top: 20%;
+  top: 90px;
   left: 20%;
   padding: 40px;
   width: 50%;

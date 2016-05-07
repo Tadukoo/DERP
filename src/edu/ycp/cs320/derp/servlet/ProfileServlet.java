@@ -1,11 +1,17 @@
 package edu.ycp.cs320.derp.servlet;
 
+
+import java.util.List;
 import java.io.IOException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import edu.ycp.cs320.derp.model.Poll;
+import edu.ycp.cs320.derp.model.User;
 
 import edu.ycp.cs320.derp.controller.MainContentController;
 
@@ -16,67 +22,46 @@ public class ProfileServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getRequestDispatcher("/_view/profile.jsp").forward(req, resp);
-		String name = (String)req.getSession().getAttribute("username");
+		User thisUser = (User)req.getSession().getAttribute("user");
 		controller = new MainContentController();
-		req.setAttribute("fullname", controller.GetUserByUsername(name));
+		req.setAttribute("fullname", thisUser.getFirstName() + " " + thisUser.getLastName());
+		req.getRequestDispatcher("/_view/profile.jsp").forward(req, resp);
+		List<Poll> pollList = controller.FindAllPolls();
+		Poll poll1=null;
+		Poll poll2=null;
+		Poll poll3=null;
+		for(int i=0;i<pollList.size();i++){
+			if(pollList.get(i).getUserId() == thisUser.getUserId()){
+				if(poll1!=null){
+					poll1=pollList.get(i);
+				}
+				if(poll2!=null){
+					poll2=pollList.get(i);
+				}
+				if(poll3!=null){
+					poll3=pollList.get(i);
+				}
+				
+			}
+			
+		}
+		req.setAttribute("fullname1", poll1.getTitle());
+		req.setAttribute("fullname2", poll2.getTitle());
+		req.setAttribute("fullname3", poll3.getTitle());
+		int dis =poll1.getTotalVotes() - poll1.getYesVotes();
+		req.setAttribute("info1", "Agree:" + poll1.getYesVotes() + " DisAgree:" + dis);
+		dis =poll2.getTotalVotes() - poll2.getYesVotes();
+		req.setAttribute("info2", "Agree:" + poll2.getYesVotes() + " DisAgree:" + dis);
+		dis =poll3.getTotalVotes() - poll3.getYesVotes();
+		req.setAttribute("info3", "Agree:" + poll3.getYesVotes() + " DisAgree:" + dis);
+		
 		
 	}
-/*	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
 
-		String user = (String) req.getSession().getAttribute("user");
-		if (user == null) {
-			System.out.println("   User: <" + user + "> not logged in or session timed out");
-			
-			// user is not logged in, or the session expired
-			resp.sendRedirect(req.getContextPath() + "/login");
-			return;
-		}
-			
-			// now we have the user's User object,
-			// proceed to handle request...
-			
-			req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);	
-
-	}*/
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		/*// Decode form parameters and dispatch to controller
-		String errorMessage = null;
-		Double result = null;
-		try {
-			Double first = getDoubleFromParameter(req.getParameter("first"));
-			Double second = getDoubleFromParameter(req.getParameter("second"));
-
-			if (first == null || second == null) {
-				errorMessage = "Please specify two numbers";
-			} else {
-			}
-		} catch (NumberFormatException e) {
-			errorMessage = "Invalid double";
-		}
 		
-		// Add parameters as request attributes
-		req.setAttribute("first", req.getParameter("first"));
-		req.setAttribute("second", req.getParameter("second"));
-		
-		// Add result objects as request attributes
-		req.setAttribute("errorMessage", errorMessage);
-		req.setAttribute("result", result);
-		
-		// Forward to view to render the result HTML document
-		req.getRequestDispatcher("/_view/profile.jsp").forward(req, resp);
-	}
-
-	private Double getDoubleFromParameter(String s) {
-		if (s == null || s.equals("")) {
-			return null;
-		} else {
-			return Double.parseDouble(s);
-		}*/
 	}
 }

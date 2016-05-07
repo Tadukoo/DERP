@@ -167,6 +167,14 @@ public List<Poll> FindAllPolls(){
 public Boolean removePoll(String title, String username){
 	return db.removePollByTitle(title, username);
 }
+public List<Poll> findPollByTitle(String title){
+	List<Pair<User, Poll>> returned= db.findUserAndPollByTitle(title);
+	List<Poll> polls = null;
+	for(int i=0; i<returned.size(); i++) {
+		polls.add( returned.get(i).getRight());	
+	}
+	return polls;
+}
 ///////////////////////////////////////////Not needed for produce///////////////////////////////
 //TODO: implement stub
 /**

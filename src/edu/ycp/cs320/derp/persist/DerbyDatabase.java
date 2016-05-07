@@ -688,7 +688,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"select * from Polls " +
-							" order by total_votes asc"
+							" order by total_votes desc"
 					);
 					
 					List<Poll> result = new ArrayList<>();
@@ -713,7 +713,6 @@ public class DerbyDatabase implements IDatabase {
 					if (!found) {
 						System.out.println("No Polls were found in the database");
 					}
-					
 					return result;
 				} finally {
 					DBUtil.closeQuietly(resultSet);

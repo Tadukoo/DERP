@@ -405,8 +405,8 @@ body {
 <div id ="searchbox">
       	
 <section class="searchbar">
-	<form action="" method="">		    
-		<input type="search" placeholder="Search Polls...">		    	
+	<form action="" method="post">
+		<input type="search" name="search" placeholder="Search Polls...">		    	
 		<button>Search</button>
 	</form>
 </section>
@@ -422,13 +422,13 @@ body {
   
                  <div id = "buttonBar">
 		<div id = "signup">                   
-		 <a href="/derp/profile" class="Signup">Profile</a>
+		 <a href="/derp/createPoll" class="Signup">Create Poll</a>
                 	 </div>
 			<div id = "Login">
-                   <a href="/derp/login" class="Login">Log-in</a>
+                   <a href="/derp/profile" class="Login">Profile</a>
                     	 </div>	
 			<div id = "home">
-                    <a href="/derp/userHome" class="home">Home</a>
+                    <a href="http://localhost:8081/derp/userHome" class="home">Home</a>
                 </div>
 </div>	
 	</div>
@@ -440,24 +440,24 @@ body {
 <h3> Hot Polls</h3>
 <div id = "pollboxOne">
 		    <div id= "pollOne">
-		        <a href="http://designshack.net/" class="pollOne">Example Pole one</a>
-		<name="fullname"> </name>
-				<generalinfo="geninfo2"> </generalinfo>
+		        <a href="/derp/poll" class="pollOne">Poll </a>
+                <p>${fullname1}</p>
+                <p>${info1}</p>
 </div>
 </div>
 <div id = "pollboxTwo">
 		    <div id= "pollTwo">
-		        <a href="http://designshack.net/" class="pollTwo">Example Pole Two</a>
-				<name="fullname2"> </name>
-				<generalinfo2="geninfo2"> </generalinfo>		
+		        <a href="/derp/poll" class="pollTwo">Poll </a>
+                <p>${fullname2}</p>
+                <p>${info2}</p>
 </div>
 
 </div>
 <div id = "pollboxThree">
 		    <div id= "pollThree">
-		        <a href="http://designshack.net/" class="pollThree">Example Pole Three</a>
-<name="fullname3"> </name>
-				<generalinfo2="geninfo3"> </generalinfo>
+		        <a href="/derp/poll" class="pollThree">Poll </a>
+                <p>${fullname3}</p>
+                <p>${info3}</p>
 </div>
 
 </div>

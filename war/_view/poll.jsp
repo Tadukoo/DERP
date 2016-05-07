@@ -33,9 +33,6 @@
                 font-size: 150%;
                 color: #0099ff;
 		}
-		#pollbox{
-		
-}
 		#PollTitleBox{
 		border-radius: 25px;
                 position:relative;
@@ -44,9 +41,9 @@
                 float:center;
                 border-style:solid;
                 height: 100px;
-                width:69%;
+                width:50%;
                 margin-top:-13%;
-                left: 17%;
+                left: 30%;
                 font-size:300%;
                 background-color: #0099ff;
             }
@@ -59,8 +56,8 @@
                 border-style:solid;
                 height:500px;
                 width: 35%;
-                margin-top: .5%;
-                left: 51.5%;
+                margin-top:2%;
+                left: 52%;
                 font-size:300%;
                 background-color: #0099ff;
             }
@@ -72,9 +69,9 @@
                 float:center;
                 border-style:solid;
                 height: 200px;
-                width: 33%;
+                width: 35%;
                 margin-top:-26.5%;
-                left: 17%;
+                left: 10%;
                 font-size:150%;
                 background-color: #0099ff;
             }
@@ -140,10 +137,10 @@
                 text-align: center;
                 float:center;
                 border-style:solid;
-                height: 265px;
-                width: 33%;
-                margin-top:.5%;
-                left: 17%;
+                height: 120px;
+                width: 30%;
+                margin-top:4%;
+                left: 15%;
                 font-size:100%;
                 background-color: #0099ff;
             }	
@@ -425,6 +422,7 @@
             </div>
 	<div id= "PollTitleBox">
 	<title="polltitle"> Poll Title</title>
+	<p>${pollTitle}</p>
 	</div>
   <div id="descriptionbox">
 <summary="pollsummary"> Summary of poll</summary>
@@ -432,33 +430,35 @@
  <div id="totalanswerbox">
 	<div class="totalyescount">
 		Total Votes for agree:
+		<p>${agree}</p>
 </div>
 <div class="totalnocount">
 	        Total Votes for disagree:
+	        <p>${disagree}</p>
 </div>
 <div id="answerbox">
 <name="agrees"></name>
 <name="disagrees"></name>	
 <form method="post">
-<input type="button" class="yesbutton" value="Agree">
+<input type="submit" name="button" class="yesbutton" value="Agree">
 </form>
 <form method="post">
-<input type="button" class="nobutton" value="Disagree">
+<input type="submit" name="button" class="nobutton" value="Disagree">
 </form>
 </div>
 </div>
 <div id="profileinfo">
-		<div id="picture">
-    <a href="/url/"><img src="http://greenlea.ru/Articles-Directory/Online-Dating-the-First-Step-Is-Your-Profile/i0099rp.jpg" alt="/" width=100px /></a>
-</div>	
+	<div id="picture">
+		<img src="image" alt="None"
+		 width="120" height="120"  >
+		</div>
 		<div id="author">	
 		Author Info
+		</div>
+		<div id="username">
 		<profilename="profilename"> </name>
-		<institution="institution"> </name>
-		<generalinfo="geninfo"> </generalinfo>
-
 </div>
-</div>	
+
 </body>
 </html>
 

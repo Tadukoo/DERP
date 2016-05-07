@@ -46,7 +46,7 @@ public class CreateAccountServlet extends HttpServlet {
 		String usrname = req.getParameter("user");
 		String email = req.getParameter("email");
 		String pw   = req.getParameter("pass");
-		String repw   = req.getParameter("repass");
+		String repw   = req.getParameter("reppass");
 		String inst = req.getParameter("institution");
 
 		System.out.println("   Name: <" + usrname + "> PW: <" + pw + ">");	
@@ -58,17 +58,24 @@ public class CreateAccountServlet extends HttpServlet {
 		
 		if (usrname == null || pw == null || usrname.equals("") || pw.equals("")||fstnme == null || lstnme == null || fstnme.equals("") || lstnme.equals("")) {
 			errorMessage = "Please specify both user name and password";
+			System.out.println("   Invalid login - returning to /Login");
+			req.getRequestDispatcher("/_view/createAccount.jsp").forward(req, resp);
+			req.getSession().setAttribute("login", false);
 		} else {
-			controller = new MainContentController();
 
 			if (validAccount) {
 				System.out.println("unam taken");
 				errorMessage = "Username is already taken.";
+				System.out.println("   Invalid login Username taken- returning to /Login");
+				req.getRequestDispatcher("/_view/createAccount.jsp").forward(req, resp);
+				req.getSession().setAttribute("login", false);
 			}
-			else if(pw!=repw)
+			else if(!pw.equals(repw))
 			{
-				System.out.println("pass no match");
 				errorMessage = "Passwords do not match.";
+				System.out.println("   Invalid login  mismatch password- returning to /Login");
+				req.getRequestDispatcher("/_view/createAccount.jsp").forward(req, resp);
+				req.getSession().setAttribute("login", false);
 			}
 			else{
 				System.out.println("else");
@@ -81,10 +88,6 @@ public class CreateAccountServlet extends HttpServlet {
 			}
 			
 		}
-		System.out.println("   Invalid login - returning to /Login");
-		req.getRequestDispatcher("/_view/userHome.jsp").forward(req, resp);
-		req.getSession().setAttribute("login", false);
-
 
 		// Add result objects as request attributes
 		

@@ -54,9 +54,9 @@ font-family: 'Roboto', sans-serif;
 	        text-align:center;
 	        border-style:solid;
                 height: 250px;
-                width: 50%;
-                margin-top: -13%;
-                left: -18%;
+                width: 30%;
+                margin-top: 80px;
+                left: -20%;
                 font-size:200%;
                 background-color: #0099ff;
             }
@@ -69,8 +69,8 @@ font-family: 'Roboto', sans-serif;
                 border-style:solid;
                 height: 400px;
                 width:65%;
-                margin-top: 2%;
-                left: -17%;
+                margin-top: 400px;
+                left: 15%;
                 font-size:200%;
                 background-color: #0099ff;
             }
@@ -146,11 +146,13 @@ font-family: 'Roboto', sans-serif;
            	color: #000000;
 	 }
 		
-#picture{
-margin-top: 5%;
-position:relative;
-margin-left: 15%;
-}
+		
+	
+		
+	  .Profilepicture{
+                display: block;
+                
+            }
  </style>
     </head>
 
@@ -161,27 +163,26 @@ margin-left: 15%;
 		
             </div>
        </div>
+<div id="Profilepicture">
+		<img src="http://www.ycp.edu/media/t4_1714435898215170617-270x270.jpg" alt="None"
+		 width="300" height="250"  >
+		</div>
 
 <div id = "buttonBar">
                 <div id = "Yourpolls">
-                    <a href="/derp/profile" class="YourPolls">Profile</a>
+                    <a href="/derp/userHome" class="YourPolls">HomePage</a>
                 </div>
                 <div id = "home">
-                    <a href="/derp/userHome" class="home">Home</a>
+                    <a href="/derp/createPoll" class="home">New Poll</a>
                 </div>
                 <div id = "Newpoll">
-                    <a href"/derp/createpoll" class="Newpoll">New Poll</a>
+                    <a href="profile" class="Newpoll">Loop</a>
                 </div>
             </div>
         </div>
-<div id="picture">
-    <a href="/url/"><img src="http://greenlea.ru/Articles-Directory/Online-Dating-the-First-Step-Is-Your-Profile/i0099rp.jpg" alt="/" /></a>
-</div>	    
-<div id = "Personalinfo">
+	    <div id = "Personalinfo">
 				<a class="Personalinfo">Personal Information</a>
-            			<name="fullname"> </name>
-				<age="userage"> </age>
-				<generalinfo="geninfo"> </generalinfo>
+            			<p>${fullname} </p>
 		</div>
 		
 		<div id = "yourpollsbox">
@@ -189,18 +190,18 @@ margin-left: 15%;
 		        <a class="yourpolls">Your Polls</a>
 		 <div id = "pollboxOne">
 		    <div id= "pollOne">
-		        <a href="http://designshack.net/" class="pollOne">Example Pole one</a>
-				<name="fullname"> </name>
-				<generalinfo="geninfo"> </generalinfo>
+		        <a href="/derp/poll" class="pollOne">Example Poll one</a>
+		<p>${fullname1} </p>
+				<p>${info1} </p>
 		<div id = "pollboxTwo">
 		    <div id= "pollTwo">
-		        <a href="http://designshack.net/" class="pollTwo">Example Pole Two</a>
-				<name="fullname2"> </name>
-				<generalinfo2="geninfo2"> </generalinfo>
+		        <a href="/derp/poll" class="pollTwo">Example Poll Two</a>
+				<p>${fullname2} </p>
+				<p>${info2} </p>
 	<div id = "pollboxThree">
 		    <div id= "pollThree">
-		        <a href="http://designshack.net/" class="pollThree">Example Pole Three</a>
-				<name="fullname3"> </name>
-				<generalinfo2="geninfo3"> </generalinfo>
+		        <a href="/derp/poll" class="pollThree">Example Poll Three</a>
+				<p>${fullname3} </p>
+				<p>${info3} </p>
 </body>		
 </html>

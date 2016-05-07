@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.derp.controller.MainContentController;
 import edu.ycp.cs320.derp.model.Poll;
+import edu.ycp.cs320.derp.model.User;
 
 /*import edu.ycp.cs320.derp.model.Pair;
 import edu.ycp.cs320.derp.model.Poll;
@@ -24,36 +25,31 @@ public class PollServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("\nLoginServlet: doGet");
-		req.setAttribute("username", "Gringo");
-		req.setAttribute("password", "western");
-		req.setAttribute("pollname","Are Ghosts real??" );
-		if((String)req.getSession().getAttribute("username")==null || (String)req.getSession().getAttribute("username")==""){
-		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);}
-		String name= (String)req.getSession().getAttribute("username");
-		String pollname= (String)req.getSession().getAttribute("pollname");
-		controller = new MainContentController();
-		Poll poll =new Poll();
-		poll = controller.SearchByPollTitle(pollname,name);
-		req.setAttribute("poll", poll);
-		req.setAttribute("polltitle", pollname);
-		req.setAttribute("pollsummary", poll.getDescription());
-		req.setAttribute("agrees", poll.getYesVotes());
-		req.setAttribute("disagrees", poll.getTotalVotes() - poll.getYesVotes());
-		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+		User thisUser = (User) req.getSession().getAttribute("user");
+		
+		Poll thisPoll = (Poll) req.getSession().getAttribute("poll");
+		req.setAttribute("pollTitle", thisPoll.getTitle());
+		req.setAttribute("agree", thisPoll.getYesVotes());
+		req.setAttribute("disagree", thisPoll.getTotalVotes() - thisPoll.getYesVotes());
+		thisPoll.setPageViews(thisPoll.getPageViews() + 1);
+		
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{
-		String name= (String)req.getSession().getAttribute("username");
-		String pollname= (String)req.getSession().getAttribute("pollname");;
-		Poll poll = (Poll) req.getSession().getAttribute("poll");
-		controller = new MainContentController();
-		controller.IncrementTotalPollCounter(poll.getPollId());
-		if (req.getParameter("Agree") == null) {
-			controller.IncrementYesPollCounter(poll.getPollId());
-			}
+		String button = req.getParameter("button");
+		Poll thisPoll = (Poll) req.getSession().getAttribute("poll");
+		if (button == null) {
+		    //no button has been selected
+		} else if (button.equals("Dissagree")) {
+		    thisPoll.setTotalVotes(thisPoll.getTotalVotes() + 1);
+		} else if (button.equals("Agree")) {
+			thisPoll.setYesVotes(thisPoll.getYesVotes() + 1);
+		} else {
+		    //someone has altered the HTML and sent a different value!
+		}
 		
 		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
 	}
