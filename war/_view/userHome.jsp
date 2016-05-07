@@ -362,6 +362,7 @@ body {
                 text-align: center;
                 border-style:solid;
 		left: 5%;
+		z-index:4;
 		bottom: 0;                
 		height: 25%;
                 width: 90%;
@@ -374,6 +375,7 @@ body {
                 position:absolute ;
                 text-align: center;
                 border-style:solid;
+		z-index:4;
 		left: 5%;
 		bottom: 30%;                
 		height: 25%;
@@ -387,6 +389,7 @@ body {
                 position:absolute ;
                 text-align: center;
                 border-style:solid;
+		z-index:4;
 		left: 5%;
 		bottom: 60%;                
 		height: 25%;

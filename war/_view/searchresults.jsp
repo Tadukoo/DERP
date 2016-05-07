@@ -300,6 +300,7 @@ body {
                 position:absolute ;
                 text-align: center;
                 border-style:solid;
+		z-index:4;
 		left: 5%;
 		bottom:10%;            
 		height: 25%;
@@ -313,6 +314,7 @@ body {
                 position:absolute ;
                 text-align: center;
                 border-style:solid;
+		z-index:4;
 		left: 5%;
 		bottom: 40%;              
 		height: 25%;
@@ -326,6 +328,7 @@ body {
                 position:absolute ;
                 text-align: center;
                 border-style:solid;
+		z-index:4;
 		left: 5%;
 		bottom: 69%;             
 		height: 25%;

@@ -174,7 +174,6 @@ Submit {
    <form method="post">
     <input type="text" name="polltitle" placeholder="poll title">
     <input type="text" name="polldescription" placeholder="poll description">
-<form method="post">
 <input type="button" class="Submit" value="Submit">
 </form>
 
