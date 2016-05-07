@@ -26,25 +26,21 @@ public class ProfileServlet extends HttpServlet {
 		controller = new MainContentController();
 		req.setAttribute("fullname", thisUser.getFirstName() + " " + thisUser.getLastName());
 		req.getRequestDispatcher("/_view/profile.jsp").forward(req, resp);
-		List<Poll> pollList = controller.FindAllPolls();
+		List<Poll> pollList = controller.findPollByUsername(thisUser.getUserName());
+		System.out.println("D");
 		Poll poll1=null;
 		Poll poll2=null;
 		Poll poll3=null;
-		for(int i=0;i<pollList.size();i++){
-			if(pollList.get(i).getUserId() == thisUser.getUserId()){
-				if(poll1!=null){
-					poll1=pollList.get(i);
+				if(pollList.size()>0){
+					poll1=pollList.get(0);
 				}
-				if(poll2!=null){
-					poll2=pollList.get(i);
+				if(pollList.size()>1){
+					poll2=pollList.get(1);
 				}
-				if(poll3!=null){
-					poll3=pollList.get(i);
+				if(pollList.size()>2){
+					poll3=pollList.get(2);
 				}
-				
-			}
 			
-		}
 		req.setAttribute("fullname1", poll1.getTitle());
 		req.setAttribute("fullname2", poll2.getTitle());
 		req.setAttribute("fullname3", poll3.getTitle());

@@ -175,6 +175,16 @@ public List<Poll> findPollByTitle(String title){
 	}
 	return polls;
 }
+//TODO: exception happening
+public List<Poll> findPollByUsername(String userName){
+	List<Pair<User, Poll>> returned= db.findPollByUserName(userName);
+	List<Poll> polls = null;
+	for(int i=0; i<returned.size(); i++) {
+		System.out.println("ds");
+		polls.add( returned.get(i).getRight());	
+	}
+	return polls;
+}
 ///////////////////////////////////////////Not needed for produce///////////////////////////////
 //TODO: implement stub
 /**
