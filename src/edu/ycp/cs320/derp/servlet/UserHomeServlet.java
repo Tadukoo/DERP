@@ -21,18 +21,34 @@ public class UserHomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		User thisUser = (User) req.getSession().getAttribute("user");
 		List<Poll> pollList = controller.FindAllPolls();
-		Poll poll1=pollList.get(0);
-		Poll poll2=pollList.get(1);
-		Poll poll3=pollList.get(2);
+		Poll poll1 = new Poll();
+		Poll poll2 = new Poll();
+		Poll poll3 = new Poll();
+		User pollUser = null;
 		
+		if(pollList.size()>0){
+			poll1=pollList.get(0);
+		}
+		if(pollList.size()>1){
+			poll2=pollList.get(1);
+		}
+		if(pollList.size()>2){
+			poll3=pollList.get(2);
+		}
 		req.setAttribute("fullname1", poll1.getTitle());
+		pollUser = controller.findUserbyUserId(poll1.getUserId());
+		req.setAttribute("poll1user", pollUser.getUserName());
 		req.setAttribute("fullname2", poll2.getTitle());
+		pollUser = controller.findUserbyUserId(poll2.getUserId());
+		req.setAttribute("poll2user", pollUser.getUserName());
 		req.setAttribute("fullname3", poll3.getTitle());
-		int dis =poll1.getTotalVotes() - poll1.getYesVotes();
+		pollUser = controller.findUserbyUserId(poll3.getUserId());
+		req.setAttribute("poll3user", pollUser.getUserName());
+		int dis = poll1.getTotalVotes() - poll1.getYesVotes();
 		req.setAttribute("info1", "Agree:" + poll1.getYesVotes() + " DisAgree:" + dis);
-		dis =poll2.getTotalVotes() - poll2.getYesVotes();
+		dis = poll2.getTotalVotes() - poll2.getYesVotes();
 		req.setAttribute("info2", "Agree:" + poll2.getYesVotes() + " DisAgree:" + dis);
-		dis =poll3.getTotalVotes() - poll3.getYesVotes();
+		dis = poll3.getTotalVotes() - poll3.getYesVotes();
 		req.setAttribute("info3", "Agree:" + poll3.getYesVotes() + " DisAgree:" + dis);
 		req.getRequestDispatcher("/_view/userHome.jsp").forward(req, resp);
 		

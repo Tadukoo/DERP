@@ -103,6 +103,7 @@ public class DerbyDatabase implements IDatabase {
 				}
 			});
 		}
+		
 	
 	// transaction that retrieves a list of Polls with their Users, given User's name
 	@Override
@@ -874,6 +875,32 @@ public class DerbyDatabase implements IDatabase {
 		}
 	});
 }
+
+	@Override
+	public User findUserByuserid(final int id) {
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				User User = new User();
+				try{
+					stmt= conn.prepareStatement(
+							"select * from Users where user_id=?" );
+					stmt.setInt(1, id);
+					resultSet = stmt.executeQuery();
+					if(resultSet.next()){
+						loadUser(User, resultSet, 1);;
+					}
+				}finally{
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(resultSet);
+				}
+				
+		return User;
+		}
+	});
+}
 ///////////////////////////////////////The Functions after this point do not need to be implemented////////////
 
 	@Override
@@ -971,6 +998,7 @@ public class DerbyDatabase implements IDatabase {
 		}
 	});
 }
+
 
 
 }

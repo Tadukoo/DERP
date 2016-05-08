@@ -25,9 +25,12 @@ public class ProfileServlet extends HttpServlet {
 		User thisUser = (User)req.getSession().getAttribute("user");
 		controller = new MainContentController();
 		req.setAttribute("fullname", thisUser.getFirstName() + " " + thisUser.getLastName());
+		req.setAttribute("username", thisUser.getUserName());
+		req.setAttribute("email", thisUser.getEmail());
+		req.setAttribute("Inst", thisUser.getInstitution());
 		req.getRequestDispatcher("/_view/profile.jsp").forward(req, resp);
 		List<Poll> pollList = controller.findPollByUsername(thisUser.getUserName());
-		System.out.println("D");
+		User pollUser = null;
 		Poll poll1=null;
 		Poll poll2=null;
 		Poll poll3=null;
@@ -44,6 +47,12 @@ public class ProfileServlet extends HttpServlet {
 		req.setAttribute("fullname1", poll1.getTitle());
 		req.setAttribute("fullname2", poll2.getTitle());
 		req.setAttribute("fullname3", poll3.getTitle());
+		pollUser = controller.findUserbyUserId(poll1.getUserId());
+		req.setAttribute("poll1user", pollUser.getUserName());
+		pollUser = controller.findUserbyUserId(poll2.getUserId());
+		req.setAttribute("poll2user", pollUser.getUserName());
+		pollUser = controller.findUserbyUserId(poll3.getUserId());
+		req.setAttribute("poll3user", pollUser.getUserName());
 		int dis =poll1.getTotalVotes() - poll1.getYesVotes();
 		req.setAttribute("info1", "Agree:" + poll1.getYesVotes() + " DisAgree:" + dis);
 		dis =poll2.getTotalVotes() - poll2.getYesVotes();

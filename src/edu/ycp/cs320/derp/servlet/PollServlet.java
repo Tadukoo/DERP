@@ -24,15 +24,27 @@ public class PollServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		controller = new MainContentController();
 		System.out.println("\nLoginServlet: doGet");
 		User thisUser = (User) req.getSession().getAttribute("user");
 		
-		Poll thisPoll = (Poll) req.getSession().getAttribute("poll");
+		// pull poll info from the url
+		String url = req.getQueryString();
+		System.out.println(url);
+		String username = url.substring(url.indexOf("user=")+5, url.indexOf("&"));
+		System.out.println(username);
+		String title = url.substring(url.indexOf("&")+7);
+		title = title.replaceAll("%20", " ");
+		System.out.println(title);
+		
+		Poll thisPoll = controller.GetPollByTitle(title, username);
+		System.out.println(thisPoll.getPollId());
+		System.out.println(thisPoll.getDescription());
 		req.setAttribute("pollTitle", thisPoll.getTitle());
 		req.setAttribute("agree", thisPoll.getYesVotes());
 		req.setAttribute("disagree", thisPoll.getTotalVotes() - thisPoll.getYesVotes());
 		thisPoll.setPageViews(thisPoll.getPageViews() + 1);
-		
+		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
 		
 	}
 	

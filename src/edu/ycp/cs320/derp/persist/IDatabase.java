@@ -20,6 +20,7 @@ public interface IDatabase {
 	public Boolean IncrementCounter(int poll_id, int CounterType);
 	public User findUserInformation(String userName);
 	public Poll findPollByTitle(String title, String userName);
+	public User findUserByuserid(int id);
 	
 	// Not necessarily needed
 	public List<String> FindIpaddressByUser(String userName);

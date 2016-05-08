@@ -185,6 +185,10 @@ public List<Poll> findPollByUsername(String userName){
 	}
 	return polls;
 }
+public User findUserbyUserId(int id){
+	return db.findUserByuserid(id);
+}
+
 ///////////////////////////////////////////Not needed for produce///////////////////////////////
 //TODO: implement stub
 /**

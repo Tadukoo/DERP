@@ -83,6 +83,7 @@ public class CreateAccountServlet extends HttpServlet {
 				req.getSession().setAttribute("login", true);
 				User thisUser = controller.GetUserByUsername(usrname);
 				req.getSession().setAttribute("user", thisUser);
+				resp.sendRedirect(req.getContextPath() + "/userHome");
 				req.getRequestDispatcher("/_view/userHome.jsp").forward(req, resp);
 				
 			}

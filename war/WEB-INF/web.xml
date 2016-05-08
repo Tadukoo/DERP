@@ -54,6 +54,7 @@
   <servlet-mapping>
     <servlet-name>PollServlet</servlet-name>
     <url-pattern>/poll</url-pattern>
+    <url-pattern>/poll/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>

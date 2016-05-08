@@ -185,7 +185,9 @@ font-family: 'Roboto', sans-serif;
         </div>
 	    <div id = "Personalinfo">
 				<a class="Personalinfo">Personal Information</a>
-            			<p>${fullname} </p>
+            			<p>${fullname} (${username})</p>
+				<p>${email} </p>
+				<p>${Inst} </p>
 		</div>
 		
 		<div id = "yourpollsbox">
@@ -193,17 +195,17 @@ font-family: 'Roboto', sans-serif;
 		        <a class="yourpolls">Your Polls</a>
 		 <div id = "pollboxOne">
 		    <div id= "pollOne">
-		        <a href="/derp/poll" class="pollOne">Example Poll one</a>
+		        <a href="/derp/poll?user=${poll1user}&title=${fullname1}" class="pollOne">Example Poll one</a>
 		<p>${fullname1} </p>
 				<p>${info1} </p>
 		<div id = "pollboxTwo">
 		    <div id= "pollTwo">
-		        <a href="/derp/poll" class="pollTwo">Example Poll Two</a>
+		        <a href="/derp/poll?user=${poll2user}&title=${fullname2}" class="pollTwo">Example Poll Two</a>
 				<p>${fullname2} </p>
 				<p>${info2} </p>
 	<div id = "pollboxThree">
 		    <div id= "pollThree">
-		        <a href="/derp/poll" class="pollThree">Example Poll Three</a>
+		        <a href="/derp/poll?user=${poll3user}&title=${fullname3}" class="pollThree">Example Poll Three</a>
 				<p>${fullname3} </p>
 				<p>${info3} </p>
 </body>		
