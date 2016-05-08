@@ -52,6 +52,13 @@ public class PollServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{
+		User thisUser = (User)req.getSession().getAttribute("user");
+		if (thisUser == null) {
+			System.out.println("   User not logged in or session timed out");
+			
+			// user is not logged in, or the session expired
+			resp.sendRedirect(req.getContextPath() + "/login");
+		}
 		String button = req.getParameter("button");
 		String url = req.getQueryString();
 		String username = url.substring(url.indexOf("user=")+5, url.indexOf("&"));
@@ -61,8 +68,10 @@ public class PollServlet extends HttpServlet {
 		
 		if (button == null) {
 		    //no button has been selected
-			
-		} else if (button.equals("Dissagree")) {
+			req.getSession().setAttribute("search", "I am the one");
+			resp.sendRedirect(req.getContextPath() + "/search");
+			return;
+		} else if (button.equals("Disagree")) {
 		    controller.IncrementTotalPollCounter(thisPoll.getPollId());
 		} else if (button.equals("Agree")) {
 			controller.IncrementYesPollCounter(thisPoll.getPollId());
