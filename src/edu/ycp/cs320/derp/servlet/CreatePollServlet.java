@@ -52,7 +52,6 @@ public class CreatePollServlet extends HttpServlet {
 		} else {
 			controller = new MainContentController();
 			controller.InsertPoll(title, desc, name);
-			req.getSession().setAttribute("poll", controller.GetPollByTitle(title, name));
 			resp.sendRedirect(req.getContextPath() + "/poll?user="+name+"&title="+title);
 			return;
 				

@@ -67,8 +67,10 @@ public class PollServlet extends HttpServlet {
 		Poll thisPoll = controller.GetPollByTitle(title, username);
 		
 		if (button == null) {
-		    //no button has been selected
-			req.getSession().setAttribute("search", "I am the one");
+		    //no button has been selected		
+			req.getSession().setAttribute("search", "search");
+			//req.getSession().setAttribute("search", "I am the one");
+			System.out.println(req.getAttribute("search"));
 			resp.sendRedirect(req.getContextPath() + "/search");
 			return;
 		} else if (button.equals("Disagree")) {
