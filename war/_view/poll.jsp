@@ -407,7 +407,7 @@
            <div id ="searchbox">
       	
 <section class="webdesigntuts-workshop">
-	<form action="" method="">		    
+	<form action="" method="post">		    
 		<input type="search" placeholder="Search Polls...">		    	
 		<button>Search</button>
 	</form>

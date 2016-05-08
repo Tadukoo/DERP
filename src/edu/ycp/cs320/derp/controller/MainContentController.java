@@ -169,16 +169,18 @@ public Boolean removePoll(String title, String username){
 }
 public List<Poll> findPollByTitle(String title){
 	List<Pair<User, Poll>> returned= db.findUserAndPollByTitle(title);
-	List<Poll> polls = null;
-	for(int i=0; i<returned.size(); i++) {
+	List<Poll> polls = new ArrayList<Poll>();
+	if(!returned.equals(null)){
+		for(int i=0; i<returned.size(); i++) {
 		polls.add( returned.get(i).getRight());	
+		}
 	}
 	return polls;
 }
 //TODO: exception happening
 public List<Poll> findPollByUsername(String userName){
 	List<Pair<User, Poll>> returned= db.findPollByUserName(userName);
-	List<Poll> polls = null;
+	List<Poll> polls = new ArrayList<Poll>();
 	for(int i=0; i<returned.size(); i++) {
 		System.out.println("ds");
 		polls.add( returned.get(i).getRight());	

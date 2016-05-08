@@ -57,6 +57,6 @@ public class CreatePollServlet extends HttpServlet {
 			return;
 				
 			}
-			
+		req.getRequestDispatcher("/_view/createPoll.jsp").forward(req, resp);	
 		}
 }

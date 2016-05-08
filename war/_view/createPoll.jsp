@@ -172,9 +172,10 @@ Submit {
     <div class= "createpoll">	
 	Create Poll
    <form method="post">
-    <input type="text" name="polltitle" placeholder="poll title">
-    <input type="text" name="polldescription" placeholder="poll description">
-<input type="button" class="Submit" value="Submit">
+      <input type="text" name="polltitle" placeholder="poll title">
+      <input type="text" name="polldescription" placeholder="poll description">
+      <input type="submit" class="Submit" value="Submit">
+
 </form>
       
   </div>

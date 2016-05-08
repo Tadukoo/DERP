@@ -26,7 +26,13 @@ public class PollServlet extends HttpServlet {
 
 		controller = new MainContentController();
 		System.out.println("\nLoginServlet: doGet");
-		User thisUser = (User) req.getSession().getAttribute("user");
+		User thisUser = (User)req.getSession().getAttribute("user");
+		if (thisUser == null) {
+			System.out.println("   User not logged in or session timed out");
+			
+			// user is not logged in, or the session expired
+			resp.sendRedirect(req.getContextPath() + "/login");
+		}
 		
 		// pull poll info from the url
 		String url = req.getQueryString();
@@ -55,6 +61,7 @@ public class PollServlet extends HttpServlet {
 		Poll thisPoll = (Poll) req.getSession().getAttribute("poll");
 		if (button == null) {
 		    //no button has been selected
+			
 		} else if (button.equals("Dissagree")) {
 		    thisPoll.setTotalVotes(thisPoll.getTotalVotes() + 1);
 		} else if (button.equals("Agree")) {
@@ -65,45 +72,4 @@ public class PollServlet extends HttpServlet {
 		
 		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
 	}
-  //private MainContentController controller = null;
-
-	
-/*	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException{
-		
-		String errorMessage = null;
-		String pollTitle = null;
-		String author = null;
-		Pair<User,Poll> Poll = null;
-		
-		// Decode form parameters and dispatch to the controller
-		pollTitle = req.getParameter("poll_Title");
-		author = req.getParameter("author_name");
-		
-		// check for attributes
-		if ( pollTitle == null || pollTitle.equals("")){
-			errorMessage = "Please specify a Poll";
-		} if(author == null || author.equals("")){
-			if(errorMessage == null){
-				errorMessage = "Please specify a user";
-			}else{
-				errorMessage = errorMessage + "and a User.";
-			}}
-		
-		// create request
-		if(errorMessage != null){
-			// will print error message
-		}else{
-			controller = new MainContentController();
-			
-			// get list of Pair returned by query
-			Poll = controller.SearchByPollTitleAndAuthor(pollTitle, author);
-			
-		}
-		pollTitle = (String) req.getSession().getAttribute("pollTitle");
-		req.setAttribute("pollTitle", pollTitle);
-		req.setAttribute("Poll", Poll.getRight());
-		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
-	}*/
 }

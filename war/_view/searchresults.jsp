@@ -424,7 +424,7 @@ body {
 
 <div id = "pollboxOne">
 		    <div id= "pollOne">
-		        <a href="" class="pollOne">Pole</a>
+		        <a href="" class="pollOne">Poll</a>
 				<p>${fullname1}</p>
                 <p>${info1}</p>
 				
@@ -432,7 +432,7 @@ body {
 </div>
 <div id = "pollboxTwo">
 		    <div id= "pollTwo">
-		        <a href="" class="pollTwo"> Pole </a>
+		        <a href="" class="pollTwo"> Poll </a>
 				<p>${fullname2}</p>
                 <p>${info2}</p>
 </div>
@@ -440,7 +440,7 @@ body {
 </div>
 <div id = "pollboxThree">
 		    <div id= "pollThree">
-		        <a href="" class="pollThree">Pole </a>
+		        <a href="" class="pollThree">Poll </a>
 				<p>${fullname3}</p>
                 <p>${info3}</p>
 </div>
