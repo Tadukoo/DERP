@@ -128,8 +128,8 @@ public Boolean CreateUserAccount(String firstname, String lastname, String Usern
  * @param PollTitle
  * @return
  */
-public Boolean IncrementYesPollCounter(int user_id){
-		return db.IncrementCounter(user_id, 1);
+public Boolean IncrementYesPollCounter(int poll_id){
+		return db.IncrementCounter(poll_id, 1);
 	}
 //Implemented 5/1/2016 Alex Keperling
 /**
@@ -138,8 +138,8 @@ public Boolean IncrementYesPollCounter(int user_id){
 * @param PollTitle
 * @return
 */
-public Boolean IncrementTotalPollCounter(int user_id){
-		return db.IncrementCounter(user_id, 2);
+public Boolean IncrementTotalPollCounter(int poll_id){
+		return db.IncrementCounter(poll_id, 2);
 	}
 //Implemented 5/1/2016 Alex Keperling
 /**
