@@ -38,6 +38,10 @@ public class MainContentController {
 			System.out.println("New Poll (ID: " + Poll_id + ") sucessfully added to Poll Table: <" +title + ">");
 			return true;
 		}
+		else if(Poll_id == 0){
+			System.out.println("Poll exists in database");
+			return false;
+		}
 		else
 		{
 			System.out.println("Failed to insert new Poll(ID: " + Poll_id + ") into Poll Table: <" +title + ">");

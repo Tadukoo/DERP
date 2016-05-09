@@ -426,6 +426,7 @@
 	</div>
   <div id="descriptionbox">
 <summary="pollsummary"> Summary of poll</summary>
+<p>${description}</p>
 </div>
  <div id="totalanswerbox">
 	<div class="totalyescount">

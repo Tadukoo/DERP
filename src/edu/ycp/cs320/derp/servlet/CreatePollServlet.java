@@ -37,24 +37,24 @@ public class CreatePollServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		System.out.println("he");
 		// Decode form parameters and dispatch to controller
 		String errorMessage = null;
 		String title = req.getParameter("polltitle");
 		String desc = req.getParameter("polldescription");
 		User user = (User) req.getSession().getAttribute("user");
 		String name =user.getUserName();
-		
 
 		// Decode form parameters and dispatch to controller
 		if (desc == null || title == null || desc.equals("") || title.equals("")) {
 			errorMessage = "Please specify poll title and or desciption";
 		} else {
 			controller = new MainContentController();
-			controller.InsertPoll(title, desc, name);
-			resp.sendRedirect(req.getContextPath() + "/poll?user="+name+"&title="+title);
-			return;
-				
+			boolean  newPoll = controller.InsertPoll(title, desc, name);
+			if(newPoll){
+				resp.sendRedirect(req.getContextPath() + "/poll?user="+name+"&title="+title);
+				return;
+			}
+			errorMessage= "User: <"+user.getUserName()+"> has already created poll:< "+title;	
 			}
 		req.getRequestDispatcher("/_view/createPoll.jsp").forward(req, resp);	
 		}

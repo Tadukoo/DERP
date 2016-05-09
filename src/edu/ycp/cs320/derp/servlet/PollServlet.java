@@ -44,6 +44,7 @@ public class PollServlet extends HttpServlet {
 		req.setAttribute("pollTitle", thisPoll.getTitle());
 		req.setAttribute("agree", thisPoll.getYesVotes());
 		req.setAttribute("disagree", thisPoll.getTotalVotes() - thisPoll.getYesVotes());
+		req.setAttribute("description", thisPoll.getDescription());
 		thisPoll.setPageViews(thisPoll.getPageViews() + 1);
 		req.getRequestDispatcher("/_view/poll.jsp").forward(req, resp);
 		
@@ -68,9 +69,9 @@ public class PollServlet extends HttpServlet {
 		
 		if (button == null) {
 		    //no button has been selected		
-			req.getSession().setAttribute("search", "search");
-			//req.getSession().setAttribute("search", "I am the one");
-			System.out.println(req.getAttribute("search"));
+			//req.getSession().setAttribute("search", "search");
+			req.getSession().setAttribute("search", "I am the one");
+			//System.out.println(req.getAttribute("search"));
 			resp.sendRedirect(req.getContextPath() + "/search");
 			return;
 		} else if (button.equals("Disagree")) {

@@ -277,9 +277,11 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;		
+				PreparedStatement stmt4 = null;
 				
 				ResultSet resultSet1 = null;
 				ResultSet resultSet3 = null;
+				ResultSet resultSet4 = null;
 				
 				// for saving User ID and Poll ID
 				Integer User_id = -1;
@@ -304,50 +306,69 @@ public class DerbyDatabase implements IDatabase {
 						User_id = resultSet1.getInt(1);
 						System.out.println("User <" + userName+ "> found with ID: " + User_id);						
 					
-						// now insert new Poll into Polls table
-						// prepare SQL insert statement to add new Poll to Polls table
-						stmt2 = conn.prepareStatement(
-								"insert into Polls (user_id, title, description, total_votes, yes_votes, page_views) " +
-								"  values(?, ?, ?, ?, ?, ?) "
-						);
-						stmt2.setInt(1, User_id);
-						stmt2.setString(2, title);
-						stmt2.setString(3, description);
-						stmt2.setInt(4, 0);
-						stmt2.setInt(5, 0);
-						stmt2.setInt(6, 0);
 						
-						// execute the update
-						stmt2.executeUpdate();
-						
-						System.out.println("New Poll <" + title + "> inserted into Polls table");					
-	
-						// now retrieve Poll_id for new Poll, so that we can set up PollUser entry
-						// and return the Poll_id, which the DB auto-generates
-						// prepare SQL statement to retrieve Poll_id for new Poll
-						stmt3 = conn.prepareStatement(
-								"select Poll_id from Polls " +
-								"  where title = ? and description = ? "
-						);
-						stmt3.setString(1, title);
-						stmt3.setString(2, description);
-	
-						// execute the query
-						resultSet3 = stmt3.executeQuery();
-						
-						// get the result - there had better be one
-						if (resultSet3.next())
-						{
-							Poll_id = resultSet3.getInt(1);
-							System.out.println("New Poll <" + title + "> ID: " + Poll_id);						
+						stmt4 = conn.prepareStatement(
+								"select Poll_id from Polls "+
+								" where User_id = ?"+
+								" and title = ?"
+								);
+		
+						stmt4.setInt(1, User_id);
+						stmt4.setString(2, title);
+						resultSet4 = stmt4.executeQuery();
+						if(resultSet4.next()){
+						Poll_id = resultSet4.getInt(1);
 						}
-						else	// really should throw an exception here - the new Poll should have been inserted, but we didn't find it
-						{
-							System.out.println("New Poll <" + title + "> not found in Polls table (ID: " + Poll_id);
+						if(Poll_id == -1){
+							System.out.println("hi");
+							// now insert new Poll into Polls table
+							// prepare SQL insert statement to add new Poll to Polls table
+							stmt2 = conn.prepareStatement(
+									"insert into Polls (user_id, title, description, total_votes, yes_votes, page_views) " +
+									"  values(?, ?, ?, ?, ?, ?) "
+							);
+							stmt2.setInt(1, User_id);
+							stmt2.setString(2, title);
+							stmt2.setString(3, description);
+							stmt2.setInt(4, 0);
+							stmt2.setInt(5, 0);
+							stmt2.setInt(6, 0);
+							
+							// execute the update
+							stmt2.executeUpdate();
+							
+							System.out.println("New Poll <" + title + "> inserted into Polls table");					
+		
+							// now retrieve Poll_id for new Poll, so that we can set up PollUser entry
+							// and return the Poll_id, which the DB auto-generates
+							// prepare SQL statement to retrieve Poll_id for new Poll
+							stmt3 = conn.prepareStatement(
+									"select Poll_id from Polls " +
+									"  where title = ? and description = ? "
+							);
+							stmt3.setString(1, title);
+							stmt3.setString(2, description);
+		
+							// execute the query
+							resultSet3 = stmt3.executeQuery();
+							
+							// get the result - there had better be one
+							if (resultSet3.next())
+							{
+								Poll_id = resultSet3.getInt(1);
+								System.out.println("New Poll <" + title + "> ID: " + Poll_id);						
+							}
+							else	// really should throw an exception here - the new Poll should have been inserted, but we didn't find it
+							{
+								System.out.println("New Poll <" + title + "> not found in Polls table (ID: " + Poll_id);
+							}
+							
+							System.out.println("New Poll <" + title + "> inserted into Polls table");					
+							
+						}else {
+							System.out.println(title+" was found in the database for the user");
+							Poll_id = 0;
 						}
-						
-						System.out.println("New Poll <" + title + "> inserted into Polls table");					
-						
 						return Poll_id;
 					} catch (SQLException e) {
 						throw new SQLException("no user specified", e);

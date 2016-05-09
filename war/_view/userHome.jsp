@@ -408,7 +408,7 @@ body {
 <div id ="searchbox">
       	
 <section class="searchbar">
-	<form action="" method="post">
+	<form action = "" method="post">
 		<input type="search" name="search" placeholder="Search Polls...">		    	
 		<button>Search</button>
 	</form>

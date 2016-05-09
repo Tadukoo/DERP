@@ -64,6 +64,7 @@ public class ProfileServlet extends HttpServlet {
 					pollUser = controller.findUserbyUserId(poll3.getUserId());
 					req.setAttribute("poll3user", pollUser.getUserName());
 					dis =poll3.getTotalVotes() - poll3.getYesVotes();
+					System.out.println(poll3.getYesVotes());
 					req.setAttribute("info3", "Agree:" + poll3.getYesVotes() + " DisAgree:" + dis);
 				}
 			}
