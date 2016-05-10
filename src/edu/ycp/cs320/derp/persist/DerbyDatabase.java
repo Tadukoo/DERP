@@ -67,10 +67,10 @@ public class DerbyDatabase implements IDatabase {
 						stmt = conn.prepareStatement(
 								"select Users.*, Polls.* " +
 								"  from  Users, Polls" +
-								"  where Polls.title = ? " +
+								"  where Polls.title like ? " +
 								"    and Users.user_id = Polls.user_id"
 						);
-						stmt.setString(1, title);
+						stmt.setString(1, '%'+title+'%');
 						
 						List<Pair<User, Poll>> result = new ArrayList<Pair<User,Poll>>();
 						

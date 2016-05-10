@@ -408,13 +408,13 @@ body {
 <div id ="searchbox">
       	
 <section class="searchbar">
-	<form action = "" method="post">
-		<input type="search" name="search" placeholder="Search Polls...">		    	
+	<form method="post">
+		<input type="text" name="search" placeholder="Search Polls...">		    	
 		<button>Search</button>
 	</form>
 </section>
 </div>	 
-            	    
+
  <div id = "name">
                     D.E.R.P.
                 </div>
