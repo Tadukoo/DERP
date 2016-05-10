@@ -186,7 +186,6 @@ public List<Poll> findPollByUsername(String userName){
 	List<Pair<User, Poll>> returned= db.findPollByUserName(userName);
 	List<Poll> polls = new ArrayList<Poll>();
 	for(int i=0; i<returned.size(); i++) {
-		System.out.println("ds");
 		polls.add( returned.get(i).getRight());	
 	}
 	return polls;

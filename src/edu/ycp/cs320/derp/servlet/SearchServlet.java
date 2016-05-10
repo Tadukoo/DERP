@@ -58,7 +58,7 @@ public class SearchServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getSession().setAttribute("search", req.getAttribute("search"));
+		req.getSession().setAttribute("search", req.getParameter("search"));
 		req.getRequestDispatcher("/_view/searchresults.jsp").forward(req, resp);
 		
 	}

@@ -70,7 +70,7 @@ public class PollServlet extends HttpServlet {
 		if (button == null) {
 		    //no button has been selected		
 			//req.getSession().setAttribute("search", "search");
-			req.getSession().setAttribute("search", "I am the one");
+			req.getSession().setAttribute("search", req.getParameter("search"));
 			//System.out.println(req.getAttribute("search"));
 			resp.sendRedirect(req.getContextPath() + "/search");
 			return;

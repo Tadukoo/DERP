@@ -1,7 +1,6 @@
 package edu.ycp.cs320.derp.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs320.derp.controller.MainContentController;
 import edu.ycp.cs320.derp.model.Poll;
 import edu.ycp.cs320.derp.model.User;
+import java.util.*;
 
 public class UserHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -64,8 +64,7 @@ public class UserHomeServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getSession().setAttribute("search", "I am the one");
-		//System.out.println(req.getAttribute("search"));
+		req.getSession().setAttribute("search", req.getParameter("search"));
 		resp.sendRedirect(req.getContextPath() + "/search");
 		
 	}
