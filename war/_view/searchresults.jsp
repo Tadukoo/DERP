@@ -424,7 +424,7 @@ body {
 
 <div id = "pollboxOne">
 		    <div id= "pollOne">
-		        <a href="" class="pollOne">Poll</a>
+		        <a href="/derp/poll?user=${poll1user}&title=${fullname1}" class="pollOne">Poll</a>
 				<p>${fullname1}</p>
                 <p>${info1}</p>
 				
@@ -432,7 +432,7 @@ body {
 </div>
 <div id = "pollboxTwo">
 		    <div id= "pollTwo">
-		        <a href="" class="pollTwo"> Poll </a>
+		        <a href="/derp/poll?user=${poll1user}&title=${fullname2}" class="pollTwo"> Poll </a>
 				<p>${fullname2}</p>
                 <p>${info2}</p>
 </div>
@@ -440,7 +440,7 @@ body {
 </div>
 <div id = "pollboxThree">
 		    <div id= "pollThree">
-		        <a href="" class="pollThree">Poll </a>
+		        <a href="/derp/poll?user=${poll1user}&title=${fullname3}" class="pollThree">Poll </a>
 				<p>${fullname3}</p>
                 <p>${info3}</p>
 </div>

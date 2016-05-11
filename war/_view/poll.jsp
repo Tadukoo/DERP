@@ -43,8 +43,8 @@
                 height: 100px;
                 width:50%;
                 margin-top:-13%;
-                left: 30%;
-                font-size:300%;
+                left: 25%;
+                font-size:400%;
                 background-color: #0099ff;
             }
 		#descriptionbox{
@@ -176,7 +176,6 @@
 	text-align: center;
 	width: 100%;
 }
-
 .webdesigntuts-workshop:before,
 .webdesigntuts-workshop:after {
 	content: '';
@@ -187,7 +186,6 @@
 	position:relative;
 	width: 800px;
 }
-
 .webdesigntuts-workshop:before {
 	background: #444;
 	background: -webkit-linear-gradient(left, #151515, #444, #151515);
@@ -197,7 +195,6 @@
 	background: linear-gradient(left, #151515, #444, #151515);
 	top: 192px;
 }
-
 .webdesigntuts-workshop:after {
 	background: #000;
 	background: -webkit-linear-gradient(left, #151515, #000, #151515);	
@@ -207,7 +204,6 @@
 	background: linear-gradient(left, #151515, #000, #151515);	
 	top: 191px;
 }
-
 .webdesigntuts-workshop form {
 	background: #111;
 	background: -webkit-linear-gradient(#1b1b1b, #111);
@@ -225,7 +221,6 @@
 	position: relative;
 	z-index: 1;
 }
-
 .webdesigntuts-workshop input {
 	background: #222;
 	background: -webkit-linear-gradient(#333, #222);	
@@ -248,19 +243,15 @@
 	text-shadow: 0 -1px 0 #000;
 	width: 200px;
 }
-
 .ie .webdesigntuts-workshop input {
 	line-height: 40px;
 }
-
 .webdesigntuts-workshop input::-webkit-input-placeholder {
    color: #888;
 }
-
 .webdesigntuts-workshop input:-moz-placeholder {
    color: #888;
 }
-
 .webdesigntuts-workshop input:focus {
 	-webkit-animation: glow 800ms ease-out infinite alternate;
 	-moz-animation: glow 800ms ease-out infinite alternate;
@@ -278,15 +269,12 @@
 	color: #efe;
 	outline: none;
 }
-
 .webdesigntuts-workshop input:focus::-webkit-input-placeholder { 
 	color: #efe;
 }
-
 .webdesigntuts-workshop input:focus:-moz-placeholder {
 	color: #efe;
 }
-
 .webdesigntuts-workshop button {
 	background: #222;
 	background: -webkit-linear-gradient(#333, #222);
@@ -317,7 +305,6 @@
 	text-shadow: 0 -1px 0 #000;
 	width: 80px;
 }	
-
 .webdesigntuts-workshop button:hover,
 .webdesigntuts-workshop button:focus {
 	background: #292929;
@@ -329,7 +316,6 @@
 	color: #0099ff;
 	outline: none;
 }
-
 .webdesigntuts-workshop button:active {
 	background: #292929;
 	background: -webkit-linear-gradient(#393939, #292929);
@@ -342,7 +328,6 @@
 }
 	top: 1px;
 }
-
 @-webkit-keyframes glow {
     0% {
 		border-color: #0099ff;
@@ -353,7 +338,6 @@
 		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
     }
 }
-
 @-moz-keyframes glow {
     0% {
 		border-color: #0099ff;
@@ -364,7 +348,6 @@
 		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
     }
 }
-
 @-o-keyframes glow {
     0% {
 		border-color: #0099ff;
@@ -375,7 +358,6 @@
 		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
     }
 }
-
 @-ms-keyframes glow {
     0% {
 		border-color: #0099ff;
@@ -421,8 +403,7 @@
                 </div>
             </div>
 	<div id= "PollTitleBox">
-	<title="polltitle"> Poll Title</title>
-	<p>${pollTitle}</p>
+	<title="polltitle"> ${pollTitle}</title>
 	</div>
   <div id="descriptionbox">
 <summary="pollsummary"> Summary of poll</summary>
@@ -430,12 +411,10 @@
 </div>
  <div id="totalanswerbox">
 	<div class="totalyescount">
-		Total Votes for agree:
-		<p>${agree}</p>
+		Total Votes for agree: ${agree}
 </div>
 <div class="totalnocount">
-	        Total Votes for disagree:
-	        <p>${disagree}</p>
+	        Total Votes for disagree: ${disagree}
 </div>
 <div id="answerbox">
 <name="agrees"></name>

@@ -34,19 +34,27 @@ public class SearchServlet extends HttpServlet {
 		Poll poll2 = null;
 		Poll poll3 = null;
 		int dis = 0;
+		User pollUser = null;
+	
 		if(pollList.size() >0){
 			poll1=pollList.get(0);
 			req.setAttribute("fullname1", poll1.getTitle());
 			dis =poll1.getTotalVotes() - poll1.getYesVotes();
+			pollUser = controller.findUserbyUserId(poll1.getUserId());
+			req.setAttribute("poll1user", pollUser.getUserName());
 			req.setAttribute("info1", "Agree:" + poll1.getYesVotes() + " DisAgree:" + dis);
 			if(pollList.size() >1){
 				poll2=pollList.get(1);
 				req.setAttribute("fullname2", poll2.getTitle());
+				pollUser = controller.findUserbyUserId(poll2.getUserId());
+				req.setAttribute("poll1user", pollUser.getUserName());
 				dis =poll2.getTotalVotes() - poll2.getYesVotes();
 				req.setAttribute("info2", "Agree:" + poll2.getYesVotes() + " DisAgree:" + dis);
 				if(pollList.size() >2){
 					poll3=pollList.get(2);
 					req.setAttribute("fullname3", poll3.getTitle());
+					pollUser = controller.findUserbyUserId(poll3.getUserId());
+					req.setAttribute("poll1user", pollUser.getUserName());
 					dis =poll3.getTotalVotes() - poll3.getYesVotes();
 					req.setAttribute("info3", "Agree:" + poll3.getYesVotes() + " DisAgree:" + dis);
 				}
@@ -59,7 +67,7 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.getSession().setAttribute("search", req.getParameter("search"));
-		req.getRequestDispatcher("/_view/searchresults.jsp").forward(req, resp);
+		doGet(req, resp);
 		
 	}
 }
