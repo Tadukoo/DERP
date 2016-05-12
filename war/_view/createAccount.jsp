@@ -16,14 +16,16 @@
             }
 		#name {
                 top: 0;
-		float: left;
-                font-size: 300%;
-           	color: #0099ff;
+				float: left;
+               	font-size: 300%;
+           		color: #0099ff;
+           		left: 5%;
+           		position:relative;
 		 }
             #fullName{
                 float:left;
                 margin-top:2%;
-                margin-left:-9%;
+                margin-left:-8%;
                 font-size: 150%;
                 color: #0099ff;
 		}
@@ -44,7 +46,7 @@ body {
 .login-box {
   position:fixed;
   float: center;
-  top: 90px;
+  top: 15%;
   left: 20%;
   padding: 40px;
   width: 50%;
